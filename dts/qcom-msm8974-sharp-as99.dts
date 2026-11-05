@@ -1,0 +1,184 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * Sharp AQUOS SERIE SHL25 / AS99, KDDI 01.01.03
+ * First-stage MSM8974Pro mainline 6.16 Device Tree, NOT BOOT VERIFIED.
+ *
+ * Hardware identity, PMIC, eMMC drive levels and key GPIOs from the
+ * GPL sources released by Sharp. SoC/PMIC bindings adapted from
+ * msm8974-mainline (Xperia Z2 / msm8974pro).
+ *
+ * DELIBERATELY leaves Sharp-specific DSI panel, touch, WLAN disabled.
+ * Never flash a DTB produced by this draft without confirming it
+ * matches the Qualcomm legacy DTB table and SHL25 bootloader.
+ */
+#include "qcom-msm8974pro.dtsi"
+#include "pm8841.dtsi"
+#include "pm8941.dtsi"
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/input.h>
+
+/ {
+	model = "Sharp AQUOS SERIE SHL25 (AS99)";
+	compatible = "qcom,sharp-as99", "qcom,msm8974";
+
+	/* Exact Qualcomm IDs and board-id from Sharp's AS99 DTS. */
+	qcom,msm-id = <208 0x10000>,
+		      <209 0x10000>,
+		      <211 0x10000>,
+		      <212 0x10000>,
+		      <214 0x10000>,
+		      <215 0x10000>,
+		      <217 0x10000>,
+		      <218 0x10000>;
+	qcom,board-id = <50 0>;
+
+	chassis-type = "handset";
+
+	aliases {
+		mmc0 = &sdhc_1;
+	};
+
+	gpio-keys {
+		compatible = "gpio-keys";
+
+		key-volume-down {
+			label = "Volume Down";
+			gpios = <&pm8941_gpios 2 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_VOLUMEDOWN>;
+			wakeup-source;
+			debounce-interval = <15>;
+		};
+
+		key-volume-up {
+			label = "Volume Up";
+			gpios = <&pm8941_gpios 5 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_VOLUMEUP>;
+			wakeup-source;
+			debounce-interval = <15>;
+		};
+	};
+};
+
+/*
+ * MSM8974 RPM regulator definitions in the modern qcom bindings.
+ * Voltage values adapted from the known-good Sony Xperia Z2
+ * MSM8974Pro reference. The physical rails must be rechecked
+ * against Sharp's sharp-common-pm8941.dtsi before power-up.
+ */
+&rpm_requests {
+	regulators-0 {
+		compatible = "qcom,rpm-pm8841-regulators";
+
+		pm8841_s1: s1 {
+			regulator-min-microvolt = <675000>;
+			regulator-max-microvolt = <1050000>;
+		};
+
+		pm8841_s3: s3 {
+			regulator-min-microvolt = <1050000>;
+			regulator-max-microvolt = <1050000>;
+		};
+	};
+
+	regulators-1 {
+		compatible = "qcom,rpm-pm8941-regulators";
+
+		pm8941_s1: s1 {
+			regulator-min-microvolt = <1300000>;
+			regulator-max-microvolt = <1300000>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+
+		pm8941_s2: s2 {
+			regulator-min-microvolt = <2150000>;
+			regulator-max-microvolt = <2150000>;
+			regulator-boot-on;
+		};
+
+		pm8941_s3: s3 {
+			regulator-min-microvolt = <1800000>;
+			regulator-max-microvolt = <1800000>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+
+		pm8941_l6: l6 {
+			regulator-min-microvolt = <1800000>;
+			regulator-max-microvolt = <1800000>;
+			regulator-boot-on;
+		};
+
+		pm8941_l20: l20 {
+			regulator-min-microvolt = <2950000>;
+			regulator-max-microvolt = <2950000>;
+			regulator-boot-on;
+			regulator-allow-set-load;
+			regulator-system-load = <200000>;
+		};
+
+		pm8941_l24: l24 {
+			regulator-min-microvolt = <3075000>;
+			regulator-max-microvolt = <3075000>;
+			regulator-boot-on;
+		};
+	};
+};
+
+/* Sharp 3.4 SDHC1 drive settings: CLK 12mA, CMD/DATA 10mA. */
+&tlmm {
+	as99_sdc1_default: sdc1-default-state {
+		clk-pins {
+			pins = "sdc1_clk";
+			drive-strength = <12>;
+			bias-disable;
+		};
+
+		cmd-data-pins {
+			pins = "sdc1_cmd", "sdc1_data";
+			drive-strength = <10>;
+			bias-pull-up;
+		};
+	};
+};
+
+/* OEM eMMC at /dev/block/mmcblk0 on MSM SDCC.1. */
+&sdhc_1 {
+	vmmc-supply = <&pm8941_l20>;
+	vqmmc-supply = <&pm8941_s3>;
+
+	pinctrl-names = "default";
+	pinctrl-0 = <&as99_sdc1_default>;
+
+	non-removable;
+	status = "okay";
+};
+
+/*
+ * USB gadget/serial-console bring-up. PHY setup from modern MSM8974.
+ * Actual ADB gadget is userspace-dependent, not automatically enabled.
+ */
+&usb {
+	phys = <&usb_hs1_phy>;
+	phy-select = <&tcsr 0xb000 0>;
+	extcon = <&smbb>;
+
+	hnp-disable;
+	srp-disable;
+	adp-disable;
+	status = "okay";
+};
+
+&usb_hs1_phy {
+	v1p8-supply = <&pm8941_l6>;
+	v3p3-supply = <&pm8941_l24>;
+	extcon = <&smbb>;
+	status = "okay";
+};
+
+&smbb {
+	status = "okay";
+};
+
+/* SHL25 DSI/CLMR, SPI touch and AR6004 HSIC Wi-Fi require board-specific drivers. */

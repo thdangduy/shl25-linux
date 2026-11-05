@@ -1,0 +1,10 @@
+.build/
+dist/
+out/
+linux/
+*.img
+*.cpio
+*.tar.gz
+*.deb
+*.log
+__pycache__/
