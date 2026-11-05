@@ -27,12 +27,14 @@ static void emit(const char *phase, const char *detail)
 
     int fd = open("/dev/kmsg", O_WRONLY | O_CLOEXEC | O_NONBLOCK);
     if (fd >= 0) {
-        (void)write(fd, line, (size_t)len);
+        ssize_t bytes_written = write(fd, line, (size_t)len);
+        (void)bytes_written;
         close(fd);
     }
     fd = open("/dev/console", O_WRONLY | O_CLOEXEC | O_NONBLOCK);
     if (fd >= 0) {
-        (void)write(fd, line, (size_t)len);
+        ssize_t bytes_written = write(fd, line, (size_t)len);
+        (void)bytes_written;
         close(fd);
     }
 }

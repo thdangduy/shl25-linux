@@ -31,7 +31,7 @@ arm-linux-gnueabihf-readelf -h "$TMP/init" | grep -q 'Machine:.*ARM' || exit 4
 ) | gzip -9n > "$DIST/shl25-diag-initramfs.cpio.gz"
 
 gzip -t "$DIST/shl25-diag-initramfs.cpio.gz"
-gzip -dc "$DIST/shl25-diag-initramfs.cpio.gz" | cpio -it --quiet | grep -q '^init$' \
+gzip -dc "$DIST/shl25-diag-initramfs.cpio.gz" | cpio -it --quiet | grep -Eq '^([.]/)?init$' \
   || { echo 'ERROR: cpio does not contain init'; exit 5; }
 
 cp "$ROOT/diagnostics/init.c" "$DIST/init.c"
