@@ -1,0 +1,40 @@
+name: SHL25 Diagnostic Initramfs ARMHF
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "diagnostics/**"
+      - ".github/workflows/diagnostic.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  native-pid1-initramfs:
+    name: Compile static ARMHF PID1 and validate CPIO
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+      - name: Install cross-compiler and CPIO
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            gcc-arm-linux-gnueabihf libc6-dev-armhf-cross \
+            binutils-arm-linux-gnueabihf cpio gzip file
+      - name: Build static diagnostic PID1
+        run: bash ./diagnostics/build.sh
+      - name: Publish safe offline diagnostic artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: shl25-diagnostic-initramfs-armhf
+          path: |
+            dist-diagnostic/shl25-diag-initramfs.cpio.gz
+            dist-diagnostic/init.c
+            dist-diagnostic/SHA256SUMS
+            dist-diagnostic/BUILD_INFO.txt
+          if-no-files-found: error
+          retention-days: 30
