@@ -85,9 +85,17 @@ def main():
     assert be32(sdhc1["vmmc-supply"]) == be32(rail["l20"]["phandle"])
     assert be32(sdhc1["vqmmc-supply"]) == be32(rail["s3"]["phandle"])
 
-    memory = [n for k, n in tree.items() if k.startswith("/memory@")]
-    if any(not n.get("reg") for n in memory):
-        print("BLOCKED_FOR_FLASH: memory node has empty reg, bootloader RAM fixups not yet verified")
+    # Sharp's known-good stock BOOT QCDT FDT uses exactly /memory with
+    # an empty reg to be populated by the bootloader. The pristine
+    # upstream msm8974 base instead uses /memory@0, which may miss a
+    # Sharp-specific fixup by path. Keep the vendor node name.
+    memory = tree.get("/memory")
+    assert memory is not None, "SHL25 /memory node is absent"
+    assert "/memory@0" not in tree, "unverified upstream /memory@0 still present"
+    assert memory.get("device_type", b"").rstrip(bytes([0])) == b"memory"
+    assert memory.get("reg") == b"", "SHL25 memory must await bootloader fixup"
+    print("SHL25_STOCK_COMPATIBLE_MEMORY_NODE=PASS")
+    print("BOOTLOADER_FIXUP_NOT_YET_PROVEN: /memory reg remains empty")
     print("SHL25_BOARD_RAILS_AND_EMMC_FDT_VALIDATED=PASS")
     print("WARNING: compile/FDT validation does NOT prove CPU boot or eMMC power-up")
 
