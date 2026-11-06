@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-set -Eeuo pipefail
+set -Eeo pipefail
+# Android 6 envsetup.sh references optional unset shell variables (e.g. TOP).
+# Bash nounset is incompatible with sourcing legacy envsetup.sh.
 export DEBIAN_FRONTEND=noninteractive
 export TZ=UTC
 apt-get update
