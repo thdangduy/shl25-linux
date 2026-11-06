@@ -1,0 +1,6 @@
+.omni_ci_data/
+dist-a51w/
+device/oppo/a51w/prebuilt/
+*.part
+*.pyc
+__pycache__/

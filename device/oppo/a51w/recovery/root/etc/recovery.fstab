@@ -1,0 +1,9 @@
+# A51w stock recovery + 38-partition live GPT, no A51f 'encrypt' partition.
+/boot           emmc  /dev/block/bootdevice/by-name/boot       flags=backup=1
+/recovery       emmc  /dev/block/bootdevice/by-name/recovery   flags=backup=1
+/system         ext4  /dev/block/bootdevice/by-name/system     flags=backup=1
+/cache          ext4  /dev/block/bootdevice/by-name/cache      flags=backup=1
+/data           ext4  /dev/block/bootdevice/by-name/userdata   flags=backup=0;encryptable=footer
+/misc           emmc  /dev/block/bootdevice/by-name/misc
+/external_sd    vfat  /dev/block/mmcblk1p1 /dev/block/mmcblk1  flags=removable;storage;display=MicroSD
+/usb-otg        vfat  /dev/block/sda1 /dev/block/sda            flags=removable;storage;display=USB-OTG
