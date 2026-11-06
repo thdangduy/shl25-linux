@@ -1,5 +1,5 @@
 /*
- * SHL25 Linux 6.16: statically linked, single-purpose diagnostic PID 1.
+ * SHL25 Linux 3.4/6.16: statically linked, single-purpose diagnostic PID 1.
  * Not Android, not systemd, not a full Ubuntu init. No network, no flash.
  * Optional read/write access is restricted to the VERIFIED GPT 'cache'
  * partition; never mounts or modifies userdata, BOOT, or Recovery.
@@ -14,6 +14,7 @@
 #include <string.h>
 #include <sys/mount.h>
 #include <sys/stat.h>
+#include <sys/sysmacros.h>
 #include <sys/types.h>
 #include <sys/utsname.h>
 #include <unistd.h>
@@ -59,6 +60,54 @@ static int is_verified_sharp_cache(void)
     b[n] = '\0';
     return strstr(b, "\nPARTNAME=cache\n") != NULL ||
            (n >= 15 && strcmp(b + n - 15, "\nPARTNAME=cache\n") == 0);
+}
+
+
+/*
+ * On legacy Sharp 3.4, devtmpfs is disabled. Construct only the
+ * *verified* cache block node from its live sysfs major:minor.
+ * The same fallback is useful if mainline devtmpfs isn't populated.
+ */
+static int ensure_cache_node(void)
+{
+    const char *path = "/dev/mmcblk0p32";
+    struct stat st;
+    if (stat(path, &st) == 0 && S_ISBLK(st.st_mode)) return 1;
+
+    char b[64];
+    int fd = open("/sys/class/block/mmcblk0p32/dev", O_RDONLY | O_CLOEXEC);
+    if (fd < 0) return 0;
+    ssize_t n = read(fd, b, sizeof(b) - 1);
+    close(fd);
+    if (n <= 0) return 0;
+    b[n] = '\0';
+
+    unsigned major_no = 0, minor_no = 0;
+    if (sscanf(b, "%u:%u", &major_no, &minor_no) != 2)
+        return 0;
+    if (major_no == 0 || major_no > 4095 || minor_no > 1048575)
+        return 0;
+
+    if (mknod(path, S_IFBLK | 0600, makedev(major_no, minor_no)) != 0 &&
+        errno != EEXIST) {
+        emit("mmc", "mknod cache failed");
+        return 0;
+    }
+    return stat(path, &st) == 0 && S_ISBLK(st.st_mode) &&
+           st.st_rdev == makedev(major_no, minor_no);
+}
+
+static void ensure_early_console(void)
+{
+    /* These are character devices; harmless if already present. */
+    if (mknod("/dev/console", S_IFCHR | 0600, makedev(5, 1)) != 0 &&
+        errno != EEXIST) {
+        /* /dev/console is optional for cache-marker diagnostics. */
+    }
+    if (mknod("/dev/kmsg", S_IFCHR | 0600, makedev(1, 11)) != 0 &&
+        errno != EEXIST) {
+        /* /dev/kmsg is optional for cache-marker diagnostics. */
+    }
 }
 
 static void persist_once(void)
@@ -116,13 +165,14 @@ int main(void)
     mkdir_safe("/proc");
     mkdir_safe("/sys");
     mkdir_safe("/cache");
+    ensure_early_console();
 
     /* Console may already be present from the initial CPIO node. */
     emit("init", "static ARMHF PID1 reached");
     if (mount("devtmpfs", "/dev", "devtmpfs", MS_NOSUID, "mode=0755") == 0)
         emit("dev", "devtmpfs mounted");
     else
-        emit("dev", "devtmpfs mount failed");
+        emit("dev", "devtmpfs unavailable; sysfs block-node fallback enabled");
 
     if (mount("proc", "/proc", "proc", MS_NOSUID | MS_NODEV | MS_NOEXEC, NULL) == 0)
         emit("proc", "proc mounted");
@@ -139,7 +189,7 @@ int main(void)
 
     /* Wait for eMMC block enumeration, without assuming USB or display. */
     for (int i = 0; i < 60; i++) {
-        if (access("/dev/mmcblk0p32", F_OK) == 0 && is_verified_sharp_cache()) {
+        if (is_verified_sharp_cache() && ensure_cache_node()) {
             emit("mmc", "cache partition appeared");
             persist_once();
             break;
