@@ -1,0 +1,40 @@
+name: SHL25 Linux upstream v6.16 clean build
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - "feat/upstream-shl25-v6.16"
+    paths:
+      - "scripts/build-upstream-linux.sh"
+      - ".github/workflows/upstream.yml"
+      - "dts/**"
+      - "upstream/**"
+permissions:
+  contents: read
+jobs:
+  build-upstream:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 110
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install original Linux ARMv7 toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            git make gcc gcc-arm-linux-gnueabihf binutils-arm-linux-gnueabihf \
+            device-tree-compiler bc bison flex libssl-dev libelf-dev python3
+      - name: Build Linux from upstream tag v6.16
+        run: bash scripts/build-upstream-linux.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shl25-upstream-v6.16-clean-build
+          path: |
+            dist-upstream/zImage
+            dist-upstream/qcom-msm8974-sharp-as99.dtb
+            dist-upstream/kernel.config
+            dist-upstream/qcom-msm8974-sharp-as99.dts
+            dist-upstream/SOURCE_MANIFEST.txt
+            dist-upstream/SHA256SUMS
+          retention-days: 30
+          if-no-files-found: error
