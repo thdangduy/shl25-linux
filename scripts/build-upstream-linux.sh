@@ -65,6 +65,7 @@ gcc -E -P -x assembler-with-cpp -nostdinc -undef -D__DTS__ \
     -I "$SRC/arch/arm/boot/dts/qcom" \
     "$DTS" -o "$WORK/shl25.preprocessed.dts"
 dtc -I dts -O dtb -o "$DIST/qcom-msm8974-sharp-as99.dtb" "$WORK/shl25.preprocessed.dts"
+python3 "$ROOT/upstream/verify_shl25_dtb.py" "$DIST/qcom-msm8974-sharp-as99.dtb"
 cp "$OBJ/arch/arm/boot/zImage" "$DIST/zImage"
 cp "$CONFIG" "$DIST/kernel.config"
 cp "$DTS" "$DIST/qcom-msm8974-sharp-as99.dts"

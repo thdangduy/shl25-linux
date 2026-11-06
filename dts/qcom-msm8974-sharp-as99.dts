@@ -20,7 +20,7 @@
 
 / {
 	model = "Sharp AQUOS SERIE SHL25 (AS99)";
-	compatible = "qcom,sharp-as99", "qcom,msm8974";
+	compatible = "qcom,sharp-as99", "qcom,msm8974pro", "qcom,msm8974";
 
 	/* Exact Qualcomm IDs and board-id from Sharp's AS99 DTS. */
 	qcom,msm-id = <208 0x10000>,
@@ -62,9 +62,10 @@
 
 /*
  * MSM8974 RPM regulator definitions in the modern qcom bindings.
- * Voltage values adapted from the known-good Sony Xperia Z2
- * MSM8974Pro reference. The physical rails must be rechecked
- * against Sharp's sharp-common-pm8941.dtsi before power-up.
+ * Early-boot voltage setpoints / always-on rails verified against
+ * Sharp's released sharp-common-pm8941.dtsi and sharp-common-sdcc.dtsi.
+ * These values identify SHL25 board wiring, not generic Sony rails.
+ * PM8841 and memory/firmware reservations still require separate audit.
  */
 &rpm_requests {
 	regulators-0 {
@@ -94,6 +95,7 @@
 		pm8941_s2: s2 {
 			regulator-min-microvolt = <2150000>;
 			regulator-max-microvolt = <2150000>;
+			regulator-always-on;
 			regulator-boot-on;
 		};
 
@@ -107,12 +109,14 @@
 		pm8941_l6: l6 {
 			regulator-min-microvolt = <1800000>;
 			regulator-max-microvolt = <1800000>;
+			regulator-always-on;
 			regulator-boot-on;
 		};
 
 		pm8941_l20: l20 {
 			regulator-min-microvolt = <2950000>;
 			regulator-max-microvolt = <2950000>;
+			regulator-always-on;
 			regulator-boot-on;
 			regulator-allow-set-load;
 			regulator-system-load = <200000>;
