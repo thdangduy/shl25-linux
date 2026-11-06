@@ -1,0 +1,20 @@
+# OPPO Mirror 5 A51w board-specific TWRP recovery bring-up.
+# Based on the read-only extracted A.17 stock recovery init.rc:
+# - LM3630 backlight exposed via /sys/class/leds/lcd-backlight
+# - OEM uses brightness 102 early in recovery boot
+# - USB functionfs ADB uses 18D1:D001 (configured by TWRP usb rc)
+# Imported by /init.rc because androidboot.hardware=qcom.
+# All actions are ephemeral, never flash or format any partition.
+
+on early-init
+    write /sys/class/leds/lcd-backlight/brightness 102
+    write /sys/class/leds/button-backlight/brightness 255
+
+on init
+    write /sys/class/leds/lcd-backlight/brightness 102
+
+on boot
+    write /sys/class/leds/lcd-backlight/brightness 102
+    setprop sys.usb.config adb
+    setprop service.adb.root 1
+    start adbd
