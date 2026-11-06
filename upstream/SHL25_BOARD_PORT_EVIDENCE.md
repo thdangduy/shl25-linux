@@ -26,3 +26,9 @@ Source of device-specific facts: Sharp's released GPL Linux 3.4 DTS in local SHL
 - `CONFIG_PSTORE` is disabled; a ramoops region MUST NOT be fabricated from random free RAM. Early diagnostic /init must first prove kernel, MMC and ext4.
 - Stock TWRP Recovery is separate from BOOT, and must not be overwritten.
 - Source upstream stays pinned to commit `038d61fd642278bab63ee8ef722c50d10ab01e8f`; the Sharp board DTS and any driver patches belong to this repository, not a third-party fork.
+
+## 2026-11-06 — CORRECTION: OEM Sharp memory/reg was NOT empty (V5 diagnostic)
+- Raw binary parse of the genuine `SHL25-01.01.03-stock-boot-exact.img` Qualcomm QCDT FDT confirms `/memory` contains `#address-cells = <1>`, `#size-cells = <1>`, and `reg = <0 0>` — **8 zero bytes**. Earlier notes that rendered the zero-filled field as `reg = <>` were INCORRECT: a value of eight NUL bytes is not a zero-length property.
+- The completed upstream Linux v6.16 V4 artifact (CI 42160842013) compiled `/memory/reg` as zero-length (`<>`); it subsequently produced NO PID1 marker when tried on the phone. This size discrepancy may affect bootloader memory fixups; **root cause is NOT yet proven**.
+- Dedicated Sharp DTS and verifier have been corrected to require the exact OEM 8-byte memory reg and address/size cell metadata. The new verifier deliberately FAILS against the V4 DTB, establishing a regression test. No DDR bank physical addresses were guessed. Existing reserved-memory mappings remain to be independently checked.
+- Recovery TWRP and three verified BOOT images remain intact. A new GitHub CI build should be validated before considering another hardware trial.

@@ -46,3 +46,9 @@ This correction is a controlled compatibility experiment, NOT proof that the RAM
 3. Build an independent, hash-verified diagnostic BOOT with the revised FDT only; keep the same v3 PID1 as the proven control.
 4. If test is approved, flash **BOOT only**, never TWRP, with checksum and recovery preservation. Test kernel marker after returning to recovery.
 5. Only after first `kernel=6.16` PID1 PASS, port real Sharp DSI/CLMR/BDIC and show an LCD terminal; then touch and native Linux GUI.
+
+## 2026-11-06 — CORRECTION: OEM Sharp memory/reg was NOT empty (V5 diagnostic)
+- Raw binary parse of the genuine `SHL25-01.01.03-stock-boot-exact.img` Qualcomm QCDT FDT confirms `/memory` contains `#address-cells = <1>`, `#size-cells = <1>`, and `reg = <0 0>` — **8 zero bytes**. Earlier notes that rendered the zero-filled field as `reg = <>` were INCORRECT: a value of eight NUL bytes is not a zero-length property.
+- The completed upstream Linux v6.16 V4 artifact (CI 42160842013) compiled `/memory/reg` as zero-length (`<>`); it subsequently produced NO PID1 marker when tried on the phone. This size discrepancy may affect bootloader memory fixups; **root cause is NOT yet proven**.
+- Dedicated Sharp DTS and verifier have been corrected to require the exact OEM 8-byte memory reg and address/size cell metadata. The new verifier deliberately FAILS against the V4 DTB, establishing a regression test. No DDR bank physical addresses were guessed. Existing reserved-memory mappings remain to be independently checked.
+- Recovery TWRP and three verified BOOT images remain intact. A new GitHub CI build should be validated before considering another hardware trial.

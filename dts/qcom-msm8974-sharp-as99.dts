@@ -37,14 +37,17 @@
 
 	/*
 	 * Sharp's shipped QCDT FDT has /memory (not /memory@0), with
-	 * an initially empty reg property for the bootloader's RAM fixup.
+	 * the OEM 8-byte <0 0> reg placeholder for bootloader DDR bank fixup.
 	 * Match the original board node name; never guess hardcoded DDR regions.
 	 * This remains a hypothesis until bootloader behavior is observed.
 	 */
 	/delete-node/ memory@0;
 	memory {
+		/* OEM DTB: memory reg contains two 32-bit zero cells, NOT an empty property. */
+		#address-cells = <1>;
+		#size-cells = <1>;
 		device_type = "memory";
-		reg = <>;
+		reg = <0 0>;
 	};
 
 	aliases {

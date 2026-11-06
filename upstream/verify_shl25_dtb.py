@@ -86,16 +86,21 @@ def main():
     assert be32(sdhc1["vqmmc-supply"]) == be32(rail["s3"]["phandle"])
 
     # Sharp's known-good stock BOOT QCDT FDT uses exactly /memory with
-    # an empty reg to be populated by the bootloader. The pristine
+    # an 8-byte zero-placeholder reg to be populated by the bootloader. The pristine
     # upstream msm8974 base instead uses /memory@0, which may miss a
     # Sharp-specific fixup by path. Keep the vendor node name.
     memory = tree.get("/memory")
     assert memory is not None, "SHL25 /memory node is absent"
     assert "/memory@0" not in tree, "unverified upstream /memory@0 still present"
     assert memory.get("device_type", b"").rstrip(bytes([0])) == b"memory"
-    assert memory.get("reg") == b"", "SHL25 memory must await bootloader fixup"
+    # Raw OEM Sharp 01.01.03 QCDT memory/reg is exactly 8
+    # zero bytes (two u32 cells), NOT an empty property. Requiring the OEM
+    # placeholder avoids publishing a subtly incompatible FDT to the handset.
+    assert memory.get("#address-cells") == struct.pack(">I", 1), "Sharp memory address-cells differ from OEM"
+    assert memory.get("#size-cells") == struct.pack(">I", 1), "Sharp memory size-cells differ from OEM"
+    assert memory.get("reg") == struct.pack(">II", 0, 0), "Sharp OEM reg is 8-byte <0 0>, NOT <>"
     print("SHL25_STOCK_COMPATIBLE_MEMORY_NODE=PASS")
-    print("BOOTLOADER_FIXUP_NOT_YET_PROVEN: /memory reg remains empty")
+    print("BOOTLOADER_FIXUP_NOT_YET_PROVEN: /memory reg has OEM 8-byte <0 0> placeholder")
     print("SHL25_BOARD_RAILS_AND_EMMC_FDT_VALIDATED=PASS")
     print("WARNING: compile/FDT validation does NOT prove CPU boot or eMMC power-up")
 
