@@ -2,7 +2,7 @@
 
 A separate **orphan Git branch**, unrelated to Sharp SHL25 sources.
 
-Goal: build Android 6 Omni TWRP for the **actual OPPO A51w**. It is not
+Goal: build Android 5.1 Omni TWRP for the **actual OPPO A51w**. It is not
 Samsung Galaxy A51 and must not use a generic A51f binary unmodified.
 
 ## Verified A51w inputs
@@ -23,7 +23,7 @@ from the original OPPO A.17 OTA, CRC and SHA-256 verified. Vendor binaries
 are not committed to the git branch.
 
 Build with `minimal-manifest-twrp/platform_manifest_twrp_omni`
-branch `twrp-6.0`, using an Ubuntu 18.04 compatibility container
+branch `twrp-5.1`, using an Ubuntu 18.04 compatibility container
 to provide Android's legacy Java 8/Python 2 dependencies. A CI success is
 not equivalent to device boot success.
 

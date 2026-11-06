@@ -1,9 +1,9 @@
-name: OPPO A51w TWRP Experimental (ARM32)
+name: OPPO A51w TWRP 5.1 OEM-compatible (ARM32)
 on:
   workflow_dispatch:
   push:
     branches:
-      - lab/oppo-a51w-twrp
+      - lab/oppo-a51w-twrp-5.1
 permissions:
   contents: read
 jobs:
@@ -18,7 +18,7 @@ jobs:
           df -h
       - name: Download and authenticate exact A51w A.17 kernel and QCDT
         run: python3 scripts/prepare_stock_boot.py
-      - name: Build with Ubuntu 18.04 / Android 6 legacy toolchain
+      - name: Build TWRP 5.1 with Ubuntu 18.04 legacy toolchain
         run: |
           mkdir -p .omni_ci_data
           docker run --rm --user root \
@@ -27,7 +27,7 @@ jobs:
             ubuntu:18.04 bash /workspace/input/scripts/build_in_ubuntu18.sh
       - uses: actions/upload-artifact@v4
         with:
-          name: oppo-a51w-twrp-experimental-UNFLASHED
+          name: oppo-a51w-twrp-android51-experimental-UNFLASHED
           path: |
             dist-a51w/recovery.img
             dist-a51w/A51W_RECOVERY_BUILD_MANIFEST.json

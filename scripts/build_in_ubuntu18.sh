@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -Eeo pipefail
-# Android 6 envsetup.sh references optional unset shell variables (e.g. TOP).
+# Android 5.1 envsetup.sh references optional unset shell variables (e.g. TOP).
 # Bash nounset is incompatible with sourcing legacy envsetup.sh.
 export DEBIAN_FRONTEND=noninteractive
 export TZ=UTC
@@ -20,7 +20,7 @@ export PATH="/workspace/bin:$PATH"
 git config --global user.name "A51w CI"
 git config --global user.email "a51w-ci@localhost"
 cd /workspace/omni
-repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-6.0
+repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-5.1
 repo sync -c --no-tags --no-clone-bundle -j4
 mkdir -p device/oppo/a51w
 cp -a /workspace/input/device/oppo/a51w/. device/oppo/a51w/
