@@ -1,0 +1,51 @@
+name: SHL25 K34 visual five-target and 3-4-5 multitouch test
+on:
+  push:
+    branches:
+      - feat/shl25-k34-hwprobe-20261107
+    paths:
+      - diagnostics/k34_touch_points.c
+      - .github/workflows/k34-touch-points.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  armhf:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install cross tools and QEMU
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends gcc-arm-linux-gnueabihf binutils-arm-linux-gnueabihf qemu-user file
+      - name: Build tiny static no-libc ARMv7 touch and framebuffer test
+        run: |
+          set -eux
+          mkdir -p dist-touch-points
+          arm-linux-gnueabihf-gcc -std=gnu11 -Os -Wall -Wextra -Werror \
+            -march=armv7-a -marm -mfpu=neon -mfloat-abi=hard \
+            -fno-builtin -ffreestanding -fno-stack-protector -fno-pie \
+            -fno-asynchronous-unwind-tables -nostdlib -static -no-pie \
+            -Wl,-e,_start -Wl,--build-id=none -s \
+            diagnostics/k34_touch_points.c -o dist-touch-points/k34-touch-points
+          arm-linux-gnueabihf-readelf -h dist-touch-points/k34-touch-points | grep 'Machine:.*ARM'
+          if arm-linux-gnueabihf-readelf -l dist-touch-points/k34-touch-points | grep -q INTERP; then exit 5; fi
+          if arm-linux-gnueabihf-readelf -d dist-touch-points/k34-touch-points 2>/dev/null | grep -q NEEDED; then exit 6; fi
+          file dist-touch-points/k34-touch-points
+          wc -c dist-touch-points/k34-touch-points
+          set +e
+          qemu-arm -cpu cortex-a15 dist-touch-points/k34-touch-points > dist-touch-points/qemu.txt 2>&1
+          exit_code=$?
+          set -e
+          cat dist-touch-points/qemu.txt
+          grep 'SHL25_TOUCH_FB_OPEN_ERROR' dist-touch-points/qemu.txt
+          test "$exit_code" -eq 2
+          (cd dist-touch-points && sha256sum k34-touch-points > SHA256SUMS)
+          echo SHL25_TOUCH_POINTS_BUILD_AND_QEMU_ABI_PASS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shl25-k34-touch-points-static
+          path: dist-touch-points/
+          retention-days: 30
+          if-no-files-found: error
