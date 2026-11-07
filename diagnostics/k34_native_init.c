@@ -252,7 +252,7 @@ static void shell_on_tty(int fd) {
            dup2(fd,STDOUT_FILENO)<0 ||
            dup2(fd,STDERR_FILENO)<0)_exit(125);
         if(fd>STDERR_FILENO)close(fd);
-        (void)chdir("/");
+        if(chdir("/")<0)_exit(126);
         (void)setenv("PATH","/bin:/sbin",1);
         (void)setenv("HOME","/",1);
         (void)setenv("TERM","vt100",1);
