@@ -139,6 +139,9 @@ static int init_usb_console(void) {
     if(write_text(path,"tty")<0)return -1;
     snprintf(path,sizeof(path),"%sfunctions",b);
     if(write_text(path,"modem")<0)return -1;
+    /* Sharp enable_store refuses changes while unlocked == 0. */
+    snprintf(path,sizeof(path),"%sunlocked",b);
+    if(write_text(path,"1")<0)return -1;
     snprintf(path,sizeof(path),"%senable",b);
     if(write_text(path,"1")<0)return -1;
     snprintf(path,sizeof(path),"%sstate",b);
