@@ -1,0 +1,39 @@
+name: Sharp SHL25 OEM Linux 3.4 gserial patch build
+
+on:
+  push:
+    branches:
+      - feat/shl25-k34-hwprobe-20261107
+    paths:
+      - scripts/build-oem-kernel34-gserial.sh
+      - patches/oem34/**
+      - .github/workflows/oem34-gserial.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-sharp-oem34:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 85
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Linux 3.4 ARM EABI cross build prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            curl git make gcc gcc-arm-linux-gnueabihf binutils-arm-linux-gnueabihf \
+            device-tree-compiler bc bison flex libssl-dev libelf-dev python3
+      - name: Download pinned Sharp GPL archive, apply patch and compile
+        run: bash scripts/build-oem-kernel34-gserial.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shl25-oem34-gserial-patched-zimage
+          path: |
+            dist-oem-k34-gserial/zImage
+            dist-oem-k34-gserial/kernel.config
+            dist-oem-k34-gserial/SOURCE_MANIFEST.txt
+            dist-oem-k34-gserial/SHA256SUMS
+          retention-days: 30
+          if-no-files-found: error
