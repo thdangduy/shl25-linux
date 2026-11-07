@@ -42,6 +42,7 @@ ACTUAL_PATCH_SHA="$(sha256sum "$SRC/drivers/usb/gadget/u_serial.c" | cut -d' ' -
 }
 echo "OEM_SHARP_GSERIAL_PATCH_APPLY_PASS"
 python3 "$ROOT/scripts/fix_legacy_gcc_wrapper.py" "$SRC/scripts/gcc-wrapper.py"
+python3 "$ROOT/scripts/fix_legacy_timeconst.py" "$SRC/kernel/timeconst.pl"
 # Original Sharp 3.4 cannot compile using modern GCC13 (compiler-gcc13.h absent).
 # Download immutable historical ARMHF GCC 4.9.4; reject hash mismatches.
 if [ ! -f "$TOOLCHAIN_TAR" ]; then
