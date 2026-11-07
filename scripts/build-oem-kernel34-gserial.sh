@@ -19,7 +19,10 @@ for tool in curl sha256sum tar git make arm-linux-gnueabihf-gcc; do
 done
 mkdir -p "$WORK" "$EXTRACT" "$OUT" "$DIST"
 if [ ! -f "$TARBALL" ]; then
-    curl --fail --location --retry 2 --connect-timeout 25 --max-time 360 \
+# Sharp archival server presents a TLS certificate for a different host.
+    # This exception applies ONLY to this pinned public GPL tarball;
+    # sha256sum --check is mandatory before extraction or execution.
+    curl --insecure --fail --location --retry 2 --connect-timeout 25 --max-time 360 \
         "$OFFICIAL_URL" -o "$TARBALL"
 fi
 echo "$EXPECTED_SOURCE  $TARBALL" | sha256sum --check -
