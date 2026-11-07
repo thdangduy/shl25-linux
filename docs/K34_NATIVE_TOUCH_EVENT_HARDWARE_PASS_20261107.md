@@ -29,7 +29,7 @@ On this ARMv7 Linux 3.4 system, each event is:
 little-endian, total 16 bytes.
 
 Verified Linux input event codes:
-- `EV_ABS=3, ABS_MT_SLOT=0x30` (multitouch slot).
+- `EV_ABS=3, ABS_MT_TOUCH_MAJOR=0x30` (touch contact width; NOT a slot ID).
 - `EV_ABS=3, ABS_MT_POSITION_X=0x35`.
 - `EV_ABS=3, ABS_MT_POSITION_Y=0x36`.
 - `EV_ABS=3, ABS_MT_PRESSURE=0x3a`.
@@ -38,7 +38,7 @@ Verified Linux input event codes:
 
 Selected records decoded directly from the 512-byte capture:
 
-| Frame | Slot | X | Y | Pressure |
+| Frame | Touch major | X | Y | Pressure |
 |---|---:|---:|---:|---:|
 | 1 | 12 | 650 | 405 | 39 |
 | 2 | 15 | 677 | 314 | 37 |
@@ -86,3 +86,5 @@ Safety: current BOOT p13 v5, verified SHA256 from previous readback
 `b0d52a1fce11070791607b14e476ca8a67209483fb7cafcfb7209b5be22b849f`.
 TWRP Recovery p14 untouched; no flash or reboot for LCD/touch tests.
 No Windows driver changes, no VPS-ARM.
+
+IMPORTANT CORRECTION: slot is ABS_MT_SLOT=0x2f, whereas the actual 0x30 events in the source sample are ABS_MT_TOUCH_MAJOR. Do not infer simultaneous fingers from touch major values. See the new five-target simultaneous hardware test.
