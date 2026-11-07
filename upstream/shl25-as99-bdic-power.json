@@ -1,0 +1,164 @@
+{
+  "bdic_7bit_address_equivalent": 84,
+  "bdic_fwcmd_slave8": 168,
+  "chipver0_uses_vsn_on_ts1": true,
+  "groups": {
+    "active": [
+      {
+        "data": 0,
+        "delay_us": 0,
+        "mask": 0,
+        "op": "SHDISP_BDIC_BANK",
+        "reg": 255,
+        "reg_symbol": "BDIC_REG_BANKSEL"
+      },
+      {
+        "data": 128,
+        "delay_us": 1000,
+        "mask": 128,
+        "op": "SHDISP_BDIC_SET",
+        "reg": 0,
+        "reg_symbol": "BDIC_REG_SYSTEM1"
+      },
+      {
+        "data": 2,
+        "delay_us": 0,
+        "mask": 2,
+        "op": "SHDISP_BDIC_SET",
+        "reg": 2,
+        "reg_symbol": "BDIC_REG_SYSTEM3"
+      }
+    ],
+    "standby": [
+      {
+        "data": 0,
+        "delay_us": 0,
+        "mask": 0,
+        "op": "SHDISP_BDIC_BANK",
+        "reg": 255,
+        "reg_symbol": "BDIC_REG_BANKSEL"
+      },
+      {
+        "data": 0,
+        "delay_us": 0,
+        "mask": 2,
+        "op": "SHDISP_BDIC_CLR",
+        "reg": 2,
+        "reg_symbol": "BDIC_REG_SYSTEM3"
+      },
+      {
+        "data": 0,
+        "delay_us": 0,
+        "mask": 128,
+        "op": "SHDISP_BDIC_CLR",
+        "reg": 0,
+        "reg_symbol": "BDIC_REG_SYSTEM1"
+      }
+    ],
+    "vsn_off": [
+      {
+        "data": 64,
+        "delay_us": 1000,
+        "mask": 80,
+        "op": "SHDISP_BDIC_RMW",
+        "reg": 1,
+        "reg_symbol": "BDIC_REG_SYSTEM2"
+      }
+    ],
+    "vsn_on": [
+      {
+        "data": 16,
+        "delay_us": 0,
+        "mask": 80,
+        "op": "SHDISP_BDIC_RMW",
+        "reg": 1,
+        "reg_symbol": "BDIC_REG_SYSTEM2"
+      }
+    ],
+    "vsn_on_ts1": [
+      {
+        "data": 5,
+        "delay_us": 0,
+        "mask": 255,
+        "op": "SHDISP_BDIC_STR",
+        "reg": 42,
+        "reg_symbol": "BDIC_REG_CPM1"
+      },
+      {
+        "data": 0,
+        "delay_us": 0,
+        "mask": 32,
+        "op": "SHDISP_BDIC_CLR",
+        "reg": 1,
+        "reg_symbol": "BDIC_REG_SYSTEM2"
+      },
+      {
+        "data": 16,
+        "delay_us": 16000,
+        "mask": 80,
+        "op": "SHDISP_BDIC_RMW",
+        "reg": 1,
+        "reg_symbol": "BDIC_REG_SYSTEM2"
+      },
+      {
+        "data": 32,
+        "delay_us": 0,
+        "mask": 32,
+        "op": "SHDISP_BDIC_SET",
+        "reg": 1,
+        "reg_symbol": "BDIC_REG_SYSTEM2"
+      }
+    ],
+    "vsp_off": [
+      {
+        "data": 0,
+        "delay_us": 0,
+        "mask": 1,
+        "op": "SHDISP_BDIC_CLR",
+        "reg": 1,
+        "reg_symbol": "BDIC_REG_SYSTEM2"
+      },
+      {
+        "data": 128,
+        "delay_us": 2000,
+        "mask": 255,
+        "op": "SHDISP_BDIC_STR",
+        "reg": 87,
+        "reg_symbol": "BDIC_REG_DCDC2_TEST_57"
+      }
+    ],
+    "vsp_on": [
+      {
+        "data": 0,
+        "delay_us": 0,
+        "mask": 0,
+        "op": "SHDISP_BDIC_BANK",
+        "reg": 255,
+        "reg_symbol": "BDIC_REG_BANKSEL"
+      },
+      {
+        "data": 0,
+        "delay_us": 0,
+        "mask": 255,
+        "op": "SHDISP_BDIC_STR",
+        "reg": 87,
+        "reg_symbol": "BDIC_REG_DCDC2_TEST_57"
+      },
+      {
+        "data": 1,
+        "delay_us": 3000,
+        "mask": 1,
+        "op": "SHDISP_BDIC_SET",
+        "reg": 1,
+        "reg_symbol": "BDIC_REG_SYSTEM2"
+      }
+    ]
+  },
+  "selected_board": "CONFIG_MACH_DECKARD_AS99",
+  "source_sha256": {
+    "as99": "79bebee79c31f2a0d39637dc0de5c6b596f4f196cdbd73e0017df7b069dab18b",
+    "control": "f4a034bc613339c92b04c9df94f5a5adcb06ab51dfab53e9ba2ee095e9d2f69b",
+    "driver": "ae1d0d78dc639c881c80c857a781e510341fdd66e92c8481e88088b4b02c3206",
+    "registers": "d78408db969bd0ff9cf2efdec97e2cd5c4158a16cbaf6777238b8ee17404ae62"
+  }
+}

@@ -43,6 +43,9 @@ jobs:
             dist-upstream61/shl25-as99-clmr-boot.c
             dist-upstream61/shl25-as99-clmr-boot.h
             dist-upstream61/shl25-as99-clmr-boot-tables.h
+            dist-upstream61/shl25-as99-bdic-power.c
+            dist-upstream61/shl25-as99-bdic-power.h
+            dist-upstream61/shl25-as99-bdic-power-tables.h
             dist-upstream61/SOURCE_MANIFEST.txt
             dist-upstream61/SHA256SUMS
           retention-days: 30
