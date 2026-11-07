@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
+# Build with fakeroot to encode correct character-device metadata in CPIO.
+# The CI runner is unprivileged; no real /dev nodes are created on the host.
+if [ -z "${FAKEROOTKEY:-}" ]; then
+    command -v fakeroot >/dev/null || { echo "TOOL_MISSING: fakeroot"; exit 2; }
+    exec fakeroot -- bash "$0" "$@"
+fi
 # SHL25 Linux 6.1 native RAM-only initramfs, never flashes.
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 WORK="$ROOT/.build/linux61-native"
@@ -7,7 +13,12 @@ DIST="$ROOT/dist-linux61-native"
 FS="$WORK/rootfs"
 rm -rf "$FS"
 mkdir -p "$FS/bin" "$FS/sbin" "$FS/dev/pts" "$FS/proc" "$FS/sys" "$FS/tmp" "$FS/run" "$FS/etc" "$DIST"
-for name in qemu-arm curl dpkg-deb sha256sum cpio gzip file arm-linux-gnueabihf-readelf; do
+# Kernel opens /dev/console before executing /init: required for PID1
+# diagnostics even when USB/DRM are not initialized. Preserve null/kmsg.
+mknod -m 0600 "$FS/dev/console" c 5 1
+mknod -m 0666 "$FS/dev/null" c 1 3
+mknod -m 0600 "$FS/dev/kmsg" c 1 11
+for name in qemu-arm curl dpkg-deb sha256sum cpio gzip file arm-linux-gnueabihf-readelf mknod python3; do
     command -v "$name" >/dev/null || { echo "TOOL_MISSING: $name"; exit 2; }
 done
 
@@ -58,6 +69,7 @@ printf '%s\n' \
     "BusyBox .deb SHA256: $SHA" \
     "PID1: /init; USB configfs CDC ACM; ttyGS0 BusyBox ash" \
     "No eMMC mount, flash, repartition or modem config" \
+    "C11: dev/console (5,1), dev/null (1,3), dev/kmsg (1,11) verified by archive parser" \
     "Device boot verified: NO" \
     "TWRP Recovery and BOOT modified: NO" \
     > "$DIST/SOURCE_MANIFEST.txt"
@@ -65,5 +77,6 @@ cp "$ROOT/native61/init" "$DIST/init"
 cp "$ROOT/scripts/build-linux61-native-initramfs.sh" "$DIST/build-script.sh"
 (cd "$DIST" && sha256sum native-initramfs.cpio.gz init build-script.sh SOURCE_MANIFEST.txt > SHA256SUMS)
 gzip -t "$DIST/native-initramfs.cpio.gz"
+python3 "$ROOT/native61/verify_initramfs.py" "$DIST/native-initramfs.cpio.gz"
 echo SHL25_LINUX61_NATIVE_INITRAMFS_QEMU_AND_ARCHIVE_PASS
 cat "$DIST/SHA256SUMS"

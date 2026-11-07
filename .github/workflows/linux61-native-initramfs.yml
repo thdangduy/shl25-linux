@@ -22,7 +22,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            binutils-arm-linux-gnueabihf qemu-user cpio curl dpkg file gzip
+            binutils-arm-linux-gnueabihf qemu-user cpio curl dpkg file gzip fakeroot
       - name: Build and test pinned native Linux 6.1 rootfs
         run: |
           bash -n scripts/build-linux61-native-initramfs.sh
@@ -36,6 +36,7 @@ jobs:
               grep -Fxq "./$f" dist-linux61-native/ARCHIVE_FILES.txt ||
               { echo "MISSING_INITRAMFS_ENTRY=$f"; exit 9; }
           done
+          python3 native61/verify_initramfs.py dist-linux61-native/native-initramfs.cpio.gz
           echo SHL25_LINUX61_RAM_INITRAMFS_PATHS_PASS
       - uses: actions/upload-artifact@v4
         with:
