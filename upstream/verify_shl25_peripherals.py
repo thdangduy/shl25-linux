@@ -91,6 +91,18 @@ def main():
         path="/smd/rpm/rpm_requests/regulators-1/"+name
         disabled(check(tree,path),path)
     print("SHL25_LINUX61_SHARP_POWER_RAIL_DTB_PASS: six fixed rails + three switched rails, all disabled")
+    # Real Sharp Andy panel declaration; DSI0 and panel must remain
+    # disabled until CLMR/BDIC, reset and regulator sequencing works.
+    candidates=[(path,node) for path,node in tree.items()
+                if path.endswith("/dsi@fd922800/panel@0")]
+    assert len(candidates)==1, "SHL25 Andy panel missing/duplicated"
+    panel_path,panel=candidates[0]
+    disabled(panel,panel_path)
+    compatible(panel,"sharp,shl25-andy")
+    assert u32seq(panel["reg"])==(0,), "Sharp DSI0 panel virtual channel must be zero"
+    parent=panel_path.rsplit("/",1)[0]
+    disabled(tree[parent],parent)
+    print("SHL25_LINUX61_ANDY_DRM_PANEL_DTB_STAGED_DISABLED_PASS")
     print("SHL25_LINUX61_PERIPHERAL_DTB_DECLARATIONS_PASS: 4 QUP buses, 6 attached chips, 4 pinmux sets")
     print("SHL25_LINUX61_PERIPHERALS_DISABLED_UNTIL_DRIVER_PORT: PASS")
     print("WARNING: compiled DTB does not establish a device driver or successful hardware probing")

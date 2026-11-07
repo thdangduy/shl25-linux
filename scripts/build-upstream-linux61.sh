@@ -25,6 +25,32 @@ ACTUAL="$(git -C "$SRC" rev-parse HEAD)"
 if [ "$ACTUAL" != "$KERNEL_COMMIT" ]; then
     echo "UPSTREAM_COMMIT_MISMATCH: $ACTUAL"; exit 3
 fi
+# Out-of-tree Sharp OEM Andy command-mode panel driver: graft onto
+# clean, SHA-pinned vanilla 6.1 source for compiler/API validation.
+# The SHL25 board DTS keeps panel + DSI0 disabled until CLMR/BDIC power
+# sequencing is verified; built-in code alone is NOT hardware PASS.
+python3 "$ROOT/upstream/verify_shl25_andy_panel.py" --verify
+PANEL_SRC="$ROOT/drivers/gpu/drm/panel/panel-sharp-shl25-andy.c"
+PANEL_DIR="$SRC/drivers/gpu/drm/panel"
+test -s "$PANEL_SRC"
+cp "$PANEL_SRC" "$PANEL_DIR/panel-sharp-shl25-andy.c"
+if ! grep -q '^config DRM_PANEL_SHARP_SHL25_ANDY$' "$PANEL_DIR/Kconfig"; then
+    cat >> "$PANEL_DIR/Kconfig" <<'PANEL_KCONFIG'
+
+config DRM_PANEL_SHARP_SHL25_ANDY
+    tristate "Sharp SHL25 AS99 Andy 1080p command-mode panel"
+    depends on OF
+    depends on DRM_MIPI_DSI
+    depends on BACKLIGHT_CLASS_DEVICE
+    help
+      Vendor GPL-derived Sharp Andy MIPI DSI command transport port.
+      Board CLMR/BDIC regulators and power sequencing are not yet
+      completed; keep board display node disabled until verified.
+PANEL_KCONFIG
+    printf '%s\n' 'obj-$(CONFIG_DRM_PANEL_SHARP_SHL25_ANDY) += panel-sharp-shl25-andy.o' \
+      >> "$PANEL_DIR/Makefile"
+fi
+echo SHL25_ANDY_PANEL_VENDOR_CMDS_CHECKED_AND_SOURCE_STAGED
 KVER="$(make -s -C "$SRC" kernelversion)"
 case "$KVER" in 6.1|6.1.0) ;; *) echo "WRONG_UPSTREAM_VERSION: $KVER"; exit 4;; esac
 
@@ -48,6 +74,7 @@ CONFIG="$OBJ/.config"
     -e SPI -e SPI_MASTER -e SPI_QUP -e I2C -e I2C_QUP -e INPUT -e INPUT_EVDEV -e IIO \
     -e RMI4_CORE -e RMI4_SPI -e RMI4_F11 -e RMI4_F12 \
     -e DRM -e DRM_MSM -e DRM_PANEL -e DRM_FBDEV_EMULATION -e FB -e FRAMEBUFFER_CONSOLE -e VT \
+    -e DRM_PANEL_SHARP_SHL25_ANDY \
     -e USB_GADGET -e USB_CONFIGFS -e USB_CONFIGFS_ACM \
     -e QCOM_SMD_RPM -e REGULATOR_QCOM_SMD_RPM \
     -d ATA -d SATA_AHCI -d DEBUG_INFO_BTF -d DEBUG_INFO_BTF_MODULES
@@ -55,7 +82,7 @@ make -C "$SRC" O="$OBJ" olddefconfig
 python3 - "$CONFIG" <<'PY'
 import pathlib,sys
 cfg=pathlib.Path(sys.argv[1]).read_text()
-required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
+required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_PANEL_SHARP_SHL25_ANDY", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
 missing=[key for key in required if f"CONFIG_{key}=y" not in cfg]
 if missing: raise SystemExit("REQUIRED_UPSTREAM_CONFIG_NOT_BUILTIN: "+", ".join(missing))
 print("UPSTREAM_SHL25_MINIMAL_CONFIG_PASS", len(required), "required built-ins")
@@ -72,9 +99,14 @@ python3 "$ROOT/upstream/verify_shl25_dtb.py" "$DIST/qcom-msm8974-sharp-as99.dtb"
 python3 "$ROOT/upstream/verify_shl25_peripherals.py" "$DIST/qcom-msm8974-sharp-as99.dtb"
 echo "SHL25_DTB_PREFLIGHT_PASS"
 make -C "$SRC" O="$OBJ" -j"$(nproc)" zImage
+test -s "$OBJ/drivers/gpu/drm/panel/panel-sharp-shl25-andy.o" ||
+    { echo "SHL25_ANDY_PANEL_DRIVER_OBJECT_MISSING"; exit 14; }
+echo SHL25_ANDY_DRM_PANEL_61_COMPILED_BUILTIN_PASS
 cp "$OBJ/arch/arm/boot/zImage" "$DIST/zImage"
 cp "$CONFIG" "$DIST/kernel.config"
 cp "$DTS" "$DIST/qcom-msm8974-sharp-as99.dts"
+cp "$PANEL_SRC" "$DIST/panel-sharp-shl25-andy.c"
+cp "$ROOT/upstream/shl25-andy-oem-dsi.json" "$DIST/shl25-andy-oem-dsi.json"
 
 python3 - "$DIST/qcom-msm8974-sharp-as99.dtb" <<'PY'
 from pathlib import Path
@@ -94,10 +126,12 @@ Config: vanilla qcom_defconfig + explicit minimal boot requirements
 SoC files: original Linux upstream; SHL25 DTS: thdangduy/shl25-linux
 Third-party precompiled kernel: NONE
 Flashable image: NONE (output zImage, DTB, config only)
+Sharp AS99 Andy DRM driver: compiled into zImage; DSI0 DT node disabled
+Andy OEM DSI commands: 28 on + 2 off, SHA-pinned against Sharp GPL
 Validated on device: NO, build/DTB check only
 TWRP / Recovery: untouched
 EOF
-(cd "$DIST" && sha256sum zImage qcom-msm8974-sharp-as99.dtb kernel.config qcom-msm8974-sharp-as99.dts > SHA256SUMS)
+(cd "$DIST" && sha256sum zImage qcom-msm8974-sharp-as99.dtb kernel.config qcom-msm8974-sharp-as99.dts panel-sharp-shl25-andy.c shl25-andy-oem-dsi.json > SHA256SUMS)
 echo "UPSTREAM_LINUX_6_1_BUILD_PASS"
 cat "$DIST/SOURCE_MANIFEST.txt"
 cat "$DIST/SHA256SUMS"

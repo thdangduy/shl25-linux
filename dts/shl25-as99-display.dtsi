@@ -1,0 +1,19 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * SHL25 / AS99 Sharp Andy DRM DSI0 panel bring-up description.
+ *
+ * OEM Sharp bld010105 DTS proves four-lane RGB888 1080x1920 60Hz,
+ * Sharp CLMR + IR2E71Y6 BDIC and DSI0 command-mode.
+ *
+ * CRITICAL: Panel, DSI0 and MDSS are left DISABLED until correct
+ * PM8941 supplies, CLMR/BDIC control, panel reset and TE sync are
+ * ported and verified. A compiled panel object is not a boot PASS.
+ */
+&dsi0 {
+	shl25_andy: panel@0 {
+		compatible = "sharp,shl25-andy";
+		reg = <0>;
+		status = "disabled";
+		/* No fabricated reset-gpios, power-supply, or backlight phandles. */
+	};
+};
