@@ -33,6 +33,9 @@ struct shl25_clmr_boot_prereqs {
  * No hardware adapter is wired in this stage.
  */
 struct shl25_clmr_boot_ops {
+	/* CLMR DEVCODE preflight runs only AFTER firmware SHA verification,
+	 * but BEFORE the first destructive register write. */
+	int (*validate_device)(void *ctx);
 	int (*write_reg)(void *ctx, u16 reg, u32 value);
 	int (*read_reg)(void *ctx, u16 reg, u32 *value);
 	int (*stream_firmware)(void *ctx, const u8 *fw, size_t bytes);

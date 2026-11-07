@@ -28,6 +28,8 @@
 #define SHL25_CLMR_SPI_FW_PAYLOAD 6128U
 #define SHL25_CLMR_SPI_FW_BLOCK 16U
 
+#define SHL25_CLMR_REG_DEVCODE 0x0300
+#define SHL25_CLMR_DEVCODE_EXPECTED 0x00004002U
 #define SHL25_CLMR_OP_REG_WRITE 0xc0
 #define SHL25_CLMR_OP_REG_SELECT 0xc2
 #define SHL25_CLMR_OP_REG_FETCH 0xc4
@@ -110,6 +112,21 @@ out:
 	return ret;
 }
 
+/* OEM shdisp_clmr_lcdc_devcheck() compares DEVCODE 0x00004002.
+ * Reject wrong hardware identity before the first register write.
+ */
+static int shl25_clmr_bridge_validate_device(void *ctx)
+{
+	u32 devcode;
+	int ret;
+
+	ret = shl25_clmr_bridge_read(ctx, SHL25_CLMR_REG_DEVCODE,
+				     &devcode);
+	if (ret)
+		return ret;
+	return devcode == SHL25_CLMR_DEVCODE_EXPECTED ? 0 : -ENODEV;
+}
+
 /*
  * OEM eDram_transfer() copies 6128 payload bytes at offset 1 in each
  * 6144-byte frame and transmits 4 + payload length. Its trailing three
@@ -190,6 +207,7 @@ int shl25_as99_clmr_bridge_boot(
 	const struct shl25_clmr_board_irq_ops *irq_ops, void *irq_ctx)
 {
 	const struct shl25_clmr_boot_ops ops = {
+		.validate_device = shl25_clmr_bridge_validate_device,
 		.write_reg = shl25_clmr_bridge_write,
 		.read_reg = shl25_clmr_bridge_read,
 		.stream_firmware = shl25_clmr_bridge_stream,

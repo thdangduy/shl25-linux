@@ -116,12 +116,20 @@ int shl25_as99_clmr_boot_sequence(
 	} else {
 		return -EOPNOTSUPP;
 	}
-	if (!ops->write_reg || !ops->read_reg || !ops->stream_firmware ||
+	if (!ops->validate_device || !ops->write_reg || !ops->read_reg ||
+	    !ops->stream_firmware ||
 	    !ops->arm_boot_completion || !ops->wait_boot_completion)
 		return -EOPNOTSUPP;
 
 	/* No SPI writes before checking actual firmware SHA-256 in kernel. */
 	ret = shl25_clmr_verify_firmware_sha256(firmware, firmware_bytes);
+	if (ret)
+		return ret;
+
+	/* OEM reads DEVCODE and requires 0x00004002 before boot.
+	 * This is the first hardware I/O and MUST precede register writes.
+	 */
+	ret = ops->validate_device(ctx);
 	if (ret)
 		return ret;
 

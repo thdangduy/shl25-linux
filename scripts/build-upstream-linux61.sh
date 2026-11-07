@@ -199,6 +199,7 @@ echo SHL25_AS99_C8_IRQ_STATUS_STAGED_NO_GPIO75_BINDING
 # Stage C9: OEM GPIO75 rising-edge firmware boot completion broker.
 # Threaded IRQ callbacks are provided but NEVER registered on a device.
 python3 "$ROOT/upstream/verify_shl25_clmr_boot_irq.py"
+python3 "$ROOT/upstream/verify_shl25_clmr_devcode.py"
 CLMR_BOOT_IRQ_SRC="$ROOT/drivers/spi/shl25-as99-clmr-boot-irq.c"
 CLMR_BOOT_IRQ_HDR="$ROOT/drivers/spi/shl25-as99-clmr-boot-irq.h"
 test -s "$CLMR_BOOT_IRQ_SRC" && test -s "$CLMR_BOOT_IRQ_HDR"
@@ -343,6 +344,7 @@ AS99 C6 SPI/firmware-loader transport bridge compiled; no power/IRQ device adapt
 AS99 C7 PM8941 LVS2/L2 two-rail source-pinned power sequencing compiled; no GPIO/regulator DT adapter or probe caller
 AS99 C8 OEM CLMR IRQ decode/clear compiled; IRQ GPIO75 handler not connected
 AS99 C9 boot completion callback broker compiled; OEM GPIO75 rising edge verified, no physical request_irq
+AS99 C10 CLMR DEVCODE 0x0300 == 0x00004002 gate follows firmware SHA before any register write
 Validated on device: NO, build/DTB check only
 TWRP / Recovery: untouched
 EOF
