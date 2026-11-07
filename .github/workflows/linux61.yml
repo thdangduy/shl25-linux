@@ -37,6 +37,8 @@ jobs:
             dist-upstream61/qcom-msm8974-sharp-as99.dts
             dist-upstream61/panel-sharp-shl25-andy.c
             dist-upstream61/shl25-andy-oem-dsi.json
+            dist-upstream61/shl25-andy-as99-runtime.h
+            dist-upstream61/shl25-andy-as99-runtime.json
             dist-upstream61/SOURCE_MANIFEST.txt
             dist-upstream61/SHA256SUMS
           retention-days: 30

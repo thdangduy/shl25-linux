@@ -30,10 +30,15 @@ fi
 # The SHL25 board DTS keeps panel + DSI0 disabled until CLMR/BDIC power
 # sequencing is verified; built-in code alone is NOT hardware PASS.
 python3 "$ROOT/upstream/verify_shl25_andy_panel.py" --verify
+python3 "$ROOT/upstream/build_shl25_andy_runtime.py" --verify
 PANEL_SRC="$ROOT/drivers/gpu/drm/panel/panel-sharp-shl25-andy.c"
 PANEL_DIR="$SRC/drivers/gpu/drm/panel"
 test -s "$PANEL_SRC"
 cp "$PANEL_SRC" "$PANEL_DIR/panel-sharp-shl25-andy.c"
+RUNTIME_SRC="$ROOT/drivers/gpu/drm/panel/shl25-andy-as99-runtime.h"
+test -s "$RUNTIME_SRC"
+cp "$RUNTIME_SRC" "$PANEL_DIR/shl25-andy-as99-runtime.h"
+echo SHL25_AS99_RUNTIME_SOURCE_PINNED_AND_COPIED
 if ! grep -q '^config DRM_PANEL_SHARP_SHL25_ANDY$' "$PANEL_DIR/Kconfig"; then
     cat >> "$PANEL_DIR/Kconfig" <<'PANEL_KCONFIG'
 
@@ -106,6 +111,8 @@ cp "$OBJ/arch/arm/boot/zImage" "$DIST/zImage"
 cp "$CONFIG" "$DIST/kernel.config"
 cp "$DTS" "$DIST/qcom-msm8974-sharp-as99.dts"
 cp "$PANEL_SRC" "$DIST/panel-sharp-shl25-andy.c"
+cp "$RUNTIME_SRC" "$DIST/shl25-andy-as99-runtime.h"
+cp "$ROOT/upstream/shl25-andy-as99-runtime.json" "$DIST/shl25-andy-as99-runtime.json"
 cp "$ROOT/upstream/shl25-andy-oem-dsi.json" "$DIST/shl25-andy-oem-dsi.json"
 
 python3 - "$DIST/qcom-msm8974-sharp-as99.dtb" <<'PY'
@@ -128,10 +135,11 @@ Third-party precompiled kernel: NONE
 Flashable image: NONE (output zImage, DTB, config only)
 Sharp AS99 Andy DRM driver: compiled into zImage; DSI0 DT node disabled
 Andy OEM DSI commands: 28 on + 2 off, SHA-pinned against Sharp GPL
+AS99 CLMR runtime: 16 groups, 662 DCS records; per-unit calibration and transport not active
 Validated on device: NO, build/DTB check only
 TWRP / Recovery: untouched
 EOF
-(cd "$DIST" && sha256sum zImage qcom-msm8974-sharp-as99.dtb kernel.config qcom-msm8974-sharp-as99.dts panel-sharp-shl25-andy.c shl25-andy-oem-dsi.json > SHA256SUMS)
+(cd "$DIST" && sha256sum zImage qcom-msm8974-sharp-as99.dtb kernel.config qcom-msm8974-sharp-as99.dts panel-sharp-shl25-andy.c shl25-andy-oem-dsi.json shl25-andy-as99-runtime.h shl25-andy-as99-runtime.json > SHA256SUMS)
 echo "UPSTREAM_LINUX_6_1_BUILD_PASS"
 cat "$DIST/SOURCE_MANIFEST.txt"
 cat "$DIST/SHA256SUMS"

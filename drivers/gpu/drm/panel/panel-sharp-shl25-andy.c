@@ -14,6 +14,7 @@
  */
 #include <linux/delay.h>
 #include <linux/errno.h>
+#include <linux/build_bug.h>
 #include <linux/module.h>
 #include <linux/of.h>
 #include <linux/slab.h>
@@ -29,6 +30,9 @@ struct shl25_andy {
 	struct mipi_dsi_device *dsi;
 	bool prepared;
 	bool enabled;
+	bool clmr_ready;
+	bool calibration_valid;
+	bool clmr_transport_ready;
 };
 
 struct shl25_andy_cmd {
@@ -37,6 +41,42 @@ struct shl25_andy_cmd {
 	u8 length;
 	u8 payload[16];
 };
+
+/*
+ * Exact AS99 CLMR DCS runtime records from the board-selected
+ * shdisp_lcdc/data/shdisp_andy_data_as99.h. Per-unit VCOM/gamma values
+ * are supplied by the OEM after its early startup, not fixed literals.
+ */
+#include "shl25-andy-as99-runtime.h"
+
+/* Fail closed until CLMR firmware/BDIC power/VCOM calibration are ported. */
+static int shl25_andy_require_runtime_ready(struct shl25_andy *ctx)
+{
+	BUILD_BUG_ON((ARRAY_SIZE(shl25_as99_display_off) +
+			ARRAY_SIZE(shl25_as99_display_on1_1) +
+			ARRAY_SIZE(shl25_as99_display_on1_2) +
+			ARRAY_SIZE(shl25_as99_gamma) +
+			ARRAY_SIZE(shl25_as99_initial1) +
+			ARRAY_SIZE(shl25_as99_initial1_regulator_ts1_0) +
+			ARRAY_SIZE(shl25_as99_initial1_regulator_ts1_1) +
+			ARRAY_SIZE(shl25_as99_initial1_regulator_ts1_1_flicker_unadjusted) +
+			ARRAY_SIZE(shl25_as99_initial1_regulator_ts2_0) +
+			ARRAY_SIZE(shl25_as99_initial1_regulator_ts2_0_flicker_unadjusted) +
+			ARRAY_SIZE(shl25_as99_initial2) +
+			ARRAY_SIZE(shl25_as99_power) +
+			ARRAY_SIZE(shl25_as99_sync_ts1_0) +
+			ARRAY_SIZE(shl25_as99_sync_ts2_0) +
+			ARRAY_SIZE(shl25_as99_terminal) +
+			ARRAY_SIZE(shl25_as99_timing)) != 662);
+	BUILD_BUG_ON(ARRAY_SIZE(shl25_as99_gamma) != 363);
+    if (!ctx->clmr_ready || !ctx->calibration_valid ||
+        !ctx->clmr_transport_ready) {
+        dev_err(&ctx->dsi->dev,
+                "AS99 CLMR/BDIC power, VCOM/gamma, or CLMR transport not ported; no panel writes\n");
+        return -EOPNOTSUPP;
+    }
+    return 0;
+}
 
 /* OEM_INIT_SHA256=521f981db5686f8d11ff3b04404f29f0473b1b83bc4cd5c2ad56063535b2e499 */
 /* OEM_INIT_ARRAY_BEGIN */
@@ -154,6 +194,10 @@ static int shl25_andy_prepare(struct drm_panel *panel)
 
 	if (ctx->prepared)
 		return 0;
+
+	ret = shl25_andy_require_runtime_ready(ctx);
+	if (ret)
+		return ret;
 
 	ctx->dsi->mode_flags |= MIPI_DSI_MODE_LPM;
 	ret = shl25_andy_run(ctx, shl25_andy_on,

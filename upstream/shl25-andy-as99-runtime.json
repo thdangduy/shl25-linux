@@ -1,0 +1,7321 @@
+{
+  "calibration_from_nvmem_not_implemented": true,
+  "clmr_required": true,
+  "groups": {
+    "display_off": [
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          255,
+          5
+        ],
+        "source": "mipi_sh_andy_cmd_SwitchCommand[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          214,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SynchronizeSignalSetting_off[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          255,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SwitchCommand[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 16666,
+        "payload": [
+          40
+        ],
+        "source": "mipi_sh_andy_cmd_SetDisplayOff",
+        "type": "DTYPE_DCS_WRITE",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          176,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SetNormalMode",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 66664,
+        "payload": [
+          16
+        ],
+        "source": "mipi_sh_andy_cmd_EnterSleepMode",
+        "type": "DTYPE_DCS_WRITE",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          79,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_DeepStanby",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "display_on1_1": [
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          41
+        ],
+        "source": "mipi_sh_andy_cmd_set_display_on",
+        "type": "DTYPE_DCS_WRITE",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "display_on1_2": [
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          17
+        ],
+        "source": "mipi_sh_andy_cmd_exit_sleep_mode",
+        "type": "DTYPE_DCS_WRITE",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "gamma": [
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          255,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_SwitchCommand[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          117,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          118,
+          68
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          119,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          120,
+          79
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          121,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          122,
+          94
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          123,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          124,
+          109
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          125,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          126,
+          124
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          127,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          128,
+          137
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          129,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          130,
+          149
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          131,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[14]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          132,
+          159
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          133,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          134,
+          170
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          135,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[18]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          136,
+          206
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[19]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          137,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[20]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          138,
+          236
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[21]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          139,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[22]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          140,
+          27
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[23]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          141,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[24]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          142,
+          65
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[25]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          143,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[26]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          144,
+          124
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[27]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          145,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[28]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          146,
+          172
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[29]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          147,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[30]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          148,
+          174
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[31]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          149,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[32]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          150,
+          218
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[33]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          151,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[34]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          152,
+          10
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[35]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          153,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[36]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          154,
+          44
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[37]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          155,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[38]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          156,
+          83
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[39]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          157,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[40]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          158,
+          113
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[41]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          159,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[42]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          160,
+          151
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[43]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          162,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[44]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          163,
+          165
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[45]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          164,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[46]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          165,
+          188
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[47]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          166,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[48]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          167,
+          209
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[49]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          169,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[50]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          170,
+          247
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[51]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          171,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[52]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          172,
+          29
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[53]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          173,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[54]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          174,
+          110
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[55]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          175,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[56]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          176,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[57]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          177,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[58]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          178,
+          158
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDposi[59]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          179,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          180,
+          68
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          181,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          182,
+          79
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          183,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          184,
+          94
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          185,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          186,
+          109
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          187,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          188,
+          124
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          189,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          190,
+          137
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          191,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          192,
+          149
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          193,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[14]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          194,
+          159
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          195,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          196,
+          170
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          197,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[18]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          198,
+          206
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[19]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          199,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[20]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          200,
+          236
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[21]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          201,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[22]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          202,
+          27
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[23]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          203,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[24]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          204,
+          65
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[25]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          205,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[26]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          206,
+          124
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[27]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          207,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[28]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          208,
+          172
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[29]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          209,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[30]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          210,
+          174
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[31]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          211,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[32]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          212,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[33]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          213,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[34]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          214,
+          5
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[35]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          215,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[36]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          216,
+          35
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[37]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          217,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[38]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          218,
+          70
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[39]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          219,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[40]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          220,
+          95
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[41]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          221,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[42]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          222,
+          128
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[43]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          223,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[44]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          224,
+          140
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[45]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          225,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[46]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          226,
+          161
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[47]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          227,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[48]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          228,
+          180
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[49]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          229,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[50]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          230,
+          214
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[51]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          231,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[52]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          232,
+          252
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[53]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          233,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[54]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          234,
+          78
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[55]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          235,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[56]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          236,
+          125
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[57]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          237,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[58]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          238,
+          126
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAREDnega[59]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          239,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          240,
+          68
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          241,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          242,
+          79
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          243,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          244,
+          94
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          245,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          246,
+          109
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          247,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          248,
+          124
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          249,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          250,
+          137
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          255,
+          2
+        ],
+        "source": "mipi_sh_andy_cmd_SwitchCommand[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          0,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          1,
+          149
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          2,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[14]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          3,
+          159
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          4,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          5,
+          170
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          6,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[18]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          7,
+          206
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[19]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          8,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[20]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          9,
+          236
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[21]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          10,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[22]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          11,
+          27
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[23]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          12,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[24]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          13,
+          65
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[25]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          14,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[26]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          15,
+          124
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[27]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          16,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[28]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          17,
+          172
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[29]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          18,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[30]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          19,
+          174
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[31]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          20,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[32]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          21,
+          218
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[33]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          22,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[34]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          23,
+          10
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[35]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          24,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[36]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          25,
+          44
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[37]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          26,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[38]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          27,
+          83
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[39]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          28,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[40]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          29,
+          113
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[41]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          30,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[42]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          31,
+          151
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[43]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          32,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[44]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          33,
+          165
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[45]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          34,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[46]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          35,
+          188
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[47]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          36,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[48]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          37,
+          209
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[49]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          38,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[50]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          39,
+          247
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[51]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          40,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[52]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          41,
+          29
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[53]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          42,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[54]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          43,
+          110
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[55]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          45,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[56]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          47,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[57]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          48,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[58]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          49,
+          158
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENposi[59]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          50,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          51,
+          68
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          52,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          53,
+          79
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          54,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          55,
+          94
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          56,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          57,
+          109
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          58,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          59,
+          124
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          61,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          63,
+          137
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          64,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          65,
+          149
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          66,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[14]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          67,
+          159
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          68,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          69,
+          170
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          70,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[18]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          71,
+          206
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[19]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          72,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[20]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          73,
+          236
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[21]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          74,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[22]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          75,
+          27
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[23]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          76,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[24]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          77,
+          65
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[25]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          78,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[26]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          79,
+          124
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[27]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          80,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[28]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          81,
+          172
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[29]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          82,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[30]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          83,
+          174
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[31]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          84,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[32]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          85,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[33]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          86,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[34]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          88,
+          5
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[35]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          89,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[36]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          90,
+          35
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[37]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          91,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[38]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          92,
+          70
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[39]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          93,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[40]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          94,
+          95
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[41]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          95,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[42]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          96,
+          128
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[43]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          97,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[44]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          98,
+          140
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[45]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          99,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[46]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          100,
+          161
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[47]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          101,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[48]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          102,
+          180
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[49]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          103,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[50]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          104,
+          214
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[51]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          105,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[52]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          106,
+          252
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[53]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          107,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[54]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          108,
+          78
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[55]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          109,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[56]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          110,
+          125
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[57]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          111,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[58]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          112,
+          126
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMAGREENnega[59]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          113,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          114,
+          68
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          115,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          116,
+          79
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          117,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          118,
+          94
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          119,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          120,
+          109
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          121,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          122,
+          124
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          123,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          124,
+          137
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          125,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          126,
+          149
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          127,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[14]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          128,
+          159
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          129,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          130,
+          170
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          131,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[18]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          132,
+          206
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[19]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          133,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[20]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          134,
+          236
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[21]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          135,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[22]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          136,
+          27
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[23]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          137,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[24]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          138,
+          65
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[25]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          139,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[26]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          140,
+          124
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[27]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          141,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[28]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          142,
+          172
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[29]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          143,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[30]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          144,
+          174
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[31]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          145,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[32]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          146,
+          218
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[33]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          147,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[34]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          148,
+          10
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[35]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          149,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[36]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          150,
+          44
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[37]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          151,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[38]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          152,
+          83
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[39]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          153,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[40]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          154,
+          113
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[41]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          155,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[42]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          156,
+          151
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[43]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          157,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[44]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          158,
+          165
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[45]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          159,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[46]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          160,
+          188
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[47]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          162,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[48]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          163,
+          209
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[49]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          164,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[50]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          165,
+          247
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[51]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          166,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[52]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          167,
+          29
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[53]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          169,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[54]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          170,
+          110
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[55]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          171,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[56]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          172,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[57]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          173,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[58]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          174,
+          158
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEposi[59]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          175,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          176,
+          68
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          177,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          178,
+          79
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          179,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          180,
+          94
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          181,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          182,
+          109
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          183,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          184,
+          124
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          185,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          186,
+          137
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          187,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          188,
+          149
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          189,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[14]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          190,
+          159
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          191,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          192,
+          170
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          193,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[18]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          194,
+          206
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[19]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          195,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[20]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          196,
+          236
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[21]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          197,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[22]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          198,
+          27
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[23]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          199,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[24]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          200,
+          65
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[25]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          201,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[26]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          202,
+          124
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[27]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          203,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[28]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          204,
+          172
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[29]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          205,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[30]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          206,
+          174
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[31]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          207,
+          1
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[32]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          208,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[33]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          209,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[34]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          210,
+          5
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[35]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          211,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[36]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          212,
+          35
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[37]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          213,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[38]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          214,
+          70
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[39]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          215,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[40]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          216,
+          95
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[41]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          217,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[42]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          218,
+          128
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[43]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          219,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[44]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          220,
+          140
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[45]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          221,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[46]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          222,
+          161
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[47]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          223,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[48]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          224,
+          180
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[49]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          225,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[50]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          226,
+          214
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[51]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          227,
+          2
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[52]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          228,
+          252
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[53]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          229,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[54]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          230,
+          78
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[55]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          231,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[56]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          232,
+          125
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[57]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          233,
+          3
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[58]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          234,
+          126
+        ],
+        "source": "mipi_sh_andy_set_val_GAMMABLUEnega[59]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          251,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_MTPLoadStop",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "initial1": [
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          255,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SwitchCommand[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          54,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_LRFlip",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          176,
+          24
+        ],
+        "source": "mipi_sh_andy_cmd_MIPIVideoBurstwrite",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          211,
+          8
+        ],
+        "source": "mipi_sh_andy_cmd_PorchLineSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          212,
+          13
+        ],
+        "source": "mipi_sh_andy_cmd_PorchLineSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          213,
+          10
+        ],
+        "source": "mipi_sh_andy_cmd_PorchLineSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          214,
+          10
+        ],
+        "source": "mipi_sh_andy_cmd_PorchLineSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          217,
+          97
+        ],
+        "source": "mipi_sh_andy_cmd_PorchLineSetting[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          251,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_MTPLoadStop",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          255,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_SwitchCommand[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          251,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_MTPLoadStop",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "initial1_regulator_ts1_0": [
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          4,
+          12
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          5,
+          58
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          6,
+          85
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          7,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          12,
+          166
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          13,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          14,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          15,
+          240
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          16,
+          99
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          17,
+          80
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          18,
+          110
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          19,
+          66
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          20,
+          66
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          21,
+          96
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[14]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          22,
+          21
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          23,
+          21
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          91,
+          202
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          92,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[18]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          93,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[19]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          94,
+          33
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[20]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          96,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[21]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          97,
+          247
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[22]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          108,
+          171
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[23]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          109,
+          68
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[24]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "initial1_regulator_ts1_1": [
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          4,
+          12
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          5,
+          58
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          6,
+          85
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          7,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          12,
+          166
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          13,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          14,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          15,
+          240
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          16,
+          99
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          17,
+          80
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          18,
+          110
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          19,
+          66
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          20,
+          66
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          21,
+          96
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[14]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          22,
+          21
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          23,
+          21
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          91,
+          202
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          92,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[18]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          93,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[19]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          94,
+          33
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[20]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          96,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[21]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          97,
+          247
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[22]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          108,
+          171
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[23]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          109,
+          68
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[24]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "initial1_regulator_ts1_1_flicker_unadjusted": [
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          4,
+          12
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          5,
+          58
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          6,
+          85
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          7,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          12,
+          166
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          13,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          14,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          15,
+          240
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          16,
+          99
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          17,
+          80
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          18,
+          110
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          22,
+          21
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          23,
+          21
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          91,
+          202
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          96,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[21]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          97,
+          247
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[22]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          108,
+          171
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[23]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          109,
+          68
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[24]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "initial1_regulator_ts2_0": [
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          4,
+          12
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          5,
+          58
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          6,
+          85
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          7,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          10,
+          12
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          12,
+          166
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          13,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          14,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          15,
+          240
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          16,
+          99
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          17,
+          80
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          18,
+          110
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          19,
+          66
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          20,
+          66
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          21,
+          96
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[14]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          22,
+          21
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          23,
+          21
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          91,
+          202
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          92,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[18]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          93,
+          0
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[19]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          94,
+          33
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[20]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          96,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[21]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          97,
+          247
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[22]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          108,
+          171
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[23]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          109,
+          68
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[24]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "initial1_regulator_ts2_0_flicker_unadjusted": [
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          4,
+          12
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          5,
+          58
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          6,
+          85
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          7,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          10,
+          12
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          12,
+          166
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          13,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          14,
+          157
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          15,
+          240
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          16,
+          99
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          17,
+          80
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          18,
+          110
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          22,
+          21
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          23,
+          21
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          91,
+          202
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          96,
+          213
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[21]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          97,
+          247
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[22]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          108,
+          171
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[23]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          109,
+          68
+        ],
+        "source": "mipi_sh_andy_set_val_RegulatorPumpSetting[24]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "initial2": [
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          126,
+          15
+        ],
+        "source": "mipi_sh_andy_cmd_GateEQSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          127,
+          15
+        ],
+        "source": "mipi_sh_andy_cmd_GateEQSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          128,
+          15
+        ],
+        "source": "mipi_sh_andy_cmd_GateEQSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          143,
+          192
+        ],
+        "source": "mipi_sh_andy_cmd_DisplayLineSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          144,
+          120
+        ],
+        "source": "mipi_sh_andy_cmd_DisplayLineSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          145,
+          15
+        ],
+        "source": "mipi_sh_andy_cmd_DisplayLineSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          146,
+          7
+        ],
+        "source": "mipi_sh_andy_cmd_DisplayLineSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          150,
+          17
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          151,
+          20
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          152,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          153,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          154,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          155,
+          98
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          156,
+          21
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          170,
+          112
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          171,
+          218
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          174,
+          244
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          175,
+          64
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          176,
+          127
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          177,
+          22
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          181,
+          58
+        ],
+        "source": "mipi_sh_andy_cmd_SuspendTimingSetting[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "power": [
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          188,
+          133
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          189,
+          244
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          190,
+          51
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          191,
+          19
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          192,
+          119
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          193,
+          119
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          194,
+          119
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          195,
+          119
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          196,
+          119
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          197,
+          119
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          198,
+          119
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          199,
+          119
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          200,
+          170
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          201,
+          42
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          202,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[14]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          203,
+          170
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          204,
+          18
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          207,
+          136
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          208,
+          160
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[18]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          209,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[19]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          211,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_PowerOn_OffTimingSetting[20]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "sync_ts1_0": [
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          214,
+          7
+        ],
+        "source": "mipi_sh_andy_cmd_SynchronizeSignalSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          215,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SynchronizeSignalSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          216,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SynchronizeSignalSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          239,
+          112
+        ],
+        "source": "mipi_sh_andy_cmd_BAPFunctionSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          255,
+          255
+        ],
+        "source": "mipi_sh_andy_cmd_SwitchCommand[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": true,
+        "delay_us": 0,
+        "payload": [
+          233,
+          4
+        ],
+        "source": "mipi_sh_andy_cmd_VCOMOFFSetting",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          251,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_MTPLoadStop",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          255,
+          238
+        ],
+        "source": "mipi_sh_andy_cmd_SwitchCommand[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          64,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_EngineerSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          65,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_EngineerSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          66,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_EngineerSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          30,
+          102
+        ],
+        "source": "mipi_sh_andy_cmd_EngineerSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          58,
+          96
+        ],
+        "source": "mipi_sh_andy_cmd_EngineerSetting[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          57,
+          38
+        ],
+        "source": "mipi_sh_andy_cmd_EngineerSetting[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          251,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_MTPLoadStop",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          255,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SwitchCommand[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "sync_ts2_0": [
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          214,
+          7
+        ],
+        "source": "mipi_sh_andy_cmd_SynchronizeSignalSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          215,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SynchronizeSignalSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          216,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SynchronizeSignalSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          239,
+          112
+        ],
+        "source": "mipi_sh_andy_cmd_BAPFunctionSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          255,
+          238
+        ],
+        "source": "mipi_sh_andy_cmd_SwitchCommand[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          64,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_EngineerSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          65,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_EngineerSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          66,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_EngineerSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          30,
+          102
+        ],
+        "source": "mipi_sh_andy_cmd_EngineerSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          58,
+          96
+        ],
+        "source": "mipi_sh_andy_cmd_EngineerSetting[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          57,
+          38
+        ],
+        "source": "mipi_sh_andy_cmd_EngineerSetting[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          251,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_MTPLoadStop",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          255,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_SwitchCommand[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "terminal": [
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          251,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_MTPLoadStop",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          255,
+          5
+        ],
+        "source": "mipi_sh_andy_cmd_SwitchCommand[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          251,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_MTPLoadStop",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          0,
+          12
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          1,
+          8
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          2,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          3,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          4,
+          56
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          5,
+          26
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          6,
+          22
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          7,
+          27
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          8,
+          23
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          9,
+          28
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          10,
+          24
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          11,
+          29
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          12,
+          25
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          13,
+          56
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          14,
+          10
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[14]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          15,
+          6
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          16,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          17,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          18,
+          56
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[18]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          20,
+          10
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[19]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          21,
+          6
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[20]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          22,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[21]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          23,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[22]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          24,
+          56
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[23]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          25,
+          26
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[24]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          26,
+          22
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[25]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          27,
+          27
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[26]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          28,
+          23
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[27]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          29,
+          28
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[28]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          30,
+          24
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[29]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          31,
+          29
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[30]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          32,
+          25
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[31]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          33,
+          56
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[32]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          34,
+          12
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[33]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          35,
+          8
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[34]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          36,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[35]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          37,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[36]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          38,
+          56
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[37]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          40,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[38]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          41,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[39]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          42,
+          6
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[40]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          43,
+          10
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[41]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          45,
+          56
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[42]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          47,
+          25
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[43]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          48,
+          29
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[44]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          49,
+          24
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[45]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          50,
+          28
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[46]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          51,
+          23
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[47]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          52,
+          27
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[48]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          53,
+          22
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[49]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          54,
+          26
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[50]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          55,
+          56
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[51]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          56,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[52]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          57,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[53]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          58,
+          8
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[54]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          59,
+          12
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[55]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          61,
+          56
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[56]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          64,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[57]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          65,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[58]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          66,
+          8
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[59]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          67,
+          12
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[60]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          68,
+          56
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[61]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          69,
+          25
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[62]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          70,
+          29
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[63]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          71,
+          24
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[64]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          72,
+          28
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[65]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          73,
+          23
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[66]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          74,
+          27
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[67]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          75,
+          22
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[68]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          76,
+          26
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[69]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          77,
+          56
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[70]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          78,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[71]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          79,
+          14
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[72]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          80,
+          6
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[73]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          81,
+          10
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[74]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          82,
+          56
+        ],
+        "source": "mipi_sh_andy_cmd_CGOUTMappingSetting[75]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ],
+    "timing": [
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          91,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[0]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          92,
+          16
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[1]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          94,
+          39
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[2]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          95,
+          39
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[3]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          96,
+          39
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[4]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          97,
+          39
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[5]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          98,
+          40
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[6]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          99,
+          10
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[7]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          100,
+          50
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[8]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          101,
+          48
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[9]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          102,
+          68
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[10]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          103,
+          17
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[11]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          104,
+          1
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[12]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          105,
+          24
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[13]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          106,
+          6
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[14]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          107,
+          34
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[15]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          108,
+          8
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[16]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          109,
+          8
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[17]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      },
+      {
+        "calibration_required": false,
+        "delay_us": 0,
+        "payload": [
+          120,
+          0
+        ],
+        "source": "mipi_sh_andy_cmd_GIPTimingSetting[18]",
+        "type": "DTYPE_DCS_WRITE1",
+        "unresolved_delay_expression": null
+      }
+    ]
+  },
+  "selected_by": "CONFIG_MACH_DECKARD_AS99=y + CONFIG_USES_SHLCDC=y",
+  "source_header_sha256": "65773f9045ff997cc900d4ad80f000cf190065bfbdb874ac23293de52c67557d",
+  "source_path": "kernel/drivers/sharp/shdisp_lcdc/data/shdisp_andy_data_as99.h",
+  "wait_header_sha256": "490f3d0f8a6b1763cb888edb95b7d96f89cb102977092e54c86a7c6a044169b2",
+  "wait_one_frame_us": 16666
+}
