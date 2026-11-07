@@ -56,6 +56,27 @@ PANEL_KCONFIG
       >> "$PANEL_DIR/Makefile"
 fi
 echo SHL25_ANDY_PANEL_VENDOR_CMDS_CHECKED_AND_SOURCE_STAGED
+# Selected AS99 CLMR transport, exact OEM SPI1 protocol. Compiled built-in
+# but hardware DT stays disabled and probe never powers the device.
+python3 "$ROOT/upstream/verify_shl25_clmr_spi.py"
+CLMR_SPI_SRC="$ROOT/drivers/spi/spi-shl25-as99-clmr.c"
+CLMR_SPI_DIR="$SRC/drivers/spi"
+test -s "$CLMR_SPI_SRC"
+cp "$CLMR_SPI_SRC" "$CLMR_SPI_DIR/spi-shl25-as99-clmr.c"
+if ! grep -q '^config SPI_SHL25_AS99_CLMR$' "$CLMR_SPI_DIR/Kconfig"; then
+    cat >> "$CLMR_SPI_DIR/Kconfig" <<'CLMR_SPI_KCONFIG'
+
+config SPI_SHL25_AS99_CLMR
+    tristate "Sharp SHL25 AS99 CLMR command SPI transport"
+    depends on SPI && OF
+    help
+      Board-disabled prototype for Sharp CLMR SPI reg access.
+      Does NOT load firmware or power regulators.
+CLMR_SPI_KCONFIG
+    printf '%s\n' 'obj-$(CONFIG_SPI_SHL25_AS99_CLMR) += spi-shl25-as99-clmr.o' \
+      >> "$CLMR_SPI_DIR/Makefile"
+fi
+echo SHL25_AS99_CLMR_SPI_SOURCE_STAGED_POWER_DISABLED
 KVER="$(make -s -C "$SRC" kernelversion)"
 case "$KVER" in 6.1|6.1.0) ;; *) echo "WRONG_UPSTREAM_VERSION: $KVER"; exit 4;; esac
 
@@ -77,6 +98,7 @@ CONFIG="$OBJ/.config"
     -e ARM_ATAG_DTB_COMPAT_CMDLINE_FROM_BOOTLOADER \
     -e MMC_SDHCI_MSM -e EXT4_FS \
     -e SPI -e SPI_MASTER -e SPI_QUP -e I2C -e I2C_QUP -e INPUT -e INPUT_EVDEV -e IIO \
+    -e SPI_SHL25_AS99_CLMR \
     -e RMI4_CORE -e RMI4_SPI -e RMI4_F11 -e RMI4_F12 \
     -e DRM -e DRM_MSM -e DRM_PANEL -e DRM_FBDEV_EMULATION -e FB -e FRAMEBUFFER_CONSOLE -e VT \
     -e DRM_PANEL_SHARP_SHL25_ANDY \
@@ -87,7 +109,7 @@ make -C "$SRC" O="$OBJ" olddefconfig
 python3 - "$CONFIG" <<'PY'
 import pathlib,sys
 cfg=pathlib.Path(sys.argv[1]).read_text()
-required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_PANEL_SHARP_SHL25_ANDY", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
+required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "SPI_SHL25_AS99_CLMR", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_PANEL_SHARP_SHL25_ANDY", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
 missing=[key for key in required if f"CONFIG_{key}=y" not in cfg]
 if missing: raise SystemExit("REQUIRED_UPSTREAM_CONFIG_NOT_BUILTIN: "+", ".join(missing))
 print("UPSTREAM_SHL25_MINIMAL_CONFIG_PASS", len(required), "required built-ins")
@@ -107,11 +129,15 @@ make -C "$SRC" O="$OBJ" -j"$(nproc)" zImage
 test -s "$OBJ/drivers/gpu/drm/panel/panel-sharp-shl25-andy.o" ||
     { echo "SHL25_ANDY_PANEL_DRIVER_OBJECT_MISSING"; exit 14; }
 echo SHL25_ANDY_DRM_PANEL_61_COMPILED_BUILTIN_PASS
+test -s "$OBJ/drivers/spi/spi-shl25-as99-clmr.o" ||
+    { echo "SHL25_CLMR_SPI_OBJECT_MISSING"; exit 15; }
+echo SHL25_CLMR_SPI_61_COMPILED_BUILTIN_PASS
 cp "$OBJ/arch/arm/boot/zImage" "$DIST/zImage"
 cp "$CONFIG" "$DIST/kernel.config"
 cp "$DTS" "$DIST/qcom-msm8974-sharp-as99.dts"
 cp "$PANEL_SRC" "$DIST/panel-sharp-shl25-andy.c"
 cp "$RUNTIME_SRC" "$DIST/shl25-andy-as99-runtime.h"
+cp "$CLMR_SPI_SRC" "$DIST/spi-shl25-as99-clmr.c"
 cp "$ROOT/upstream/shl25-andy-as99-runtime.json" "$DIST/shl25-andy-as99-runtime.json"
 cp "$ROOT/upstream/shl25-andy-oem-dsi.json" "$DIST/shl25-andy-oem-dsi.json"
 
@@ -135,11 +161,12 @@ Third-party precompiled kernel: NONE
 Flashable image: NONE (output zImage, DTB, config only)
 Sharp AS99 Andy DRM driver: compiled into zImage; DSI0 DT node disabled
 Andy OEM DSI commands: 28 on + 2 off, SHA-pinned against Sharp GPL
-AS99 CLMR runtime: 16 groups, 662 DCS records; per-unit calibration and transport not active
+AS99 CLMR runtime: 16 groups, 662 DCS records; per-unit calibration not active
+AS99 CLMR SPI register transport compiled; DT client disabled, no firmware/power initialization
 Validated on device: NO, build/DTB check only
 TWRP / Recovery: untouched
 EOF
-(cd "$DIST" && sha256sum zImage qcom-msm8974-sharp-as99.dtb kernel.config qcom-msm8974-sharp-as99.dts panel-sharp-shl25-andy.c shl25-andy-oem-dsi.json shl25-andy-as99-runtime.h shl25-andy-as99-runtime.json > SHA256SUMS)
+(cd "$DIST" && sha256sum zImage qcom-msm8974-sharp-as99.dtb kernel.config qcom-msm8974-sharp-as99.dts panel-sharp-shl25-andy.c shl25-andy-oem-dsi.json shl25-andy-as99-runtime.h shl25-andy-as99-runtime.json spi-shl25-as99-clmr.c > SHA256SUMS)
 echo "UPSTREAM_LINUX_6_1_BUILD_PASS"
 cat "$DIST/SOURCE_MANIFEST.txt"
 cat "$DIST/SHA256SUMS"
