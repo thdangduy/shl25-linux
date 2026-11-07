@@ -1,0 +1,36 @@
+name: SHL25 native Linux 3.4 initramfs offline build
+
+on:
+  push:
+    branches:
+      - feat/shl25-k34-hwprobe-20261107
+    paths:
+      - diagnostics/k34_native_init.c
+      - scripts/package-k34-native-initramfs.sh
+      - .github/workflows/k34-native-init.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-native-k34:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ARMHF cross compiler and deterministic initramfs tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            gcc-arm-linux-gnueabihf binutils-arm-linux-gnueabihf \
+            cpio fakeroot gzip file
+      - name: Compile native PID1 and package minimal RAM rootfs
+        run: bash scripts/package-k34-native-initramfs.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shl25-k34-native-initramfs-offline
+          path: |
+            dist-k34-native/native-initramfs.cpio.gz
+            dist-k34-native/SOURCE_MANIFEST.txt
+            dist-k34-native/SHA256SUMS
+          if-no-files-found: error
