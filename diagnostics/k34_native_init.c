@@ -134,7 +134,8 @@ static void trace_usb(const char *fmt, ...) {
     if(fd>=0){
         ssize_t w=write(fd,msg,(size_t)n);
         (void)w;
-        (void)write(fd,"\n",1);
+        ssize_t newline_written=write(fd,"\n",1);
+        (void)newline_written;
         (void)fsync(fd);
         close(fd);
     }
