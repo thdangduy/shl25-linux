@@ -29,6 +29,12 @@ static long sc6(long n,long a,long b,long c,long d,long e,long f){
     __asm__ volatile("svc #0":"+r"(r0):"r"(r1),"r"(r2),"r"(r3),"r"(r4),"r"(r5),"r"(r7):"memory","cc");
     return r0;
 }
+/* GCC ARM EABI division-by-zero fallback: fail closed, never continue. */
+__attribute__((noreturn)) int raise(int signum){
+    (void)signum;
+    (void)sc3(__NR_exit,127,0,0);
+    for(;;){}
+}
 static int fbf, evf, logf=-1;
 static struct fb_var_screeninfo fbv;
 static struct fb_fix_screeninfo fbfixed;
