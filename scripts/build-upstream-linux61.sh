@@ -15,6 +15,10 @@ export ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
 for tool in git make gcc arm-linux-gnueabihf-gcc arm-linux-gnueabihf-ld dtc sha256sum python3; do
     command -v "$tool" >/dev/null || { echo "MISSING_TOOL: $tool"; exit 2; }
 done
+# Pocket Lab Flipper-style userspace is hardware-locked/read-only.
+# Validate the capability registry/probe without touching hardware.
+python3 "$ROOT/userspace/pocketlab/test_probe_readonly.py"
+echo SHL25_POCKET_LAB_READONLY_HARDWARE_PROBE_PASS
 mkdir -p "$WORK" "$OBJ" "$DIST"
 if [ ! -d "$SRC/.git" ]; then
     git clone --depth=1 --single-branch --branch "$KERNEL_TAG" "$KERNEL_REMOTE" "$SRC"

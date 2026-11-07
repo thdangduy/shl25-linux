@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "project": "SHL25 Pocket Lab",
+  "design_direction": "Flipper Zero-style multi-tool on native Linux 6.1; not a Flipper Zero firmware port",
+  "source_audit": {
+    "kernel": "Sharp OEM bld010105 kernel.tar.gz",
+    "kernel_entries_scanned": 41978,
+    "vendor": "Sharp OEM bld010105 vendor.tar.gz",
+    "vendor_entries_scanned": 445,
+    "notes": "Names/driver sources are proof of source availability, NOT proof that a Linux 6.1 driver is working."
+  },
+  "hardware_lock": "CLMR/display/touch/radio GPIO DT nodes stay disabled until verified; no phone access or flash in audit",
+  "modules": [
+    {
+      "id": "display_touch",
+      "label": "Display & Touch",
+      "group": "Core",
+      "status": "K34_HARDWARE_VALIDATED_L61_PENDING",
+      "priority": 0,
+      "source": [
+        "K34 on-device 1080x1920 display + 5-touch test PASS",
+        "Linux 6.1 DRM/panel and touch driver staging"
+      ],
+      "needs": [
+        "Linux 6.1 DRM/KMS + CLMR/BDIC boot",
+        "Synaptics SHTPS port",
+        "graphics composition and virtual keyboard"
+      ]
+    },
+    {
+      "id": "terminal",
+      "label": "Terminal",
+      "group": "Core",
+      "status": "USERSPACE_PLANNED",
+      "priority": 0,
+      "source": [
+        "Native Linux PTY and shell"
+      ],
+      "needs": [
+        "Booted userspace, writable storage, keyboard/terminal UI"
+      ],
+      "io": "PTY local or SSH; terminal stays available if launcher exits"
+    },
+    {
+      "id": "wifi",
+      "label": "Wi-Fi Toolkit",
+      "group": "Network",
+      "status": "OEM_VENDOR_SOURCE_PRESENT_UNPORTed",
+      "priority": 1,
+      "source": [
+        "vendor/qcom/opensource/wlan/prima",
+        "WCNSS_qcom_cfg.ini and WCNSS_qcom_wlan_nv.bin"
+      ],
+      "needs": [
+        "Kernel 6.1 WCNSS/WLAN firmware + netdev",
+        "iw list simultaneous AP+managed combination before repeater"
+      ],
+      "io": "Scan, station/AP, packet inspection only on authorized networks"
+    },
+    {
+      "id": "bluetooth",
+      "label": "Bluetooth",
+      "group": "Network",
+      "status": "HARDWARE_SPEC_PRESENT_DRIVER_UNVERIFIED",
+      "priority": 2,
+      "source": [
+        "SHL25 stock hardware Bluetooth support; exact Linux 6.1 controller bringup unresolved"
+      ],
+      "needs": [
+        "HCI enumeration and firmware verification"
+      ],
+      "io": "BLE discovery/pairing diagnostics"
+    },
+    {
+      "id": "felica_nfc",
+      "label": "FeliCa / NFC",
+      "group": "Radio",
+      "status": "OEM_SHARP_DRIVER_PRESENT",
+      "priority": 2,
+      "source": [
+        "kernel/drivers/sharp/mfc/felica.c",
+        "kernel/drivers/sharp/mfc/snfc.c",
+        "kernel/drivers/sharp/nfc/snfc_ant.c",
+        "sharp-as99.dtsi felica_cen@57"
+      ],
+      "needs": [
+        "Identify controller and firmware/secure-element constraints",
+        "Port controller GPIO and communication driver",
+        "Verify reader mode; no assumption of card emulation"
+      ],
+      "io": "Inventory and own-tag reader tests when hardware validated"
+    },
+    {
+      "id": "infrared",
+      "label": "IrDA / IR",
+      "group": "Radio",
+      "status": "OEM_SHARP_DRIVER_PRESENT",
+      "priority": 2,
+      "source": [
+        "kernel/drivers/sharp/shirda/shirda_msm_kdrv.c",
+        "kernel/drivers/sharp/shirda/shirb_ldisc.c",
+        "shirda_kdrv_config_MSM8974.h GPIO45/46/47"
+      ],
+      "needs": [
+        "Confirm SHIRBLASTER enabled for AS99 and physical TX/RX circuit",
+        "Port UART/IrDA kernel APIs and GPIO pinctrl",
+        "Test IR carrier/protocol before remote claims"
+      ],
+      "io": "Optical serial, possibly IR blaster after proof"
+    },
+    {
+      "id": "tv_tuner",
+      "label": "Digital TV / UHF RX",
+      "group": "Radio",
+      "status": "OEM_SHARP_GPIO_CONTROL_PRESENT",
+      "priority": 2,
+      "source": [
+        "kernel/drivers/sharp/tunerdrv/TunerDev.c",
+        "kernel/drivers/sharp/tunerdrv_tmm/TunerDev_tmm.c",
+        "gpio_def_tmm.h CONFIG_MACH_DECKARD_AS99",
+        "mach/msm_tsif.h TSIF path"
+      ],
+      "needs": [
+        "Identify tuner/demodulator silicon and user-space blobs",
+        "Port GPIO92 DTVEN, GPIO13 DTVRST, PM8841 antenna-select lines",
+        "Port actual demodulator + MPEG-TS input and relevant TV standard",
+        "No assumed raw IQ output, no TX"
+      ],
+      "io": "ISDB-T reception if source/firmware and RF region compatible"
+    },
+    {
+      "id": "sensors_grip",
+      "label": "Sensors & Grip",
+      "group": "Device",
+      "status": "OEM_SHARP_DRIVER_PRESENT",
+      "priority": 2,
+      "source": [
+        "kernel/drivers/sharp/shsensor_hub",
+        "kernel/drivers/sharp/shgrip",
+        "kernel/drivers/sharp/shtps"
+      ],
+      "needs": [
+        "Port selected AS99 sensor and IRQ/power drivers"
+      ],
+      "io": "Motion, proximity, grip diagnostics"
+    },
+    {
+      "id": "usb",
+      "label": "USB & External Modules",
+      "group": "Device",
+      "status": "K34_USB_ACM_VALIDATED_L61_PENDING",
+      "priority": 1,
+      "source": [
+        "Native K34 USB CDC ACM COM21 tested",
+        "Linux 6.1 USB gadget config staged"
+      ],
+      "needs": [
+        "Verify Linux 6.1 gadget and OTG roles",
+        "External USB OTG/serial boards for missing RF features"
+      ],
+      "io": "CDC-ACM, serial debug, gadget profiles in controlled lab"
+    },
+    {
+      "id": "subghz_txrx",
+      "label": "Sub-GHz Transceiver",
+      "group": "Expansion",
+      "status": "REQUIRES_EXTERNAL_HARDWARE",
+      "priority": 3,
+      "source": [
+        "Flipper Zero contains a dedicated CC1101; no equivalent SHL25 transceiver confirmed"
+      ],
+      "needs": [
+        "External region-compliant radio transceiver (e.g. USB/SPI board)",
+        "Antenna, driver and regulated TX controls"
+      ],
+      "io": "No built-in sub-GHz transmit capability established"
+    },
+    {
+      "id": "lf_rfid",
+      "label": "RFID 125 kHz",
+      "group": "Expansion",
+      "status": "REQUIRES_EXTERNAL_HARDWARE",
+      "priority": 3,
+      "source": [
+        "No dedicated 125 kHz LF reader coil/controller established for SHL25"
+      ],
+      "needs": [
+        "External LF RFID front end and own-tag test"
+      ],
+      "io": "Do not equate FeliCa 13.56 MHz with RFID 125 kHz"
+    },
+    {
+      "id": "ibutton",
+      "label": "iButton 1-Wire",
+      "group": "Expansion",
+      "status": "REQUIRES_EXTERNAL_HARDWARE",
+      "priority": 3,
+      "source": [
+        "No external iButton contact interface established for SHL25"
+      ],
+      "needs": [
+        "External 1-Wire interface/contact probe"
+      ],
+      "io": "Physical contact protocol, not NFC"
+    }
+  ]
+}
