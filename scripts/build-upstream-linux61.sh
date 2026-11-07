@@ -47,13 +47,15 @@ CONFIG="$OBJ/.config"
     -e MMC_SDHCI_MSM -e EXT4_FS \
     -e SPI -e SPI_MASTER -e SPI_QUP -e I2C -e I2C_QUP -e INPUT -e INPUT_EVDEV -e IIO \
     -e RMI4_CORE -e RMI4_SPI -e RMI4_F11 -e RMI4_F12 \
+    -e DRM -e DRM_MSM -e DRM_PANEL -e DRM_FBDEV_EMULATION -e FB -e FRAMEBUFFER_CONSOLE -e VT \
+    -e USB_GADGET -e USB_CONFIGFS -e USB_CONFIGFS_ACM \
     -e QCOM_SMD_RPM -e REGULATOR_QCOM_SMD_RPM \
     -d ATA -d SATA_AHCI -d DEBUG_INFO_BTF -d DEBUG_INFO_BTF_MODULES
 make -C "$SRC" O="$OBJ" olddefconfig
 python3 - "$CONFIG" <<'PY'
 import pathlib,sys
 cfg=pathlib.Path(sys.argv[1]).read_text()
-required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12")
+required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
 missing=[key for key in required if f"CONFIG_{key}=y" not in cfg]
 if missing: raise SystemExit("REQUIRED_UPSTREAM_CONFIG_NOT_BUILTIN: "+", ".join(missing))
 print("UPSTREAM_SHL25_MINIMAL_CONFIG_PASS", len(required), "required built-ins")
