@@ -1,0 +1,37 @@
+name: SHL25 K34 read-only hardware probe
+
+on:
+  push:
+    branches:
+      - feat/shl25-k34-hwprobe-20261107
+    paths:
+      - diagnostics/k34_hwprobe.c
+      - .github/workflows/k34-hwprobe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ARMHF static cross compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-arm-linux-gnueabihf binutils-arm-linux-gnueabihf file
+      - name: Compile read-only 3.4 framebuffer and input probe
+        run: |
+          mkdir -p dist-k34-probe
+          arm-linux-gnueabihf-gcc -std=gnu11 -O2 -static -march=armv7-a -mfpu=neon -mfloat-abi=hard -Wall -Wextra -Werror \
+            diagnostics/k34_hwprobe.c -o dist-k34-probe/shl25-k34-hwprobe
+          file dist-k34-probe/shl25-k34-hwprobe
+          arm-linux-gnueabihf-readelf -h dist-k34-probe/shl25-k34-hwprobe | head -25
+          (cd dist-k34-probe && sha256sum shl25-k34-hwprobe > SHA256SUMS)
+      - name: Upload only the built read-only tool
+        uses: actions/upload-artifact@v4
+        with:
+          name: shl25-k34-hwprobe-armhf-static
+          path: dist-k34-probe/
+          if-no-files-found: error
