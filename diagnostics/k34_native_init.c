@@ -158,7 +158,7 @@ static int usb_write(const char *leaf, const char *val) {
 static int init_usb_console(void) {
     const char *root="/sys/class/android_usb/android0/";
     char path[160],state[96];
-    trace_usb("START native_v3 CDC_ACM_without_adbd");
+    trace_usb("START native_v4 CDC_ACM_IAD_EF0201_without_adbd");
     /* Wait for gadget sysfs from Sharp OEM Linux 3.4. */
     int waited=0;
     for(; waited<45; waited++) {
@@ -183,10 +183,13 @@ static int init_usb_console(void) {
      */
     if(usb_write("enable","0")<0)return -1;
     if(usb_write("idVendor","18d1")<0)return -1;
-    if(usb_write("idProduct","0001")<0)return -1;
+    if(usb_write("idProduct","0002")<0)return -1;
     if(usb_write("iManufacturer","SHARP")<0)return -1;
     if(usb_write("iProduct","SHL25 Native Linux")<0)return -1;
     if(usb_write("iSerial","356594053328037")<0)return -1;
+    if(usb_write("bDeviceClass","239")<0)return -1;
+    if(usb_write("bDeviceSubClass","2")<0)return -1;
+    if(usb_write("bDeviceProtocol","1")<0)return -1;
     if(usb_write("f_modem/acm_transports","tty")<0)return -1;
     if(usb_write("functions","modem")<0)return -1;
     if(usb_write("unlocked","1")<0)return -1;

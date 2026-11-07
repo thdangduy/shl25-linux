@@ -17,6 +17,8 @@ TOOLCHAIN_TAR="$WORK/gcc-linaro-4.9.4-2017.01.tar.xz"
 TOOLCHAIN_DIR="$WORK/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf"
 EXPECTED_PATCHED_U_SERIAL="0824f4470986ec843ded3da2f117041bf563fbb3a93550bf9b0a57343c1ada0c"
 PATCH="$ROOT/patches/oem34/0001-sharp-gserial-reuse-existing-ttygs.patch"
+PATCH_IAD="$ROOT/patches/oem34/0002-sharp-usb-acm-enable-iad.patch"
+EXPECTED_PATCHED_F_ACM="4fe8207f89b6f8e803018da346bc07d809ff3af7d54a78f6daa17d7df0e61509"
 
 for tool in curl sha256sum tar git make python3 arm-linux-gnueabihf-gcc; do
     command -v "$tool" >/dev/null || { echo "MISSING_TOOL: $tool"; exit 2; }
@@ -41,6 +43,13 @@ ACTUAL_PATCH_SHA="$(sha256sum "$SRC/drivers/usb/gadget/u_serial.c" | cut -d' ' -
     echo "PATCH_APPLIED_SOURCE_SHA_MISMATCH=$ACTUAL_PATCH_SHA"; exit 8;
 }
 echo "OEM_SHARP_GSERIAL_PATCH_APPLY_PASS"
+git -C "$EXTRACT" apply --check "$PATCH_IAD"
+git -C "$EXTRACT" apply "$PATCH_IAD"
+ACTUAL_IAD_SHA="$(sha256sum "$SRC/drivers/usb/gadget/f_acm.c" | cut -d' ' -f1)"
+[ "$ACTUAL_IAD_SHA" = "$EXPECTED_PATCHED_F_ACM" ] || {
+    echo "SHL25_IAD_SOURCE_MISMATCH=$ACTUAL_IAD_SHA"; exit 12;
+}
+echo "OEM_SHARP_CDC_ACM_IAD_PATCH_APPLY_PASS"
 python3 "$ROOT/scripts/fix_legacy_gcc_wrapper.py" "$SRC/scripts/gcc-wrapper.py"
 python3 "$ROOT/scripts/fix_legacy_timeconst.py" "$SRC/kernel/timeconst.pl"
 python3 "$ROOT/scripts/fix_legacy_cpufreq.py" "$SRC/drivers/cpufreq/cpufreq_interactive.c"
@@ -75,6 +84,8 @@ Source URL: $OFFICIAL_URL
 Pinned source SHA256: $EXPECTED_SOURCE
 Patch: patches/oem34/0001-sharp-gserial-reuse-existing-ttygs.patch
 Patched u_serial.c SHA256: $ACTUAL_PATCH_SHA
+Additional patch: patches/oem34/0002-sharp-usb-acm-enable-iad.patch
+Patched f_acm.c SHA256: $ACTUAL_IAD_SHA
 Driver: Linux 3.4 USB gadget gserial conditional reuse
 Boot image: NO; zImage only
 Hardware validated: NO; full build check only
