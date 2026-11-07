@@ -26,7 +26,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             gcc-arm-linux-gnueabihf binutils-arm-linux-gnueabihf libc6-dev-armhf-cross \
-            cpio fakeroot gzip file curl dpkg
+            cpio fakeroot gzip file curl dpkg qemu-user
       - name: Compile native PID1 and package minimal RAM rootfs
         run: bash scripts/package-k34-native-initramfs.sh
       - uses: actions/upload-artifact@v4

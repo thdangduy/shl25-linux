@@ -27,6 +27,9 @@ if arm-linux-gnueabihf-readelf -l "$FS/bin/busybox" | grep -q INTERP; then
     echo "REFUSE_DYNAMIC_BUSYBOX"; exit 6
 fi
 file "$FS/bin/busybox"
+ASH_TEST="$(qemu-arm -cpu cortex-a15 "$FS/bin/busybox" sh -c 'printf SHL25_ASH_QEMU_ARMV7_PASS')"
+[ "$ASH_TEST" = "SHL25_ASH_QEMU_ARMV7_PASS" ] || { echo "STATIC_BUSYBOX_ASH_QEMU_FAIL"; exit 13; }
+echo "$ASH_TEST"
 for app in sh ash ls cat grep dmesg uname free ps mount umount df hexdump od stat head tail   chmod chown echo test printf sleep find sort sed awk cut wc date tr mkdir mknod sync id env   kill expr readlink basename dirname; do
     ln -s busybox "$FS/bin/$app"
 done
