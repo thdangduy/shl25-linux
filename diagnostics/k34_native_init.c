@@ -37,7 +37,7 @@ static void say(const char *fmt, ...) {
     va_end(ap);
     if(n<=0 || (size_t)n>=sizeof(msg))return;
     int fd=open("/dev/kmsg",O_WRONLY|O_NONBLOCK|O_CLOEXEC);
-    if(fd>=0){(void)write(fd,msg,(size_t)n);close(fd);}
+    if(fd>=0){ssize_t written=write(fd,msg,(size_t)n);(void)written;close(fd);}
 }
 
 static void mkdir_ok(const char *p) {
@@ -111,7 +111,7 @@ static void persist_marker(void) {
             char line[160];
             int n=snprintf(line,sizeof(line),"SHL25_NATIVE_PID1 kernel=%s arch=%s\n",u.release,u.machine);
             if(n>0 && (size_t)n<sizeof(line)){
-                (void)write(fd,line,(size_t)n);
+                ssize_t written=write(fd,line,(size_t)n); if(written!=(ssize_t)n)say("SHL25_NATIVE marker_write_short\n");
                 (void)fsync(fd);
             }
         }
@@ -147,7 +147,7 @@ static int init_usb_console(void) {
     return 0;
 }
 static void send_str(int fd,const char *s){
-    if(fd>=0)(void)write(fd,s,strlen(s));
+    if(fd>=0){size_t len=strlen(s);ssize_t written=write(fd,s,len);(void)written;}
 }
 static void console_command(int fd, const char *cmd) {
     if(!strcmp(cmd,"help")){
@@ -211,7 +211,7 @@ static void usb_loop(void) {
                     used=0;
                 }else if(c>=32 && c<127 && used+1<sizeof(cmd)){
                     cmd[used++]=(char)c;
-                    (void)write(fd,&c,1);
+                    ssize_t echoed=write(fd,&c,1);(void)echoed;
                 }
             }
         }
