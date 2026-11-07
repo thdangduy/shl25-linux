@@ -39,12 +39,26 @@ struct shl25_clmr_spi {
 	bool clmr_pll_clock_ready;
 };
 
-static int shl25_clmr_ensure_ready(const struct shl25_clmr_spi *clmr)
+static int shl25_clmr_ensure_boot_ready(const struct shl25_clmr_spi *clmr)
 {
-	if (!clmr->bdic_power_validated || !clmr->firmware_running ||
+	if (!clmr->bdic_power_validated ||
 	    !clmr->clmr_pll_clock_ready)
 		return -EOPNOTSUPP;
 
+	return 0;
+}
+
+/*
+ * Firmware command queue is post-boot only. Keep this separate from
+ * register access required by the ROM firmware loader.
+ */
+static int __maybe_unused
+shl25_clmr_ensure_runtime_ready(const struct shl25_clmr_spi *clmr)
+{
+	if (shl25_clmr_ensure_boot_ready(clmr))
+		return -EOPNOTSUPP;
+	if (!clmr->firmware_running)
+		return -EOPNOTSUPP;
 	return 0;
 }
 
@@ -68,7 +82,7 @@ static int __maybe_unused shl25_clmr_reg_write(struct shl25_clmr_spi *clmr,
 		return -EINVAL;
 	memcpy(tx + 3, data, 4);
 
-	ret = shl25_clmr_ensure_ready(clmr);
+	ret = shl25_clmr_ensure_boot_ready(clmr);
 	if (ret)
 		return ret;
 
@@ -103,7 +117,7 @@ static int __maybe_unused shl25_clmr_reg_read(struct shl25_clmr_spi *clmr,
 	if (!out)
 		return -EINVAL;
 
-	ret = shl25_clmr_ensure_ready(clmr);
+	ret = shl25_clmr_ensure_boot_ready(clmr);
 	if (ret)
 		return ret;
 

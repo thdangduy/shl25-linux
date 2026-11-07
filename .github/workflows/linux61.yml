@@ -40,6 +40,9 @@ jobs:
             dist-upstream61/shl25-andy-as99-runtime.h
             dist-upstream61/shl25-andy-as99-runtime.json
             dist-upstream61/spi-shl25-as99-clmr.c
+            dist-upstream61/shl25-as99-clmr-boot.c
+            dist-upstream61/shl25-as99-clmr-boot.h
+            dist-upstream61/shl25-as99-clmr-boot-tables.h
             dist-upstream61/SOURCE_MANIFEST.txt
             dist-upstream61/SHA256SUMS
           retention-days: 30

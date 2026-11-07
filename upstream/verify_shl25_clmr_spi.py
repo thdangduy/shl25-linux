@@ -46,7 +46,14 @@ def check():
     assert "bool bdic_power_validated;" in s
     assert "bool firmware_running;" in s
     assert "bool clmr_pll_clock_ready;" in s
-    assert "if (!clmr->bdic_power_validated || !clmr->firmware_running ||" in s
+    assert "shl25_clmr_ensure_boot_ready" in s
+    assert "if (!clmr->bdic_power_validated ||" in s
+    assert "shl25_clmr_ensure_runtime_ready" in s
+    assert "if (!clmr->firmware_running)" in s
+    assert s.count("ret = shl25_clmr_ensure_boot_ready(clmr);")==2
+    assert "bdic_power_validated = true" not in s
+    assert "firmware_running = true" not in s
+    assert "clmr_pll_clock_ready = true" not in s
     assert 'as99_spi1: spi@f9923000' in d
     assert '"sharp,mipi_spi_0"' in d
     assert 'status = "disabled";' in d

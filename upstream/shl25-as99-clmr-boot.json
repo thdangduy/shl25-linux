@@ -1,0 +1,212 @@
+{
+  "board": "CONFIG_MACH_DECKARD_AS99=y, CONFIG_SHDISP_PANEL_ANDY=y",
+  "dma_poll_max": 100,
+  "fw_blocks": 3696,
+  "fw_bytes": 59136,
+  "groups": {
+    "arm_boot": [
+      {
+        "data": 19,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMHOSTSYS",
+        "op": "CALI_STR",
+        "reg": 6144
+      }
+    ],
+    "arm_init_det": [
+      {
+        "data": 196608,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_INTM",
+        "op": "CALI_OR",
+        "reg": 260
+      },
+      {
+        "data": 0,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMSRAMCTL",
+        "op": "CALI_STR",
+        "reg": 6272
+      },
+      {
+        "data": 1,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMDEBEN",
+        "op": "CALI_STR",
+        "reg": 6148
+      },
+      {
+        "data": 3,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMHOSTSYS",
+        "op": "CALI_STR",
+        "reg": 6144
+      },
+      {
+        "data": 1,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMCONTCLKEN",
+        "op": "CALI_STR",
+        "reg": 6152
+      },
+      {
+        "data": 1,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMSLPCLKEN",
+        "op": "CALI_STR",
+        "reg": 6160
+      }
+    ],
+    "arm_init_no_det": [
+      {
+        "data": 65536,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_INTM",
+        "op": "CALI_OR",
+        "reg": 260
+      },
+      {
+        "data": 0,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMSRAMCTL",
+        "op": "CALI_STR",
+        "reg": 6272
+      },
+      {
+        "data": 1,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMDEBEN",
+        "op": "CALI_STR",
+        "reg": 6148
+      },
+      {
+        "data": 3,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMHOSTSYS",
+        "op": "CALI_STR",
+        "reg": 6144
+      },
+      {
+        "data": 1,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMCONTCLKEN",
+        "op": "CALI_STR",
+        "reg": 6152
+      },
+      {
+        "data": 1,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMSLPCLKEN",
+        "op": "CALI_STR",
+        "reg": 6160
+      }
+    ],
+    "arm_sram2fw": [
+      {
+        "data": 16,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMDMA",
+        "op": "CALI_STR",
+        "reg": 6180
+      },
+      {
+        "data": 1,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMDMAHW",
+        "op": "CALI_STR",
+        "reg": 6200
+      },
+      {
+        "data": 0,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMSRAMBASE",
+        "op": "CALI_STR",
+        "reg": 6184
+      },
+      {
+        "data": 31968,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMEDRAMBASE",
+        "op": "CALI_STR",
+        "reg": 6188
+      },
+      {
+        "data": 0,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMEDRAMSTART",
+        "op": "CALI_STR",
+        "reg": 6192
+      },
+      {
+        "data": 128,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMDMASIZE",
+        "op": "CALI_STR",
+        "reg": 6196
+      },
+      {
+        "data": 17,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_ARMDMA",
+        "op": "CALI_STR",
+        "reg": 6180
+      }
+    ],
+    "fw_download": [
+      {
+        "data": 18,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_HOSTSYS",
+        "op": "CALI_STR",
+        "reg": 3584
+      },
+      {
+        "data": 0,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_HOSTCTL",
+        "op": "CALI_STR",
+        "reg": 3588
+      },
+      {
+        "data": 31968,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_HOSTBASE",
+        "op": "CALI_STR",
+        "reg": 3612
+      },
+      {
+        "data": 1,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_HOSTHW",
+        "op": "CALI_STR",
+        "reg": 3608
+      },
+      {
+        "data": 0,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_HOSTASX",
+        "op": "CALI_STR",
+        "reg": 3592
+      },
+      {
+        "data": 0,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_HOSTASY",
+        "op": "CALI_STR",
+        "reg": 3600
+      },
+      {
+        "data": 0,
+        "delay_us": 0,
+        "name": "SHDISP_CLMR_REG_HOSTAEX",
+        "op": "CALI_STR",
+        "reg": 3596
+      }
+    ]
+  },
+  "hostaey_value": 3695,
+  "hostbase": 31968,
+  "irq_timeout_ms": 2100,
+  "register_header_sha256": "1eb86c4756fd1afb5b815eb2739e2a5170f51ac4f9279b3917201edcc1c6249d",
+  "source_sha256": "399f2b8f050709f6c8c08c56e22260e13ba46b2edde363555ebb69487933e7f0"
+}

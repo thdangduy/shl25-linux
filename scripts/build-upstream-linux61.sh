@@ -79,6 +79,31 @@ CLMR_SPI_KCONFIG
       >> "$CLMR_SPI_DIR/Makefile"
 fi
 echo SHL25_AS99_CLMR_SPI_SOURCE_STAGED_POWER_DISABLED
+# Stage C3: source-pinned CLMR boot register programs and isolated
+# callback-based boot sequence. No board hardware adapter or probe hook.
+python3 "$ROOT/upstream/build_shl25_clmr_boot.py" --verify
+python3 "$ROOT/upstream/verify_shl25_clmr_boot_sequence.py"
+CLMR_BOOT_C="$ROOT/drivers/spi/shl25-as99-clmr-boot.c"
+CLMR_BOOT_H="$ROOT/drivers/spi/shl25-as99-clmr-boot.h"
+CLMR_BOOT_TABLES="$ROOT/drivers/spi/shl25-as99-clmr-boot-tables.h"
+test -s "$CLMR_BOOT_C" && test -s "$CLMR_BOOT_H" && test -s "$CLMR_BOOT_TABLES"
+cp "$CLMR_BOOT_C" "$CLMR_SPI_DIR/shl25-as99-clmr-boot.c"
+cp "$CLMR_BOOT_H" "$CLMR_SPI_DIR/shl25-as99-clmr-boot.h"
+cp "$CLMR_BOOT_TABLES" "$CLMR_SPI_DIR/shl25-as99-clmr-boot-tables.h"
+if ! grep -q '^config SPI_SHL25_AS99_CLMR_BOOT$' "$CLMR_SPI_DIR/Kconfig"; then
+    cat >> "$CLMR_SPI_DIR/Kconfig" <<'CLMR_BOOT_KCONFIG'
+
+config SPI_SHL25_AS99_CLMR_BOOT
+    bool "Sharp SHL25 AS99 CLMR firmware boot sequence (unwired)"
+    depends on SPI_SHL25_AS99_CLMR
+    help
+      Source-verified CLMR firmware-boot register program and sequence
+      executor. No caller or platform adapter, no hardware I/O in probe.
+CLMR_BOOT_KCONFIG
+    printf '%s\n' 'obj-$(CONFIG_SPI_SHL25_AS99_CLMR_BOOT) += shl25-as99-clmr-boot.o' \
+      >> "$CLMR_SPI_DIR/Makefile"
+fi
+echo SHL25_AS99_CLMR_BOOT_SEQUENCE_STAGED_DT_DISABLED
 KVER="$(make -s -C "$SRC" kernelversion)"
 case "$KVER" in 6.1|6.1.0) ;; *) echo "WRONG_UPSTREAM_VERSION: $KVER"; exit 4;; esac
 
@@ -100,7 +125,7 @@ CONFIG="$OBJ/.config"
     -e ARM_ATAG_DTB_COMPAT_CMDLINE_FROM_BOOTLOADER \
     -e MMC_SDHCI_MSM -e EXT4_FS \
     -e SPI -e SPI_MASTER -e SPI_QUP -e I2C -e I2C_QUP -e INPUT -e INPUT_EVDEV -e IIO \
-    -e SPI_SHL25_AS99_CLMR \
+    -e SPI_SHL25_AS99_CLMR -e SPI_SHL25_AS99_CLMR_BOOT \
     -e RMI4_CORE -e RMI4_SPI -e RMI4_F11 -e RMI4_F12 \
     -e DRM -e DRM_MSM -e DRM_PANEL -e DRM_FBDEV_EMULATION -e FB -e FRAMEBUFFER_CONSOLE -e VT \
     -e DRM_PANEL_SHARP_SHL25_ANDY \
@@ -111,7 +136,7 @@ make -C "$SRC" O="$OBJ" olddefconfig
 python3 - "$CONFIG" <<'PY'
 import pathlib,sys
 cfg=pathlib.Path(sys.argv[1]).read_text()
-required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "SPI_SHL25_AS99_CLMR", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_PANEL_SHARP_SHL25_ANDY", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
+required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "SPI_SHL25_AS99_CLMR", "SPI_SHL25_AS99_CLMR_BOOT", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_PANEL_SHARP_SHL25_ANDY", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
 missing=[key for key in required if f"CONFIG_{key}=y" not in cfg]
 if missing: raise SystemExit("REQUIRED_UPSTREAM_CONFIG_NOT_BUILTIN: "+", ".join(missing))
 print("UPSTREAM_SHL25_MINIMAL_CONFIG_PASS", len(required), "required built-ins")
@@ -134,12 +159,18 @@ echo SHL25_ANDY_DRM_PANEL_61_COMPILED_BUILTIN_PASS
 test -s "$OBJ/drivers/spi/spi-shl25-as99-clmr.o" ||
     { echo "SHL25_CLMR_SPI_OBJECT_MISSING"; exit 15; }
 echo SHL25_CLMR_SPI_61_COMPILED_BUILTIN_PASS
+test -s "$OBJ/drivers/spi/shl25-as99-clmr-boot.o" ||
+    { echo "SHL25_CLMR_BOOT_OBJECT_MISSING"; exit 16; }
+echo SHL25_CLMR_BOOT_SEQUENCE_61_COMPILED_BUILTIN_PASS
 cp "$OBJ/arch/arm/boot/zImage" "$DIST/zImage"
 cp "$CONFIG" "$DIST/kernel.config"
 cp "$DTS" "$DIST/qcom-msm8974-sharp-as99.dts"
 cp "$PANEL_SRC" "$DIST/panel-sharp-shl25-andy.c"
 cp "$RUNTIME_SRC" "$DIST/shl25-andy-as99-runtime.h"
 cp "$CLMR_SPI_SRC" "$DIST/spi-shl25-as99-clmr.c"
+cp "$CLMR_BOOT_C" "$DIST/shl25-as99-clmr-boot.c"
+cp "$CLMR_BOOT_H" "$DIST/shl25-as99-clmr-boot.h"
+cp "$CLMR_BOOT_TABLES" "$DIST/shl25-as99-clmr-boot-tables.h"
 cp "$ROOT/upstream/shl25-andy-as99-runtime.json" "$DIST/shl25-andy-as99-runtime.json"
 cp "$ROOT/upstream/shl25-andy-oem-dsi.json" "$DIST/shl25-andy-oem-dsi.json"
 
@@ -165,10 +196,11 @@ Sharp AS99 Andy DRM driver: compiled into zImage; DSI0 DT node disabled
 Andy OEM DSI commands: 28 on + 2 off, SHA-pinned against Sharp GPL
 AS99 CLMR runtime: 16 groups, 662 DCS records; per-unit calibration not active
 AS99 CLMR SPI register transport compiled; DT client disabled, no firmware/power initialization
+AS99 CLMR boot sequence callback executor compiled; no SPI adapter or hardware probe caller
 Validated on device: NO, build/DTB check only
 TWRP / Recovery: untouched
 EOF
-(cd "$DIST" && sha256sum zImage qcom-msm8974-sharp-as99.dtb kernel.config qcom-msm8974-sharp-as99.dts panel-sharp-shl25-andy.c shl25-andy-oem-dsi.json shl25-andy-as99-runtime.h shl25-andy-as99-runtime.json spi-shl25-as99-clmr.c > SHA256SUMS)
+(cd "$DIST" && sha256sum zImage qcom-msm8974-sharp-as99.dtb kernel.config qcom-msm8974-sharp-as99.dts panel-sharp-shl25-andy.c shl25-andy-oem-dsi.json shl25-andy-as99-runtime.h shl25-andy-as99-runtime.json spi-shl25-as99-clmr.c shl25-as99-clmr-boot.c shl25-as99-clmr-boot.h shl25-as99-clmr-boot-tables.h > SHA256SUMS)
 echo "UPSTREAM_LINUX_6_1_BUILD_PASS"
 cat "$DIST/SOURCE_MANIFEST.txt"
 cat "$DIST/SHA256SUMS"
