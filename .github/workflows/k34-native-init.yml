@@ -22,7 +22,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            gcc-arm-linux-gnueabihf binutils-arm-linux-gnueabihf \
+            gcc-arm-linux-gnueabihf binutils-arm-linux-gnueabihf libc6-dev-armhf-cross \
             cpio fakeroot gzip file
       - name: Compile native PID1 and package minimal RAM rootfs
         run: bash scripts/package-k34-native-initramfs.sh
