@@ -46,7 +46,7 @@ CONFIG="$OBJ/.config"
     -e ARM_ATAG_DTB_COMPAT_CMDLINE_FROM_BOOTLOADER \
     -e MMC_SDHCI_MSM -e EXT4_FS \
     -e QCOM_SMD_RPM -e REGULATOR_QCOM_SMD_RPM \
-    -d DEBUG_INFO_BTF -d DEBUG_INFO_BTF_MODULES
+    -d ATA -d SATA_AHCI -d DEBUG_INFO_BTF -d DEBUG_INFO_BTF_MODULES
 make -C "$SRC" O="$OBJ" olddefconfig
 python3 - "$CONFIG" <<'PY'
 import pathlib,sys
