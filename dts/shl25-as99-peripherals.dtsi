@@ -1,0 +1,181 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Sharp SHL25/AS99 board-only bus inventory for Linux 6.1.
+ *
+ * Sources: Sharp GPL 01.01.05 sharp-as99.dtsi, sharp-common.dtsi,
+ * sharp-as99-shdisp.dtsi, sharp-shdisp-clmr.dtsi; live TWRP Linux 3.4
+ * sysfs and confirmed native 3.4 display/touch tests.
+ *
+ * These controller nodes are DISABLED until board-specific drivers,
+ * regulator sequencing, polarity and pinctrl are ported and validated.
+ * Describing hardware is NOT proof that it works under Linux 6.1.
+ */
+
+/* Actual MSM8x74 pin functions and mux GPIOs checked against v6.1 pinctrl-msm8x74.c. */
+&tlmm {
+	as99_spi1_default: as99-spi1-default-state {
+		pins = "gpio0", "gpio1", "gpio2", "gpio3";
+		function = "blsp_spi1";
+		drive-strength = <8>;
+		bias-disable;
+	};
+
+	as99_spi2_default: as99-spi2-default-state {
+		pins = "gpio4", "gpio5", "gpio6", "gpio7";
+		function = "blsp_spi2";
+		drive-strength = <8>;
+		bias-disable;
+	};
+
+	as99_spi10_default: as99-spi10-default-state {
+		pins = "gpio53", "gpio54", "gpio55", "gpio56";
+		function = "blsp_spi10";
+		drive-strength = <8>;
+		bias-disable;
+	};
+
+	as99_i2c5_default: as99-i2c5-default-state {
+		pins = "gpio25", "gpio26";
+		function = "blsp_i2c5";
+		drive-strength = <2>;
+		bias-disable;
+	};
+};
+
+&soc {
+	/*
+	 * BLSP1 QUP1 SPI, f9923000 (Sharp CLMR display companion).
+	 * OEM: spi1.0 = mipi_spi_0, Sharp CLMR / BDIC / MIPI bridge.
+	 * QUP1 I2C at the same physical base is an alternative mode;
+	 * do not enable both simultaneously.
+	 */
+	as99_spi1: spi@f9923000 {
+		compatible = "qcom,spi-qup-v2.1.1";
+		reg = <0xf9923000 0x1000>;
+		interrupts = <GIC_SPI 95 IRQ_TYPE_LEVEL_HIGH>;
+		clocks = <&gcc GCC_BLSP1_QUP1_SPI_APPS_CLK>,
+			 <&gcc GCC_BLSP1_AHB_CLK>;
+		clock-names = "core", "iface";
+		pinctrl-names = "default";
+		pinctrl-0 = <&as99_spi1_default>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		status = "disabled";
+
+		sharp_clmr_spi: display-controller@0 {
+			compatible = "sharp,mipi_spi_0";
+			reg = <0>;
+			spi-max-frequency = <50000000>;
+			spi-cpol;
+			spi-cpha;
+			spi-cs-high;
+			status = "disabled";
+		};
+	};
+
+	/*
+	 * BLSP1 QUP2 SPI, f9924000: verified Sharp touchscreen on SPI2.0.
+	 * OEM GPIO 61 interrupt; PM8941 GPIO30 reset; PM8941 L15/LVS1 supplies.
+	 * Do not fabricate 6.1 regulator or reset bindings before porting shtps.
+	 */
+	as99_spi2: spi@f9924000 {
+		compatible = "qcom,spi-qup-v2.1.1";
+		reg = <0xf9924000 0x1000>;
+		interrupts = <GIC_SPI 96 IRQ_TYPE_LEVEL_HIGH>;
+		clocks = <&gcc GCC_BLSP1_QUP2_SPI_APPS_CLK>,
+			 <&gcc GCC_BLSP1_AHB_CLK>;
+		clock-names = "core", "iface";
+		pinctrl-names = "default";
+		pinctrl-0 = <&as99_spi2_default>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		status = "disabled";
+
+		as99_touch: touchscreen@0 {
+			compatible = "sharp,shtps_rmi";
+			reg = <0>;
+			spi-max-frequency = <400000>;
+			spi-cpol;
+			spi-cpha;
+			interrupt-parent = <&tlmm>;
+			interrupts = <61 IRQ_TYPE_LEVEL_HIGH>;
+			status = "disabled";
+		};
+	};
+
+	/*
+	 * BLSP1 QUP5 I2C is absent from original mainline 6.1 MSM8974 DTS.
+	 * Original AS99 attaches FeliCa control 0x57 and an antenna 0x40,
+	 * but the antenna node is disabled in the Sharp model DTS.
+	 */
+	as99_i2c5: i2c@f9927000 {
+		compatible = "qcom,i2c-qup-v2.1.1";
+		reg = <0xf9927000 0x1000>;
+		interrupts = <GIC_SPI 99 IRQ_TYPE_LEVEL_HIGH>;
+		clocks = <&gcc GCC_BLSP1_QUP5_I2C_APPS_CLK>,
+			 <&gcc GCC_BLSP1_AHB_CLK>;
+		clock-names = "core", "iface";
+		pinctrl-names = "default";
+		pinctrl-0 = <&as99_i2c5_default>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		status = "disabled";
+
+		as99_felica: felica@57 {
+			compatible = "sharp,felica_cen";
+			reg = <0x57>;
+			status = "disabled";
+		};
+
+		as99_nfc_ant: antenna@40 {
+			compatible = "sharp,snfc_ant";
+			reg = <0x40>;
+			status = "disabled";
+		};
+	};
+
+	/*
+	 * BLSP2 QUP4 SPI, f9966000, OEM spi10.0 / shgrip_dev.
+	 * Must not enable until grip-controller firmware/IRQ/GPIO reviewed.
+	 */
+	as99_spi10: spi@f9966000 {
+		compatible = "qcom,spi-qup-v2.1.1";
+		reg = <0xf9966000 0x1000>;
+		interrupts = <GIC_SPI 104 IRQ_TYPE_LEVEL_HIGH>;
+		clocks = <&gcc GCC_BLSP2_QUP4_SPI_APPS_CLK>,
+			 <&gcc GCC_BLSP2_AHB_CLK>;
+		clock-names = "core", "iface";
+		pinctrl-names = "default";
+		pinctrl-0 = <&as99_spi10_default>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+		status = "disabled";
+
+		as99_grip: grip-sensor@0 {
+			compatible = "sharp,shgrip_dev";
+			reg = <0>;
+			spi-max-frequency = <960000>;
+			spi-cpol;
+			spi-cpha;
+			status = "disabled";
+		};
+	};
+};
+
+/*
+ * This I2C6 bus IS present in generic mainline msm8974.dtsi, but disabled.
+ * Live OEM I2C12: mpu6515@0x68, secondary AK8963 compass at 0x0c.
+ * Compatible is kept verbatim to avoid falsely binding a different chip
+ * to the generic mainline inv_mpu6050 driver. Driver/BSP port required.
+ */
+&blsp2_i2c6 {
+	status = "disabled";
+
+	as99_imu: imu@68 {
+		compatible = "invensense,mpu6515";
+		reg = <0x68>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <66 IRQ_TYPE_EDGE_RISING>;
+		status = "disabled";
+	};
+};
