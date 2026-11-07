@@ -59,6 +59,7 @@ echo SHL25_ANDY_PANEL_VENDOR_CMDS_CHECKED_AND_SOURCE_STAGED
 # Selected AS99 CLMR transport, exact OEM SPI1 protocol. Compiled built-in
 # but hardware DT stays disabled and probe never powers the device.
 python3 "$ROOT/upstream/verify_shl25_clmr_spi.py"
+python3 "$ROOT/upstream/verify_shl25_clmr_fw_packets.py"
 CLMR_SPI_SRC="$ROOT/drivers/spi/spi-shl25-as99-clmr.c"
 CLMR_SPI_DIR="$SRC/drivers/spi"
 test -s "$CLMR_SPI_SRC"
