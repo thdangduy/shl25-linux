@@ -98,7 +98,7 @@
 			spi-cpol;
 			spi-cpha;
 			interrupt-parent = <&tlmm>;
-			interrupts = <61 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts = <61 IRQ_TYPE_NONE>; /* OEM DT type=0; Sharp driver selects LOW or FALLING; audit before enable */
 			status = "disabled";
 		};
 	};

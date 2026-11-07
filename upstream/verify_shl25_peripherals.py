@@ -58,7 +58,7 @@ def main():
         disabled(n,path)
         compatible(n,driver)
         assert u32seq(n["reg"])==(address,),f"reg != {address}: {path}"
-    assert u32seq(tree["/soc/spi@f9924000/touchscreen@0"]["interrupts"]) == (61,4)
+    assert u32seq(tree["/soc/spi@f9924000/touchscreen@0"]["interrupts"]) == (61,0)
     assert u32seq(tree["/soc/i2c@f9968000/imu@68"]["interrupts"]) == (66,1)
     assert tree["/soc/spi@f9924000/touchscreen@0"].get("spi-max-frequency") == struct.pack(">I",400000)
     assert tree["/soc/spi@f9966000/grip-sensor@0"].get("spi-max-frequency") == struct.pack(">I",960000)
