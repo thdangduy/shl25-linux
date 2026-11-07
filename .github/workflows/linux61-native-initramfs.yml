@@ -1,0 +1,49 @@
+name: SHL25 Linux 6.1 standalone ARMHF diagnostic initramfs
+on:
+  push:
+    branches:
+      - feat/shl25-linux61-port-20261107
+    paths:
+      - native61/**
+      - scripts/build-linux61-native-initramfs.sh
+      - .github/workflows/linux61-native-initramfs.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-native-initramfs:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ARM ELF tools, QEMU, and initramfs tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            binutils-arm-linux-gnueabihf qemu-user cpio curl dpkg file gzip
+      - name: Build and test pinned native Linux 6.1 rootfs
+        run: |
+          bash -n scripts/build-linux61-native-initramfs.sh
+          bash scripts/build-linux61-native-initramfs.sh
+          gzip -dc dist-linux61-native/native-initramfs.cpio.gz |
+            cpio -t --quiet > dist-linux61-native/ARCHIVE_FILES.txt
+          grep -Fxq './init' dist-linux61-native/ARCHIVE_FILES.txt
+          grep -Fxq './bin/busybox' dist-linux61-native/ARCHIVE_FILES.txt
+          grep -Fxq './bin/sh' dist-linux61-native/ARCHIVE_FILES.txt
+          grep -Fxq './bin/setsid' dist-linux61-native/ARCHIVE_FILES.txt
+          grep -Fxq './bin/mount' dist-linux61-native/ARCHIVE_FILES.txt
+          echo SHL25_LINUX61_RAM_INITRAMFS_PATHS_PASS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shl25-linux61-native-initramfs-armhf
+          path: |
+            dist-linux61-native/native-initramfs.cpio.gz
+            dist-linux61-native/init
+            dist-linux61-native/build-script.sh
+            dist-linux61-native/SOURCE_MANIFEST.txt
+            dist-linux61-native/SHA256SUMS
+            dist-linux61-native/ARCHIVE_FILES.txt
+          retention-days: 30
+          if-no-files-found: error

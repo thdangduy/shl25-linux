@@ -1,0 +1,94 @@
+#!/bin/sh
+# SHL25 / AS99 native Linux 6.1 PID1 (RAM only).
+# Hardware validation pending. No write access to block devices.
+# Configfs CDC ACM has no Android dependency.
+export PATH=/bin:/sbin
+export HOME=/
+export TERM=vt100
+export PS1='shl25-6.1# '
+umask 022
+
+mkdir -p /proc /sys /dev /dev/pts /tmp /run /sys/kernel/config
+mount -t devtmpfs devtmpfs /dev || echo "DEVTMPFS_MOUNT_FAILED"
+mount -t proc proc /proc || echo "PROC_MOUNT_FAILED"
+mount -t sysfs sysfs /sys || echo "SYSFS_MOUNT_FAILED"
+mkdir -p /dev/pts /tmp /run /sys/kernel/config
+mount -t devpts devpts /dev/pts || echo "DEVPTS_MOUNT_FAILED"
+mount -t tmpfs tmpfs /run || echo "RUN_MOUNT_FAILED"
+mount -t configfs none /sys/kernel/config || echo "CONFIGFS_MOUNT_FAILED"
+
+# Preserve all diagnostics in volatile memory; never mount/write eMMC.
+LOG=/run/shl25-6.1-init.log
+: > "$LOG"
+note() {
+    printf '%s\n' "$*" >> "$LOG"
+    if [ -c /dev/kmsg ]; then printf '<6>%s\n' "$*" > /dev/kmsg || :; fi
+    printf '%s\n' "$*"
+}
+note "SHL25_LINUX61_NATIVE_PID1_STARTED"
+note "SHL25_KERNEL=$(uname -r) MACHINE=$(uname -m)"
+cat /proc/cmdline >> "$LOG" 2>&1 || :
+cat /proc/meminfo >> "$LOG" 2>&1 || :
+note "SHL25_DEVICE_RAM_ONLY_NO_FLASH"
+
+# Qualcomm USB controller may not yet enumerate in the draft 6.1 DT.
+# Never invent a USB PHY state or write to regulator/driver_override.
+G=/sys/kernel/config/usb_gadget/shl25
+configure_usb() {
+    if [ ! -d /sys/class/udc ]; then
+        note "SHL25_USB_NO_UDC_CLASS"
+        return 1
+    fi
+    udc="$(ls /sys/class/udc | head -n 1)"
+    if [ -z "$udc" ]; then
+        note "SHL25_USB_UDC_NOT_PRESENT"
+        return 1
+    fi
+    if [ ! -d /sys/kernel/config/usb_gadget ]; then
+        note "SHL25_USB_CONFIGFS_NOT_PRESENT"
+        return 1
+    fi
+    mkdir -p "$G" || return 1
+    # Reuse the K34 lab's previously verified host USB identity only
+    # for this locally connected experimental SHL25 device.
+    printf '%s\n' '0x18d1' > "$G/idVendor" || return 1
+    printf '%s\n' '0x0002' > "$G/idProduct" || return 1
+    printf '%s\n' '0x0200' > "$G/bcdUSB" || return 1
+    printf '%s\n' '0x0100' > "$G/bcdDevice" || return 1
+    mkdir -p "$G/strings/0x409" "$G/configs/c.1/strings/0x409" || return 1
+    printf '%s\n' '356594053328037' > "$G/strings/0x409/serialnumber" || return 1
+    printf '%s\n' 'Sharp' > "$G/strings/0x409/manufacturer" || return 1
+    printf '%s\n' 'SHL25 Native Linux 6.1 Diagnostic' > "$G/strings/0x409/product" || return 1
+    printf '%s\n' 'SHL25 USB serial' > "$G/configs/c.1/strings/0x409/configuration" || return 1
+    mkdir -p "$G/functions/acm.usb0" || return 1
+    if [ ! -e "$G/configs/c.1/acm.usb0" ]; then
+        ln -s "$G/functions/acm.usb0" "$G/configs/c.1/acm.usb0" || return 1
+    fi
+    # Let the Linux composite gadget and ACM function supply descriptors.
+    # Do not write legacy Android-gadget interface descriptors.
+    if ! printf '%s\n' "$udc" > "$G/UDC"; then
+        note "SHL25_USB_GADGET_BIND_FAILED_$udc"
+        return 1
+    fi
+    note "SHL25_USB_GADGET_BOUND_$udc"
+    return 0
+}
+
+bound=0
+# Keep PID1 alive, even with no USB UDC, so kernel logs can be inspected
+# later from recovery if a serial console exists.
+while :; do
+    if [ "$bound" -eq 0 ]; then
+        if configure_usb; then bound=1; else sleep 2; continue; fi
+    fi
+    if [ ! -c /dev/ttyGS0 ]; then
+        note "SHL25_USB_TTYGS0_MISSING"
+        sleep 2
+        continue
+    fi
+    note "SHL25_USB_TTYGS0_SHELL_READY"
+    # USB gadget is physical/local. The shell runs as PID1 child.
+    # On host detach / failure, returns here; PID1 never exits.
+    setsid /bin/sh -i < /dev/ttyGS0 > /dev/ttyGS0 2>&1 || note "SHL25_USB_SHELL_EXITED"
+    sleep 1
+done
