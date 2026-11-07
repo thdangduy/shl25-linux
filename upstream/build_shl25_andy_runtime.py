@@ -23,7 +23,7 @@ FIXTURE=ROOT/"upstream/shl25-andy-as99-runtime.json"
 HEADER=ROOT/"drivers/gpu/drm/panel/shl25-andy-as99-runtime.h"
 OEM_SHA="65773f9045ff997cc900d4ad80f000cf190065bfbd b874ac23293de52c67557d".replace(" ","")
 WAIT_SHA="490f3d0f8a6b1763cb888edb95b7d96f89cb102977092e54c86a7c6a044169b2"
-FIXTURE_SHA="aa7fcd4b8a283b0935f2428df575b7d4e28038664fecbe615e61b9075d2e16f8"
+FIXTURE_SHA="e4ea0a7d6e0a103195bf49204ea159453aaae10b49f8192c6e7332fcabcae6a1"
 GROUPS=[
  "initial1","initial1_regulator_ts1_0","initial1_regulator_ts1_1",
  "initial1_regulator_ts1_1_flicker_unadjusted",
@@ -202,7 +202,11 @@ def main():
         else:
             assert FIXTURE.read_text(encoding="utf-8")==serialized, "OEM data differs from fixture"
     fixture_bytes=FIXTURE.read_bytes()
-    if args.verify and hashlib.sha256(fixture_bytes).hexdigest()!=FIXTURE_SHA:
+    # Git normalizes Windows CRLF to LF in CI; pin canonical LF bytes.
+    canonical_fixture=fixture_bytes.replace(b'\r\n', b'\n')
+    if b'\r' in canonical_fixture:
+        raise ValueError('STAGE_B_AS99_RUNTIME_INVALID_LINE_ENDING')
+    if args.verify and hashlib.sha256(canonical_fixture).hexdigest()!=FIXTURE_SHA:
         raise ValueError("STAGE_B_AS99_RUNTIME_FIXTURE_SHA_CHANGED")
     data=json.loads(fixture_bytes.decode("utf-8"))
     if data["source_header_sha256"]!=OEM_SHA:raise ValueError("source header provenance changed")
