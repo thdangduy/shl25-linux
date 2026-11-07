@@ -51,6 +51,8 @@ jobs:
             dist-upstream61/shl25-as99-clmr-power.c
             dist-upstream61/shl25-as99-clmr-power.h
             dist-upstream61/shl25-as99-clmr-board-power.json
+            dist-upstream61/shl25-as99-clmr-irq-status.c
+            dist-upstream61/shl25-as99-clmr-irq-status.h
             dist-upstream61/SOURCE_MANIFEST.txt
             dist-upstream61/SHA256SUMS
           retention-days: 30
