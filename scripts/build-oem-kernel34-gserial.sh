@@ -14,7 +14,7 @@ EXPECTED_SOURCE="231315e67112ffa3b5311059ba8ad4f6b4f2213edea40a7fff001f5a3bdf27b
 EXPECTED_PATCHED_U_SERIAL="0824f4470986ec843ded3da2f117041bf563fbb3a93550bf9b0a57343c1ada0c"
 PATCH="$ROOT/patches/oem34/0001-sharp-gserial-reuse-existing-ttygs.patch"
 
-for tool in curl sha256sum tar git make arm-linux-gnueabihf-gcc; do
+for tool in curl sha256sum tar git make python3 arm-linux-gnueabihf-gcc; do
     command -v "$tool" >/dev/null || { echo "MISSING_TOOL: $tool"; exit 2; }
 done
 mkdir -p "$WORK" "$EXTRACT" "$OUT" "$DIST"
@@ -37,15 +37,16 @@ ACTUAL_PATCH_SHA="$(sha256sum "$SRC/drivers/usb/gadget/u_serial.c" | cut -d' ' -
     echo "PATCH_APPLIED_SOURCE_SHA_MISMATCH=$ACTUAL_PATCH_SHA"; exit 8;
 }
 echo "OEM_SHARP_GSERIAL_PATCH_APPLY_PASS"
+python3 "$ROOT/scripts/fix_legacy_gcc_wrapper.py" "$SRC/scripts/gcc-wrapper.py"
 export ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
 export KBUILD_BUILD_USER=shl25-ci KBUILD_BUILD_HOST=github-actions
 arm-linux-gnueabihf-gcc --version | head -1
-make -C "$SRC" O="$OUT" deckard_as99_defconfig
+make -C "$SRC" O="$OUT" HOSTCFLAGS="-O2 -fcommon" deckard_as99_defconfig
 grep -qx 'CONFIG_SHDISP=y' "$OUT/.config"
 grep -qx 'CONFIG_USB_ANDROID_SH_SERIALS=y' "$OUT/.config"
 grep -qx 'CONFIG_SHTPS_SY3000_TM2979_001=y' "$OUT/.config"
 echo "SHL25_OEM_CONFIG_PASS"
-make -C "$SRC" O="$OUT" -j4 zImage
+make -C "$SRC" O="$OUT" HOSTCFLAGS="-O2 -fcommon" -j4 zImage
 cp "$OUT/arch/arm/boot/zImage" "$DIST/zImage"
 cp "$OUT/.config" "$DIST/kernel.config"
 cat > "$DIST/SOURCE_MANIFEST.txt" <<EOF
