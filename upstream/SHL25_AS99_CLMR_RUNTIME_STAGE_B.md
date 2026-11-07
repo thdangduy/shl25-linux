@@ -38,7 +38,7 @@ Kbuild/conditional selection before using any shared code.
   `WAIT_1FRAME_US (16666)` and hashes to
   `490f3d0f8a6b1763cb888edb95b7d96f89cb102977092e54c86a7c6a044169b2`.
 - Generated JSON fixture SHA-256:
-  `aa7fcd4b8a283b0935f2428df575b7d4e28038664fecbe615e61b9075d2e16f8`.
+  `e4ea0a7d6e0a103195bf49204ea159453aaae10b49f8192c6e7332fcabcae6a1`.
 - The C generator accepts only pinned hash-matched original sources
   and checks each original command type/length/source payload.
   In CI, it verifies exact checked-in JSON fixture and generated
