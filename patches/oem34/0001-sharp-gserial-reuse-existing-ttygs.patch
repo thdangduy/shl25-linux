@@ -1,0 +1,34 @@
+--- a/kernel/drivers/usb/gadget/u_serial.c
++++ b/kernel/drivers/usb/gadget/u_serial.c
+@@ -1355,10 +1355,31 @@
+ 	int				status;
+ 
+ 	if (count == 0 || count > N_PORTS)
+ 		return -EINVAL;
+ 
++#ifdef CONFIG_USB_ANDROID_SH_SERIALS
++	/*
++	 * Sharp's MDLM/OBEX function initialization can register ttyGS0/1
++	 * before the CDC-ACM modem function is bound. Re-registering them
++	 * produces -EEXIST and can silently break USB serial enumeration.
++	 * Reuse the existing gserial device nodes if they cover this request;
++	 * do NOT expand a live tty driver or silently accept out-of-range
++	 * port numbers.
++	 */
++	if (gs_tty_driver) {
++		if (n_ports && count <= n_ports) {
++			pr_info("gserial_setup: reusing %u existing ttyGS ports\n",
++				n_ports);
++			return 0;
++		}
++		pr_err("gserial_setup: requested %u ports, existing %u\n",
++			count, n_ports);
++		return -EBUSY;
++	}
++#endif
++
+ 	gs_tty_driver = alloc_tty_driver(count);
+ 	if (!gs_tty_driver)
+ 		return -ENOMEM;
+ 
+ 	gs_tty_driver->driver_name = "g_serial";
