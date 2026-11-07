@@ -41,12 +41,6 @@ ACTUAL_PATCH_SHA="$(sha256sum "$SRC/drivers/usb/gadget/u_serial.c" | cut -d' ' -
     echo "PATCH_APPLIED_SOURCE_SHA_MISMATCH=$ACTUAL_PATCH_SHA"; exit 8;
 }
 echo "OEM_SHARP_GSERIAL_PATCH_APPLY_PASS"
-python3 "$ROOT/scripts/fix_oem34_cpufreq_show.py" "$SRC/drivers/cpufreq/cpufreq_interactive.c"
-ACTUAL_CPUFREQ_SHA="$(sha256sum "$SRC/drivers/cpufreq/cpufreq_interactive.c" | cut -d' ' -f1)"
-[ "$ACTUAL_CPUFREQ_SHA" = "88e3fccb60d489fee981ab4474a4d4dbfa7cbe64f148d5c11428c761943499ce" ] || {
-    echo "CPUFREQ_SEQUENCE_PATCH_SHA_MISMATCH=$ACTUAL_CPUFREQ_SHA"; exit 9;
-}
-echo "SHL25_OEM34_CPUFREQ_SOURCE_FIX_PASS"
 python3 "$ROOT/scripts/fix_legacy_gcc_wrapper.py" "$SRC/scripts/gcc-wrapper.py"
 python3 "$ROOT/scripts/fix_legacy_timeconst.py" "$SRC/kernel/timeconst.pl"
 python3 "$ROOT/scripts/fix_legacy_cpufreq.py" "$SRC/drivers/cpufreq/cpufreq_interactive.c"
