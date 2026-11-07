@@ -70,7 +70,7 @@ def main():
     rail = {}
     for name, voltage in (("s1", 1300000), ("s2", 2150000), ("s3", 1800000),
                           ("l6", 1800000), ("l20", 2950000)):
-        node = node_by_suffix(tree, "/rpm-requests/regulators-1/" + name)
+        node = node_by_suffix(tree, "/rpm_requests/regulators-1/" + name)
         assert be32(node["regulator-min-microvolt"]) == voltage, name
         assert be32(node["regulator-max-microvolt"]) == voltage, name
         assert "regulator-always-on" in node, f"Sharp {name} should be always-on"
