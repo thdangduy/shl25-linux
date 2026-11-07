@@ -152,6 +152,28 @@ CLMR_BRIDGE_KCONFIG
       >> "$CLMR_SPI_DIR/Makefile"
 fi
 echo SHL25_AS99_CLMR_C6_BRIDGE_SOURCE_STAGED_NO_PROBE
+# Stage C7: selected Sharp AS99 PM8941 LVS2 + L2 + GPIO19 power order.
+# Source-pinned only; no kernel device probe calls the power operations.
+python3 "$ROOT/upstream/verify_shl25_clmr_power.py"
+CLMR_PWR_SRC="$ROOT/drivers/spi/shl25-as99-clmr-power.c"
+CLMR_PWR_HDR="$ROOT/drivers/spi/shl25-as99-clmr-power.h"
+test -s "$CLMR_PWR_SRC" && test -s "$CLMR_PWR_HDR"
+cp "$CLMR_PWR_SRC" "$CLMR_SPI_DIR/shl25-as99-clmr-power.c"
+cp "$CLMR_PWR_HDR" "$CLMR_SPI_DIR/shl25-as99-clmr-power.h"
+if ! grep -q '^config SPI_SHL25_AS99_CLMR_POWER$' "$CLMR_SPI_DIR/Kconfig"; then
+    cat >> "$CLMR_SPI_DIR/Kconfig" <<'CLMR_PWR_KCONFIG'
+
+config SPI_SHL25_AS99_CLMR_POWER
+    bool "Sharp SHL25 AS99 PM8941 CLMR two-rail power sequence (unwired)"
+    depends on SPI_SHL25_AS99_CLMR_BRIDGE && REGULATOR && GPIOLIB
+    help
+      Verified PM8941 LVS2 then L2 1.2V with PMIC GPIO19 core switch.
+      No DT supply binding, IRQ, or board probe hook in this stage.
+CLMR_PWR_KCONFIG
+    printf '%s\n' 'obj-$(CONFIG_SPI_SHL25_AS99_CLMR_POWER) += shl25-as99-clmr-power.o' \
+      >> "$CLMR_SPI_DIR/Makefile"
+fi
+echo SHL25_AS99_C7_POWER_SEQUENCE_STAGED_NOT_ENABLED
 KVER="$(make -s -C "$SRC" kernelversion)"
 case "$KVER" in 6.1|6.1.0) ;; *) echo "WRONG_UPSTREAM_VERSION: $KVER"; exit 4;; esac
 
@@ -173,7 +195,7 @@ CONFIG="$OBJ/.config"
     -e ARM_ATAG_DTB_COMPAT_CMDLINE_FROM_BOOTLOADER \
     -e MMC_SDHCI_MSM -e EXT4_FS \
     -e SPI -e SPI_MASTER -e SPI_QUP -e I2C -e I2C_QUP -e INPUT -e INPUT_EVDEV -e IIO \
-    -e SPI_SHL25_AS99_CLMR -e SPI_SHL25_AS99_CLMR_BOOT -e SPI_SHL25_AS99_BDIC_POWER -e SPI_SHL25_AS99_CLMR_BRIDGE -e CRYPTO_SHA256 -e FW_LOADER \
+    -e SPI_SHL25_AS99_CLMR -e SPI_SHL25_AS99_CLMR_BOOT -e SPI_SHL25_AS99_BDIC_POWER -e SPI_SHL25_AS99_CLMR_BRIDGE -e SPI_SHL25_AS99_CLMR_POWER -e CRYPTO_SHA256 -e FW_LOADER -e GPIOLIB \
     -e RMI4_CORE -e RMI4_SPI -e RMI4_F11 -e RMI4_F12 \
     -e DRM -e DRM_MSM -e DRM_PANEL -e DRM_FBDEV_EMULATION -e FB -e FRAMEBUFFER_CONSOLE -e VT \
     -e DRM_PANEL_SHARP_SHL25_ANDY \
@@ -184,7 +206,7 @@ make -C "$SRC" O="$OBJ" olddefconfig
 python3 - "$CONFIG" <<'PY'
 import pathlib,sys
 cfg=pathlib.Path(sys.argv[1]).read_text()
-required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "SPI_SHL25_AS99_CLMR", "SPI_SHL25_AS99_CLMR_BOOT", "SPI_SHL25_AS99_BDIC_POWER", "SPI_SHL25_AS99_CLMR_BRIDGE", "CRYPTO_SHA256", "FW_LOADER", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_PANEL_SHARP_SHL25_ANDY", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
+required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "SPI_SHL25_AS99_CLMR", "SPI_SHL25_AS99_CLMR_BOOT", "SPI_SHL25_AS99_BDIC_POWER", "SPI_SHL25_AS99_CLMR_BRIDGE", "SPI_SHL25_AS99_CLMR_POWER", "CRYPTO_SHA256", "FW_LOADER", "GPIOLIB", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_PANEL_SHARP_SHL25_ANDY", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
 missing=[key for key in required if f"CONFIG_{key}=y" not in cfg]
 if missing: raise SystemExit("REQUIRED_UPSTREAM_CONFIG_NOT_BUILTIN: "+", ".join(missing))
 print("UPSTREAM_SHL25_MINIMAL_CONFIG_PASS", len(required), "required built-ins")
@@ -216,6 +238,9 @@ echo SHL25_BDIC_POWER_SEQUENCE_61_COMPILED_BUILTIN_PASS
 test -s "$OBJ/drivers/spi/shl25-as99-clmr-spi-bridge.o" ||
     { echo "SHL25_CLMR_SPI_BRIDGE_OBJECT_MISSING"; exit 18; }
 echo SHL25_CLMR_C6_SPI_BRIDGE_61_COMPILED_BUILTIN_PASS
+test -s "$OBJ/drivers/spi/shl25-as99-clmr-power.o" ||
+    { echo "SHL25_CLMR_C7_POWER_OBJECT_MISSING"; exit 19; }
+echo SHL25_CLMR_C7_POWER_61_COMPILED_BUILTIN_PASS
 cp "$OBJ/arch/arm/boot/zImage" "$DIST/zImage"
 cp "$CONFIG" "$DIST/kernel.config"
 cp "$DTS" "$DIST/qcom-msm8974-sharp-as99.dts"
@@ -230,6 +255,9 @@ cp "$BDIC_H" "$DIST/shl25-as99-bdic-power.h"
 cp "$BDIC_TABLES" "$DIST/shl25-as99-bdic-power-tables.h"
 cp "$CLMR_BRIDGE_SRC" "$DIST/shl25-as99-clmr-spi-bridge.c"
 cp "$CLMR_BRIDGE_HDR" "$DIST/shl25-as99-clmr-spi-bridge.h"
+cp "$CLMR_PWR_SRC" "$DIST/shl25-as99-clmr-power.c"
+cp "$CLMR_PWR_HDR" "$DIST/shl25-as99-clmr-power.h"
+cp "$ROOT/upstream/shl25-as99-clmr-board-power.json" "$DIST/shl25-as99-clmr-board-power.json"
 cp "$ROOT/upstream/shl25-andy-as99-runtime.json" "$DIST/shl25-andy-as99-runtime.json"
 cp "$ROOT/upstream/shl25-andy-oem-dsi.json" "$DIST/shl25-andy-oem-dsi.json"
 
@@ -258,10 +286,11 @@ AS99 CLMR SPI register transport compiled; DT client disabled, no firmware/power
 AS99 CLMR boot sequence callback executor compiled; SHA-256 firmware gate before I/O, no SPI adapter/probe caller
 AS99 BDIC VSP/VSN and TS1 callback programs compiled; no FWCMD adapter or hardware probe caller
 AS99 C6 SPI/firmware-loader transport bridge compiled; no power/IRQ device adapter or hardware probe caller
+AS99 C7 PM8941 LVS2/L2 two-rail source-pinned power sequencing compiled; no GPIO/regulator DT adapter or probe caller
 Validated on device: NO, build/DTB check only
 TWRP / Recovery: untouched
 EOF
-(cd "$DIST" && sha256sum zImage qcom-msm8974-sharp-as99.dtb kernel.config qcom-msm8974-sharp-as99.dts panel-sharp-shl25-andy.c shl25-andy-oem-dsi.json shl25-andy-as99-runtime.h shl25-andy-as99-runtime.json spi-shl25-as99-clmr.c shl25-as99-clmr-boot.c shl25-as99-clmr-boot.h shl25-as99-clmr-boot-tables.h shl25-as99-bdic-power.c shl25-as99-bdic-power.h shl25-as99-bdic-power-tables.h shl25-as99-clmr-spi-bridge.c shl25-as99-clmr-spi-bridge.h > SHA256SUMS)
+(cd "$DIST" && sha256sum zImage qcom-msm8974-sharp-as99.dtb kernel.config qcom-msm8974-sharp-as99.dts panel-sharp-shl25-andy.c shl25-andy-oem-dsi.json shl25-andy-as99-runtime.h shl25-andy-as99-runtime.json spi-shl25-as99-clmr.c shl25-as99-clmr-boot.c shl25-as99-clmr-boot.h shl25-as99-clmr-boot-tables.h shl25-as99-bdic-power.c shl25-as99-bdic-power.h shl25-as99-bdic-power-tables.h shl25-as99-clmr-spi-bridge.c shl25-as99-clmr-spi-bridge.h shl25-as99-clmr-power.c shl25-as99-clmr-power.h shl25-as99-clmr-board-power.json > SHA256SUMS)
 echo "UPSTREAM_LINUX_6_1_BUILD_PASS"
 cat "$DIST/SOURCE_MANIFEST.txt"
 cat "$DIST/SHA256SUMS"

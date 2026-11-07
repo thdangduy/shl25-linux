@@ -1,0 +1,76 @@
+{
+  "board": "CONFIG_MACH_DECKARD_AS99",
+  "panel": "CONFIG_SHDISP_PANEL_ANDY",
+  "source": [
+    {
+      "name": "sharp-shdisp-clmr.dtsi",
+      "sha256": "bfc029b599c3b4c0236f74e5079db80b49da21dce3d63d4677c1258b6b3b2260"
+    },
+    {
+      "name": "sharp-as99-shdisp.dtsi",
+      "sha256": "b2bf7ce848b7818e4749832ee6e8f0e26756fdb5acfc7e5af4b3324bdd1e5289"
+    },
+    {
+      "name": "sharp-as99.dtsi",
+      "sha256": "86f325c59d6b63e2905c2bb7b7353b3b1528df56db6257ee47d2db270619740a"
+    },
+    {
+      "name": "shdisp_clmr.c",
+      "sha256": "399f2b8f050709f6c8c08c56e22260e13ba46b2edde363555ebb69487933e7f0"
+    },
+    {
+      "name": "shdisp_system.h",
+      "sha256": "490f3d0f8a6b1763cb888edb95b7d96f89cb102977092e54c86a7c6a044169b2"
+    }
+  ],
+  "spi": {
+    "node": "spi@f9923000",
+    "compatible": "sharp,mipi_spi_0",
+    "chip_select": 0,
+    "clock_hz": 50000000,
+    "mode": "CPOL|CPHA|CS_HIGH",
+    "disabled_under_linux61": true
+  },
+  "regulators": [
+    {
+      "consumer": "clmr_vdd_18tx",
+      "supply": "pm8941_lvs2",
+      "type": "REG_VS",
+      "enable_order": 1,
+      "delay_after_enable_us": 1000
+    },
+    {
+      "consumer": "clmr_vdd_12lp",
+      "supply": "pm8941_l2",
+      "type": "REG_LDO",
+      "microvolts": 1200000,
+      "load_uA": 100000,
+      "enable_order": 2,
+      "delay_after_enable_us": 1000
+    }
+  ],
+  "core_switch": {
+    "origin": "PM8941 GPIO",
+    "pin": 19,
+    "polarity": "active-high",
+    "enable_after_rails": true,
+    "disable_before_rails": true
+  },
+  "gpio": {
+    "clmr_reset_tlmm": 85,
+    "clmr_pllonctl_tlmm": 8,
+    "clmr_hint_irq_tlmm": 75,
+    "clmr_te_tlmm": 12,
+    "andy_vdd_tlmm": 69,
+    "clk_sel_tlmm": 107
+  },
+  "irq": {
+    "source": "TLMM GPIO75",
+    "oem_interrupts": [
+      75,
+      0
+    ],
+    "linux61_irq_type": "unverified"
+  },
+  "note": "This is a sourced offline map; no DT supply phandles/regulator driver connected and no hardware validation of Linux 6.1."
+}
