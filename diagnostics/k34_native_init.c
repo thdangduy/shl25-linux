@@ -12,6 +12,9 @@
  */
 #define _GNU_SOURCE
 #include <errno.h>
+#include <signal.h>
+#include <sys/wait.h>
+#include <time.h>
 #include <fcntl.h>
 #include <linux/fb.h>
 #include <poll.h>
@@ -205,9 +208,119 @@ static int init_usb_console(void) {
 static void send_str(int fd,const char *s){
     if(fd>=0){size_t len=strlen(s);ssize_t written=write(fd,s,len);(void)written;}
 }
+
+#define SHL25_NATIVE_BUSYBOX_V5 1
+/* Populate only nodes announced by /sys, not hardcoded kernel major/minors. */
+static void prepare_hw_nodes(void) {
+    char path[100],name[100];
+    mkdir_ok("/dev/graphics");
+    mkdir_ok("/dev/input");
+    if(dev_node("/dev/graphics/fb0","/sys/class/graphics/fb0/dev",S_IFCHR)==0)
+        trace_usb("hw_node_fb0_ready");
+    for(unsigned i=0;i<12;i++){
+        snprintf(path,sizeof(path),"/dev/input/event%u",i);
+        snprintf(name,sizeof(name),"/sys/class/input/event%u/dev",i);
+        (void)dev_node(path,name,S_IFCHR);
+    }
+}
+static void shell_on_tty(int fd) {
+    struct stat st;
+    if(stat("/bin/busybox",&st)<0 || !S_ISREG(st.st_mode) ||
+       !(st.st_mode & S_IXUSR)) {
+        send_str(fd,"\r\nBusyBox static shell not installed\r\n");
+        return;
+    }
+    struct termios before,canonical;
+    int term_valid=(tcgetattr(fd,&before)==0);
+    if(term_valid){
+        canonical=before;
+        canonical.c_lflag |= ICANON|ECHO|ISIG;
+        canonical.c_iflag |= ICRNL;
+        canonical.c_oflag |= OPOST|ONLCR;
+        canonical.c_cc[VINTR]=3;
+        canonical.c_cc[VEOF]=4;
+        canonical.c_cc[VERASE]=127;
+        (void)tcsetattr(fd,TCSANOW,&canonical);
+    }
+    send_str(fd,"\r\nSHL25 native BusyBox ash (type exit to return)\r\n");
+    trace_usb("BUSYBOX_SHELL_START");
+    pid_t pid=fork();
+    if(pid==0){
+        if(setsid()<0)_exit(124);
+        (void)ioctl(fd,TIOCSCTTY,0);
+        if(dup2(fd,STDIN_FILENO)<0 ||
+           dup2(fd,STDOUT_FILENO)<0 ||
+           dup2(fd,STDERR_FILENO)<0)_exit(125);
+        if(fd>STDERR_FILENO)close(fd);
+        (void)chdir("/");
+        (void)setenv("PATH","/bin:/sbin",1);
+        (void)setenv("HOME","/",1);
+        (void)setenv("TERM","vt100",1);
+        (void)setenv("PS1","shl25-k34# ",1);
+        execl("/bin/busybox","sh","-i",(char*)NULL);
+        _exit(127);
+    }
+    if(pid<0){
+        trace_usb("BUSYBOX_FORK_FAILED errno=%d",errno);
+        send_str(fd,"Unable to fork BusyBox shell\r\n");
+    }else{
+        /* PID1 supervises the shell; never exits, and does not read tty
+         * while ash owns it. A persistent USB disconnect kills the child
+         * after ten seconds, to avoid leaving a stranded tty process. */
+        int status=0,disconnected=0;
+        for(;;){
+            pid_t result=waitpid(pid,&status,WNOHANG);
+            if(result==pid || (result<0 && errno==ECHILD))break;
+            if(result<0 && errno!=EINTR){
+                trace_usb("BUSYBOX_WAITPID_FAILED errno=%d",errno);
+                break;
+            }
+            char state[80];
+            if(read_text("/sys/class/android_usb/android0/state",
+                         state,sizeof(state))>0 &&
+               strstr(state,"CONFIGURED"))disconnected=0;
+            else disconnected++;
+            if(disconnected>=10){
+                trace_usb("BUSYBOX_SHELL_USB_DISCONNECTED");
+                (void)kill(pid,SIGTERM);
+                sleep(1);
+                (void)kill(pid,SIGKILL);
+                (void)waitpid(pid,&status,0);
+                break;
+            }
+            sleep(1);
+        }
+        trace_usb("BUSYBOX_SHELL_EXIT status=%d",status);
+    }
+    if(term_valid)(void)tcsetattr(fd,TCSANOW,&before);
+    send_str(fd,"\r\nBack to SHL25 diagnostic console\r\n");
+}
+static void run_lcd_test(int fd) {
+    struct stat st;
+    prepare_hw_nodes();
+    if(stat("/sbin/fbtext",&st)<0 || !S_ISREG(st.st_mode)) {
+        send_str(fd,"\r\nLCD test binary not installed\r\n");
+        return;
+    }
+    send_str(fd,"\r\nLCD test: 5-second overlay, RAM pixels restored\r\n");
+    pid_t pid=fork();
+    if(pid==0){
+        if(dup2(fd,1)<0 || dup2(fd,2)<0)_exit(126);
+        if(fd>2)close(fd);
+        execl("/sbin/fbtext","fbtext",(char*)NULL);
+        _exit(127);
+    }
+    if(pid<0){send_str(fd,"LCD test fork failed\r\n");return;}
+    int status=0;
+    while(waitpid(pid,&status,0)<0 && errno==EINTR){}
+    trace_usb("LCD_TEST_EXIT status=%d",status);
+}
+
 static void console_command(int fd, const char *cmd) {
-    if(!strcmp(cmd,"help")){
-        send_str(fd,"\r\nCommands: help info cpu mem fb touch usb\r\n");
+    if(!strcmp(cmd,"shell")){shell_on_tty(fd);
+    }else if(!strcmp(cmd,"lcd")){run_lcd_test(fd);
+    }else if(!strcmp(cmd,"help")){
+        send_str(fd,"\r\nCommands: help info cpu mem fb touch usb shell lcd\r\n");
     }else if(!strcmp(cmd,"info")){
         struct utsname u;
         if(uname(&u)==0){
@@ -291,9 +404,10 @@ int main(void) {
         sleep(1);
     }
     persist_marker();
-    trace_usb("PID1_K34_NATIVE_V3_ALIVE cache_trace_start");
+    trace_usb("PID1_K34_NATIVE_V5_BUSYBOX_ALIVE");
     if(init_usb_console()<0)trace_usb("USB_ACM_SETUP_FAILED");
     else trace_usb("USB_ACM_SETUP_DONE");
+    prepare_hw_nodes();
     usb_loop(); /* PID1 must never exit. */
     return 0;
 }
