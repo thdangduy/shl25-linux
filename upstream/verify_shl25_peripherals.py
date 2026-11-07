@@ -74,6 +74,21 @@ def main():
         assert len(found)==1,f"pinmux {suffix} missing or duplicated"
         assert found[0].get("pins")==pins.encode(),suffix
         assert found[0].get("function")==function.encode()+b"\x00",suffix
+    # Sharp OEM 2016 fixed voltages; these consumers must remain disabled.
+    rail_setpoints={
+        "l2":1200000,"l3":1200000,"l10":1800000,
+        "l15":2100000,"l17":2800000,"l23":3000000,
+    }
+    for name,voltage in rail_setpoints.items():
+        path="/rpm_requests/regulators-1/"+name
+        rail=check(tree,path)
+        disabled(rail,path)
+        assert u32seq(rail["regulator-min-microvolt"])==(voltage,),path
+        assert u32seq(rail["regulator-max-microvolt"])==(voltage,),path
+    for name in ("lvs1","lvs2","lvs3"):
+        path="/rpm_requests/regulators-1/"+name
+        disabled(check(tree,path),path)
+    print("SHL25_LINUX61_SHARP_POWER_RAIL_DTB_PASS: six fixed rails + three switched rails, all disabled")
     print("SHL25_LINUX61_PERIPHERAL_DTB_DECLARATIONS_PASS: 4 QUP buses, 6 attached chips, 4 pinmux sets")
     print("SHL25_LINUX61_PERIPHERALS_DISABLED_UNTIL_DRIVER_PORT: PASS")
     print("WARNING: compiled DTB does not establish a device driver or successful hardware probing")

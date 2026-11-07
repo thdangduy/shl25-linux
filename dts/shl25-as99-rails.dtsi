@@ -1,0 +1,70 @@
+// SPDX-License-Identifier: GPL-2.0-only
+/*
+ * Sharp AS99/SHL25 PM8941 secondary regulator mapping.
+ *
+ * Exact fixed voltages from Sharp's 2016 GPL
+ * arch/arm/boot/dts/sharp-common-pm8941.dtsi (bld010105).
+ *
+ * Every rail introduced here is DISABLED until the corresponding
+ * Linux 6.1 consumer driver and 6.1 RPM parent-supply binding are
+ * reviewed. In particular DO NOT accidentally power off PMIC supplies
+ * by enabling drivers before the board sequencing is validated.
+ *
+ * Source relationships: L2 <- S3, L3 <- S1, L15 <- S2;
+ * LVS1/LVS2/LVS3 <- S3 (load switches, no independent setpoint).
+ * Those OEM parent-supply relationships require a separate modern
+ * 6.1 regulator binding audit; not fabricated in this draft.
+ */
+&rpm_requests {
+	regulators-1 {
+		/* Sharp CLMR / MIPI low-voltage rail: fixed 1.2 V. */
+		pm8941_l2: l2 {
+			regulator-min-microvolt = <1200000>;
+			regulator-max-microvolt = <1200000>;
+			status = "disabled";
+		};
+
+		/* Camera IMX214/IMX132 digital: fixed 1.2 V. */
+		pm8941_l3: l3 {
+			regulator-min-microvolt = <1200000>;
+			regulator-max-microvolt = <1200000>;
+			status = "disabled";
+		};
+
+		/* IMX214 IO: fixed 1.8 V. */
+		pm8941_l10: l10 {
+			regulator-min-microvolt = <1800000>;
+			regulator-max-microvolt = <1800000>;
+			status = "disabled";
+		};
+
+		/*
+		 * Touch vdd_3_0V legacy property name is misleading: OEM PM8941
+		 * L15 setpoint is actually 2.1 V.
+		 */
+		pm8941_l15: l15 {
+			regulator-min-microvolt = <2100000>;
+			regulator-max-microvolt = <2100000>;
+			status = "disabled";
+		};
+
+		/* IMX214/IMX132 analog: fixed 2.8 V. */
+		pm8941_l17: l17 {
+			regulator-min-microvolt = <2800000>;
+			regulator-max-microvolt = <2800000>;
+			status = "disabled";
+		};
+
+		/* IMX214 autofocus: fixed 3.0 V. */
+		pm8941_l23: l23 {
+			regulator-min-microvolt = <3000000>;
+			regulator-max-microvolt = <3000000>;
+			status = "disabled";
+		};
+
+		/* Parent S3 (~1.8V); switched rails, no independent voltage. */
+		pm8941_lvs1: lvs1 { status = "disabled"; };
+		pm8941_lvs2: lvs2 { status = "disabled"; };
+		pm8941_lvs3: lvs3 { status = "disabled"; };
+	};
+};
