@@ -42,7 +42,7 @@ static volatile unsigned char *fb;
 static unsigned char *backup;
 static unsigned stride,total,offset;
 static int points_x[5], points_y[5];
-static int stage=0,tap_index=0,release_needed=1,quiet_frames=0;
+static int stage=0,tap_index=0,release_needed=0,quiet_frames=0;
 static int multi_dwell=0,misses=0,has_slots=0,current_slot=0,need_redraw=1;
 static unsigned rnd=0x51A99037;
 static unsigned long start_sec;
