@@ -1,0 +1,38 @@
+name: SHL25 K34 framebuffer FORCE kickoff tiny ARM ELF
+on:
+  push:
+    branches:
+      - feat/shl25-k34-hwprobe-20261107
+    paths:
+      - diagnostics/k34_fbforce.c
+      - .github/workflows/k34-fbforce.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ARMHF toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-arm-linux-gnueabihf binutils-arm-linux-gnueabihf file
+      - name: Compile freestanding ARMv7 no-libc framebuffer helper
+        run: |
+          mkdir -p dist-fbforce
+          arm-linux-gnueabihf-gcc -std=gnu11 -Os -Wall -Wextra -Werror -march=armv7-a -marm -mfpu=neon -mfloat-abi=hard \
+            -fno-pie -fno-stack-protector -fno-asynchronous-unwind-tables \
+            -nostdlib -static -no-pie -Wl,-e,_start -Wl,--build-id=none -s \
+            diagnostics/k34_fbforce.c -o dist-fbforce/k34-fbforce
+          arm-linux-gnueabihf-readelf -h dist-fbforce/k34-fbforce | grep 'Machine:.*ARM'
+          if arm-linux-gnueabihf-readelf -l dist-fbforce/k34-fbforce | grep -q INTERP; then echo REFUSE_DYNAMIC_BINARY; exit 4; fi
+          if arm-linux-gnueabihf-readelf -d dist-fbforce/k34-fbforce 2>/dev/null | grep -q NEEDED; then echo REFUSE_LINKED_LIBS; exit 5; fi
+          file dist-fbforce/k34-fbforce
+          wc -c dist-fbforce/k34-fbforce
+          (cd dist-fbforce && sha256sum k34-fbforce > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shl25-k34-fbforce-nolibc
+          path: dist-fbforce/
+          if-no-files-found: error
