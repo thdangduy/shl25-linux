@@ -11,6 +11,10 @@ OUT="$WORK/out"
 DIST="$ROOT/dist-oem-k34-gserial"
 OFFICIAL_URL="https://ad-dl02.4sh.jp/developers/oss/shl25/index_v2/download/bld010105/kernel.tar.gz"
 EXPECTED_SOURCE="231315e67112ffa3b5311059ba8ad4f6b4f2213edea40a7fff001f5a3bdf27bb"
+TOOLCHAIN_URL="https://developer.arm.com/-/cdn-downloads/permalink/legacy-linaro-gnu-toolchains/4.9-2017.01/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf.tar.xz"
+TOOLCHAIN_SHA256="22914118fd963f953824b58107015c6953b5bbdccbdcf25ad9fd9a2f9f11ac07"
+TOOLCHAIN_TAR="$WORK/gcc-linaro-4.9.4-2017.01.tar.xz"
+TOOLCHAIN_DIR="$WORK/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf"
 EXPECTED_PATCHED_U_SERIAL="0824f4470986ec843ded3da2f117041bf563fbb3a93550bf9b0a57343c1ada0c"
 PATCH="$ROOT/patches/oem34/0001-sharp-gserial-reuse-existing-ttygs.patch"
 
@@ -38,7 +42,20 @@ ACTUAL_PATCH_SHA="$(sha256sum "$SRC/drivers/usb/gadget/u_serial.c" | cut -d' ' -
 }
 echo "OEM_SHARP_GSERIAL_PATCH_APPLY_PASS"
 python3 "$ROOT/scripts/fix_legacy_gcc_wrapper.py" "$SRC/scripts/gcc-wrapper.py"
-export ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
+# Original Sharp 3.4 cannot compile using modern GCC13 (compiler-gcc13.h absent).
+# Download immutable historical ARMHF GCC 4.9.4; reject hash mismatches.
+if [ ! -f "$TOOLCHAIN_TAR" ]; then
+    curl --fail --location --retry 2 --connect-timeout 25 --max-time 360 \
+        "$TOOLCHAIN_URL" -o "$TOOLCHAIN_TAR"
+fi
+echo "$TOOLCHAIN_SHA256  $TOOLCHAIN_TAR" | sha256sum --check -
+if [ ! -x "$TOOLCHAIN_DIR/bin/arm-linux-gnueabihf-gcc" ]; then
+    tar -xJf "$TOOLCHAIN_TAR" -C "$WORK" --no-same-owner
+fi
+test -x "$TOOLCHAIN_DIR/bin/arm-linux-gnueabihf-gcc"
+export PATH="$TOOLCHAIN_DIR/bin:$PATH"
+export ARCH=arm CROSS_COMPILE="$TOOLCHAIN_DIR/bin/arm-linux-gnueabihf-"
+echo "SHL25_GCC49_COMPILER=$("$TOOLCHAIN_DIR/bin/arm-linux-gnueabihf-gcc" --version | head -1)"
 export KBUILD_BUILD_USER=shl25-ci KBUILD_BUILD_HOST=github-actions
 arm-linux-gnueabihf-gcc --version | head -1
 make -C "$SRC" O="$OUT" HOSTCFLAGS="-O2 -fcommon" deckard_as99_defconfig
