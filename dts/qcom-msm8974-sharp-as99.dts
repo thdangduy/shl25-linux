@@ -178,7 +178,7 @@
  * USB gadget/serial-console bring-up. PHY setup from modern MSM8974.
  * Actual ADB gadget is userspace-dependent, not automatically enabled.
  */
-&usb {
+&otg {
 	phys = <&usb_hs1_phy>;
 	phy-select = <&tcsr 0xb000 0>;
 	extcon = <&smbb>;
