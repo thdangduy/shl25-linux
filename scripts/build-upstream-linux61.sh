@@ -196,6 +196,28 @@ CLMR_IRQ_KCONFIG
       >> "$CLMR_SPI_DIR/Makefile"
 fi
 echo SHL25_AS99_C8_IRQ_STATUS_STAGED_NO_GPIO75_BINDING
+# Stage C9: OEM GPIO75 rising-edge firmware boot completion broker.
+# Threaded IRQ callbacks are provided but NEVER registered on a device.
+python3 "$ROOT/upstream/verify_shl25_clmr_boot_irq.py"
+CLMR_BOOT_IRQ_SRC="$ROOT/drivers/spi/shl25-as99-clmr-boot-irq.c"
+CLMR_BOOT_IRQ_HDR="$ROOT/drivers/spi/shl25-as99-clmr-boot-irq.h"
+test -s "$CLMR_BOOT_IRQ_SRC" && test -s "$CLMR_BOOT_IRQ_HDR"
+cp "$CLMR_BOOT_IRQ_SRC" "$CLMR_SPI_DIR/shl25-as99-clmr-boot-irq.c"
+cp "$CLMR_BOOT_IRQ_HDR" "$CLMR_SPI_DIR/shl25-as99-clmr-boot-irq.h"
+if ! grep -q '^config SPI_SHL25_AS99_CLMR_BOOT_IRQ$' "$CLMR_SPI_DIR/Kconfig"; then
+    cat >> "$CLMR_SPI_DIR/Kconfig" <<'CLMR_BOOT_IRQ_KCONFIG'
+
+config SPI_SHL25_AS99_CLMR_BOOT_IRQ
+    bool "Sharp SHL25 AS99 CLMR firmware boot-completion broker (unwired)"
+    depends on SPI_SHL25_AS99_CLMR_IRQ_DECODE
+    help
+      OEM GPIO75 rising-edge source-confirmed. Completion lifecycle
+      and threaded register callbacks, no IRQ request or probe caller.
+CLMR_BOOT_IRQ_KCONFIG
+    printf '%s\n' 'obj-$(CONFIG_SPI_SHL25_AS99_CLMR_BOOT_IRQ) += shl25-as99-clmr-boot-irq.o' \
+      >> "$CLMR_SPI_DIR/Makefile"
+fi
+echo SHL25_AS99_C9_BOOT_IRQ_BROKER_STAGED_NO_REQUEST_IRQ
 KVER="$(make -s -C "$SRC" kernelversion)"
 case "$KVER" in 6.1|6.1.0) ;; *) echo "WRONG_UPSTREAM_VERSION: $KVER"; exit 4;; esac
 
@@ -217,7 +239,7 @@ CONFIG="$OBJ/.config"
     -e ARM_ATAG_DTB_COMPAT_CMDLINE_FROM_BOOTLOADER \
     -e MMC_SDHCI_MSM -e EXT4_FS \
     -e SPI -e SPI_MASTER -e SPI_QUP -e I2C -e I2C_QUP -e INPUT -e INPUT_EVDEV -e IIO \
-    -e SPI_SHL25_AS99_CLMR -e SPI_SHL25_AS99_CLMR_BOOT -e SPI_SHL25_AS99_BDIC_POWER -e SPI_SHL25_AS99_CLMR_BRIDGE -e SPI_SHL25_AS99_CLMR_POWER -e SPI_SHL25_AS99_CLMR_IRQ_DECODE -e CRYPTO_SHA256 -e FW_LOADER -e GPIOLIB \
+    -e SPI_SHL25_AS99_CLMR -e SPI_SHL25_AS99_CLMR_BOOT -e SPI_SHL25_AS99_BDIC_POWER -e SPI_SHL25_AS99_CLMR_BRIDGE -e SPI_SHL25_AS99_CLMR_POWER -e SPI_SHL25_AS99_CLMR_IRQ_DECODE -e SPI_SHL25_AS99_CLMR_BOOT_IRQ -e CRYPTO_SHA256 -e FW_LOADER -e GPIOLIB \
     -e RMI4_CORE -e RMI4_SPI -e RMI4_F11 -e RMI4_F12 \
     -e DRM -e DRM_MSM -e DRM_PANEL -e DRM_FBDEV_EMULATION -e FB -e FRAMEBUFFER_CONSOLE -e VT \
     -e DRM_PANEL_SHARP_SHL25_ANDY \
@@ -228,7 +250,7 @@ make -C "$SRC" O="$OBJ" olddefconfig
 python3 - "$CONFIG" <<'PY'
 import pathlib,sys
 cfg=pathlib.Path(sys.argv[1]).read_text()
-required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "SPI_SHL25_AS99_CLMR", "SPI_SHL25_AS99_CLMR_BOOT", "SPI_SHL25_AS99_BDIC_POWER", "SPI_SHL25_AS99_CLMR_BRIDGE", "SPI_SHL25_AS99_CLMR_POWER", "SPI_SHL25_AS99_CLMR_IRQ_DECODE", "CRYPTO_SHA256", "FW_LOADER", "GPIOLIB", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_PANEL_SHARP_SHL25_ANDY", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
+required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "SPI_SHL25_AS99_CLMR", "SPI_SHL25_AS99_CLMR_BOOT", "SPI_SHL25_AS99_BDIC_POWER", "SPI_SHL25_AS99_CLMR_BRIDGE", "SPI_SHL25_AS99_CLMR_POWER", "SPI_SHL25_AS99_CLMR_IRQ_DECODE", "SPI_SHL25_AS99_CLMR_BOOT_IRQ", "CRYPTO_SHA256", "FW_LOADER", "GPIOLIB", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_PANEL_SHARP_SHL25_ANDY", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
 missing=[key for key in required if f"CONFIG_{key}=y" not in cfg]
 if missing: raise SystemExit("REQUIRED_UPSTREAM_CONFIG_NOT_BUILTIN: "+", ".join(missing))
 print("UPSTREAM_SHL25_MINIMAL_CONFIG_PASS", len(required), "required built-ins")
@@ -266,6 +288,9 @@ echo SHL25_CLMR_C7_POWER_61_COMPILED_BUILTIN_PASS
 test -s "$OBJ/drivers/spi/shl25-as99-clmr-irq-status.o" ||
     { echo "SHL25_CLMR_C8_IRQ_OBJECT_MISSING"; exit 20; }
 echo SHL25_CLMR_C8_IRQ_DECODE_61_COMPILED_BUILTIN_PASS
+test -s "$OBJ/drivers/spi/shl25-as99-clmr-boot-irq.o" ||
+    { echo "SHL25_CLMR_C9_BOOT_IRQ_OBJECT_MISSING"; exit 21; }
+echo SHL25_CLMR_C9_BOOT_IRQ_61_COMPILED_BUILTIN_PASS
 cp "$OBJ/arch/arm/boot/zImage" "$DIST/zImage"
 cp "$CONFIG" "$DIST/kernel.config"
 cp "$DTS" "$DIST/qcom-msm8974-sharp-as99.dts"
@@ -285,6 +310,8 @@ cp "$CLMR_PWR_HDR" "$DIST/shl25-as99-clmr-power.h"
 cp "$ROOT/upstream/shl25-as99-clmr-board-power.json" "$DIST/shl25-as99-clmr-board-power.json"
 cp "$CLMR_IRQ_SRC" "$DIST/shl25-as99-clmr-irq-status.c"
 cp "$CLMR_IRQ_HDR" "$DIST/shl25-as99-clmr-irq-status.h"
+cp "$CLMR_BOOT_IRQ_SRC" "$DIST/shl25-as99-clmr-boot-irq.c"
+cp "$CLMR_BOOT_IRQ_HDR" "$DIST/shl25-as99-clmr-boot-irq.h"
 cp "$ROOT/upstream/shl25-andy-as99-runtime.json" "$DIST/shl25-andy-as99-runtime.json"
 cp "$ROOT/upstream/shl25-andy-oem-dsi.json" "$DIST/shl25-andy-oem-dsi.json"
 
@@ -314,11 +341,12 @@ AS99 CLMR boot sequence callback executor compiled; SHA-256 firmware gate before
 AS99 BDIC VSP/VSN and TS1 callback programs compiled; no FWCMD adapter or hardware probe caller
 AS99 C6 SPI/firmware-loader transport bridge compiled; no power/IRQ device adapter or hardware probe caller
 AS99 C7 PM8941 LVS2/L2 two-rail source-pinned power sequencing compiled; no GPIO/regulator DT adapter or probe caller
-AS99 C8 OEM CLMR IRQ decode/clear compiled; GPIO75 IRQ type and handler not connected
+AS99 C8 OEM CLMR IRQ decode/clear compiled; IRQ GPIO75 handler not connected
+AS99 C9 boot completion callback broker compiled; OEM GPIO75 rising edge verified, no physical request_irq
 Validated on device: NO, build/DTB check only
 TWRP / Recovery: untouched
 EOF
-(cd "$DIST" && sha256sum zImage qcom-msm8974-sharp-as99.dtb kernel.config qcom-msm8974-sharp-as99.dts panel-sharp-shl25-andy.c shl25-andy-oem-dsi.json shl25-andy-as99-runtime.h shl25-andy-as99-runtime.json spi-shl25-as99-clmr.c shl25-as99-clmr-boot.c shl25-as99-clmr-boot.h shl25-as99-clmr-boot-tables.h shl25-as99-bdic-power.c shl25-as99-bdic-power.h shl25-as99-bdic-power-tables.h shl25-as99-clmr-spi-bridge.c shl25-as99-clmr-spi-bridge.h shl25-as99-clmr-power.c shl25-as99-clmr-power.h shl25-as99-clmr-board-power.json shl25-as99-clmr-irq-status.c shl25-as99-clmr-irq-status.h > SHA256SUMS)
+(cd "$DIST" && sha256sum zImage qcom-msm8974-sharp-as99.dtb kernel.config qcom-msm8974-sharp-as99.dts panel-sharp-shl25-andy.c shl25-andy-oem-dsi.json shl25-andy-as99-runtime.h shl25-andy-as99-runtime.json spi-shl25-as99-clmr.c shl25-as99-clmr-boot.c shl25-as99-clmr-boot.h shl25-as99-clmr-boot-tables.h shl25-as99-bdic-power.c shl25-as99-bdic-power.h shl25-as99-bdic-power-tables.h shl25-as99-clmr-spi-bridge.c shl25-as99-clmr-spi-bridge.h shl25-as99-clmr-power.c shl25-as99-clmr-power.h shl25-as99-clmr-board-power.json shl25-as99-clmr-irq-status.c shl25-as99-clmr-irq-status.h shl25-as99-clmr-boot-irq.c shl25-as99-clmr-boot-irq.h > SHA256SUMS)
 echo "UPSTREAM_LINUX_6_1_BUILD_PASS"
 cat "$DIST/SOURCE_MANIFEST.txt"
 cat "$DIST/SHA256SUMS"
