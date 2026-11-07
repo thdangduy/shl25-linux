@@ -1,0 +1,41 @@
+name: SHL25 Linux upstream v6.1 bring-up build
+on:
+  push:
+    branches:
+      - feat/shl25-linux61-port-20261107
+    paths:
+      - scripts/build-upstream-linux61.sh
+      - .github/workflows/linux61.yml
+      - dts/**
+      - upstream/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-linux61:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 110
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install official Linux 6.1 ARMHF build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            git make gcc gcc-arm-linux-gnueabihf binutils-arm-linux-gnueabihf \
+            device-tree-compiler bc bison flex libssl-dev libelf-dev python3
+      - name: Build pinned clean upstream 6.1 kernel and Sharp AS99 DTB
+        run: bash scripts/build-upstream-linux61.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shl25-upstream-v6.1-clean-build
+          path: |
+            dist-upstream61/zImage
+            dist-upstream61/qcom-msm8974-sharp-as99.dtb
+            dist-upstream61/kernel.config
+            dist-upstream61/qcom-msm8974-sharp-as99.dts
+            dist-upstream61/SOURCE_MANIFEST.txt
+            dist-upstream61/SHA256SUMS
+          retention-days: 30
+          if-no-files-found: error

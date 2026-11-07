@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 /*
  * Sharp AQUOS SERIE SHL25 / AS99, KDDI 01.01.03
- * First-stage MSM8974Pro mainline 6.16 Device Tree, NOT BOOT VERIFIED.
+ * First-stage MSM8974Pro mainline 6.1 Device Tree, NOT BOOT VERIFIED.
  *
  * Hardware identity, PMIC, eMMC drive levels and key GPIOs from the
  * GPL sources released by Sharp. SoC/PMIC bindings adapted from
@@ -12,8 +12,8 @@
  * matches the Qualcomm legacy DTB table and SHL25 bootloader.
  */
 #include "qcom-msm8974pro.dtsi"
-#include "pm8841.dtsi"
-#include "pm8941.dtsi"
+#include "qcom-pm8841.dtsi"
+#include "qcom-pm8941.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
