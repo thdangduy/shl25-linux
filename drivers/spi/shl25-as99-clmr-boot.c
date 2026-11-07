@@ -9,8 +9,12 @@
  * or exported symbol. The real SPI device and display DT nodes remain
  * disabled. Successful source compilation is NOT a hardware boot.
  */
+#include <crypto/hash.h>
+#include <linux/err.h>
 #include <linux/errno.h>
 #include <linux/kernel.h>
+#include <linux/slab.h>
+#include <linux/string.h>
 #include <linux/types.h>
 
 #include "shl25-as99-clmr-boot.h"
@@ -18,6 +22,41 @@
 
 #define SHL25_CLMR_REG_HOSTAEY 0x0e14
 #define SHL25_CLMR_REG_ARMDMA  0x1824
+
+/* 59136-byte OEM bld010105/SHL25 AS99 CLMR image; never embedded here. */
+static const u8 shl25_clmr_fw_digest[32] = {
+	0xa3, 0xda, 0x76, 0xd0, 0xbb, 0xc1, 0x15, 0x4a,
+	0x77, 0x4e, 0x09, 0x7b, 0xfd, 0x85, 0x10, 0x26,
+	0xcd, 0xe7, 0xa0, 0x9c, 0x39, 0x83, 0xea, 0x93,
+	0x15, 0x18, 0x18, 0x35, 0x51, 0x01, 0x45, 0xf5,
+};
+
+static int shl25_clmr_verify_firmware_sha256(const u8 *fw, size_t len)
+{
+	struct crypto_shash *tfm;
+	struct shash_desc *desc;
+	u8 digest[32];
+	int ret;
+
+	if (!fw || len != SHL25_CLMR_FW_BYTES)
+		return -EINVAL;
+	tfm = crypto_alloc_shash("sha256", 0, 0);
+	if (IS_ERR(tfm))
+		return PTR_ERR(tfm);
+	desc = kzalloc(sizeof(*desc) + crypto_shash_descsize(tfm), GFP_KERNEL);
+	if (!desc) {
+		crypto_free_shash(tfm);
+		return -ENOMEM;
+	}
+	desc->tfm = tfm;
+	ret = crypto_shash_digest(desc, fw, len, digest);
+	if (!ret && memcmp(digest, shl25_clmr_fw_digest, sizeof(digest)))
+		ret = -EKEYREJECTED;
+	kfree(desc);
+	crypto_free_shash(tfm);
+	return ret;
+}
+
 
 static int shl25_clmr_apply_regops(
 	const struct shl25_clmr_boot_ops *ops, void *ctx,
@@ -80,6 +119,11 @@ int shl25_as99_clmr_boot_sequence(
 	if (!ops->write_reg || !ops->read_reg || !ops->stream_firmware ||
 	    !ops->arm_boot_completion || !ops->wait_boot_completion)
 		return -EOPNOTSUPP;
+
+	/* No SPI writes before checking actual firmware SHA-256 in kernel. */
+	ret = shl25_clmr_verify_firmware_sha256(firmware, firmware_bytes);
+	if (ret)
+		return ret;
 
 	/* OEM fw_download[] and then HOSTAEY = htonl(fw_blocks - 1).
 	 * Injected write_reg accepts host-order u32 and must serialize

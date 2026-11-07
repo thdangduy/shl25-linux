@@ -83,6 +83,7 @@ echo SHL25_AS99_CLMR_SPI_SOURCE_STAGED_POWER_DISABLED
 # callback-based boot sequence. No board hardware adapter or probe hook.
 python3 "$ROOT/upstream/build_shl25_clmr_boot.py" --verify
 python3 "$ROOT/upstream/verify_shl25_clmr_boot_sequence.py"
+python3 "$ROOT/upstream/verify_shl25_clmr_firmware_sha.py"
 CLMR_BOOT_C="$ROOT/drivers/spi/shl25-as99-clmr-boot.c"
 CLMR_BOOT_H="$ROOT/drivers/spi/shl25-as99-clmr-boot.h"
 CLMR_BOOT_TABLES="$ROOT/drivers/spi/shl25-as99-clmr-boot-tables.h"
@@ -95,7 +96,7 @@ if ! grep -q '^config SPI_SHL25_AS99_CLMR_BOOT$' "$CLMR_SPI_DIR/Kconfig"; then
 
 config SPI_SHL25_AS99_CLMR_BOOT
     bool "Sharp SHL25 AS99 CLMR firmware boot sequence (unwired)"
-    depends on SPI_SHL25_AS99_CLMR
+    depends on SPI_SHL25_AS99_CLMR && CRYPTO_SHA256
     help
       Source-verified CLMR firmware-boot register program and sequence
       executor. No caller or platform adapter, no hardware I/O in probe.
@@ -150,7 +151,7 @@ CONFIG="$OBJ/.config"
     -e ARM_ATAG_DTB_COMPAT_CMDLINE_FROM_BOOTLOADER \
     -e MMC_SDHCI_MSM -e EXT4_FS \
     -e SPI -e SPI_MASTER -e SPI_QUP -e I2C -e I2C_QUP -e INPUT -e INPUT_EVDEV -e IIO \
-    -e SPI_SHL25_AS99_CLMR -e SPI_SHL25_AS99_CLMR_BOOT -e SPI_SHL25_AS99_BDIC_POWER \
+    -e SPI_SHL25_AS99_CLMR -e SPI_SHL25_AS99_CLMR_BOOT -e SPI_SHL25_AS99_BDIC_POWER -e CRYPTO_SHA256 \
     -e RMI4_CORE -e RMI4_SPI -e RMI4_F11 -e RMI4_F12 \
     -e DRM -e DRM_MSM -e DRM_PANEL -e DRM_FBDEV_EMULATION -e FB -e FRAMEBUFFER_CONSOLE -e VT \
     -e DRM_PANEL_SHARP_SHL25_ANDY \
@@ -161,7 +162,7 @@ make -C "$SRC" O="$OBJ" olddefconfig
 python3 - "$CONFIG" <<'PY'
 import pathlib,sys
 cfg=pathlib.Path(sys.argv[1]).read_text()
-required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "SPI_SHL25_AS99_CLMR", "SPI_SHL25_AS99_CLMR_BOOT", "SPI_SHL25_AS99_BDIC_POWER", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_PANEL_SHARP_SHL25_ANDY", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
+required=("ARCH_QCOM", "BLK_DEV_INITRD", "RD_GZIP", "DEVTMPFS", "MMC_SDHCI_MSM", "EXT4_FS", "QCOM_SMD_RPM", "REGULATOR_QCOM_SMD_RPM", "SPI_QUP", "SPI_SHL25_AS99_CLMR", "SPI_SHL25_AS99_CLMR_BOOT", "SPI_SHL25_AS99_BDIC_POWER", "CRYPTO_SHA256", "I2C_QUP", "INPUT_EVDEV", "IIO", "RMI4_CORE", "RMI4_SPI", "RMI4_F11", "RMI4_F12", "DRM_MSM", "DRM_PANEL_SHARP_SHL25_ANDY", "DRM_FBDEV_EMULATION", "FRAMEBUFFER_CONSOLE", "VT", "USB_CONFIGFS_ACM")
 missing=[key for key in required if f"CONFIG_{key}=y" not in cfg]
 if missing: raise SystemExit("REQUIRED_UPSTREAM_CONFIG_NOT_BUILTIN: "+", ".join(missing))
 print("UPSTREAM_SHL25_MINIMAL_CONFIG_PASS", len(required), "required built-ins")
@@ -227,7 +228,7 @@ Sharp AS99 Andy DRM driver: compiled into zImage; DSI0 DT node disabled
 Andy OEM DSI commands: 28 on + 2 off, SHA-pinned against Sharp GPL
 AS99 CLMR runtime: 16 groups, 662 DCS records; per-unit calibration not active
 AS99 CLMR SPI register transport compiled; DT client disabled, no firmware/power initialization
-AS99 CLMR boot sequence callback executor compiled; no SPI adapter or hardware probe caller
+AS99 CLMR boot sequence callback executor compiled; SHA-256 firmware gate before I/O, no SPI adapter/probe caller
 AS99 BDIC VSP/VSN and TS1 callback programs compiled; no FWCMD adapter or hardware probe caller
 Validated on device: NO, build/DTB check only
 TWRP / Recovery: untouched
